@@ -1,5 +1,6 @@
 package life.mashangkaishi.manongcommunity.controller;
 
+import life.mashangkaishi.manongcommunity.cache.TagCache;
 import life.mashangkaishi.manongcommunity.dto.QuestionDTO;
 import life.mashangkaishi.manongcommunity.model.Question;
 import life.mashangkaishi.manongcommunity.model.User;
@@ -21,18 +22,20 @@ public class PublishController {
     private QuestionService questionService;
 
     @GetMapping("/publish/{id}")
-    public String edit(@PathVariable(name = "id") Integer id,
+    public String edit(@PathVariable(name = "id") Long id,
                        Model model){
         QuestionDTO quesstion = questionService.getById(id);
         model.addAttribute("title",quesstion.getTitle());
         model.addAttribute("description",quesstion.getDescription());
         model.addAttribute("tag",quesstion.getTag());
         model.addAttribute("id",quesstion.getId());
+        model.addAttribute("tags", TagCache.get());
         return "publish";
     }
 
     @GetMapping("/publish")
-    public String publish() {
+    public String publish(Model model) {
+        model.addAttribute("tags", TagCache.get());
         return "publish";
     }
 
@@ -41,12 +44,13 @@ public class PublishController {
             @RequestParam(value = "title",required = false) String title,
             @RequestParam(value = "description",required = false) String description,
             @RequestParam(value = "tag",required = false) String tag,
-            @RequestParam(value = "id",required = false) Integer id,
+            @RequestParam(value = "id",required = false) Long id,
             HttpServletRequest request,
             Model model) {
         model.addAttribute("title",title);
         model.addAttribute("description",description);
         model.addAttribute("tag",tag);
+        model.addAttribute("tags", TagCache.get());
 
         if (title==null || title==""){
             model.addAttribute("error","标题不能为空");
@@ -72,6 +76,9 @@ public class PublishController {
         question.setTag(tag);
         question.setCreator(user.getId());
         question.setId(id);
+        question.setCommentCount(0);
+        question.setViewCount(0);
+        question.setLikeCount(0);
         questionService.creatOrUpdate(question);
         return "redirect:/";
     }

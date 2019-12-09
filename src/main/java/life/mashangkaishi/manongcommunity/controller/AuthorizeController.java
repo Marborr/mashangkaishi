@@ -6,6 +6,7 @@ import life.mashangkaishi.manongcommunity.mapper.UserMapper;
 import life.mashangkaishi.manongcommunity.model.User;
 import life.mashangkaishi.manongcommunity.provider.GithubProvider;
 import life.mashangkaishi.manongcommunity.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpRequest;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 @Controller
+@Slf4j
 public class AuthorizeController {
     @Autowired
     private GithubProvider githubProvider;
@@ -46,6 +48,7 @@ public class AuthorizeController {
         accessTokenDTO.setClient_secret(clientSecret);
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
         GithubUser githubUser = githubProvider.getUser(accessToken);
+
         if(githubUser!=null && githubUser.getId()!=null){
             User user = new User();
             String token = UUID.randomUUID().toString();
@@ -61,6 +64,7 @@ public class AuthorizeController {
             request.getSession().setAttribute("user",githubUser);
             return "redirect:/";
         }else {
+            log.error("callback get github error,{}",githubUser);
             return "redirect:/";
         }
     }

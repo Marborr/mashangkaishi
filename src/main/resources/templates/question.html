@@ -6,8 +6,16 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="/css/mashangkaishi.css">
+    <link rel="stylesheet" href="/css/editormd.preview.min.css">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
     <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <script src="/js/moment.js" type="application/javascript"></script>
+    <script src="/js/community.js" type="application/javascript"></script>
+
+    <script src="/js/editormd.min.js" type="application/javascript"></script>
+    <script src="/js/lib/marked.min.js"></script>
+    <script src="/js/lib/prettify.min.js"></script>
+
 </head>
 
 <body>
@@ -15,23 +23,139 @@
 
 <div class="container-fluid main profile">
     <div class="row">
-
+        <!--左边主要内容 -->
         <div class="col-lg-9 col-md-12 col-sm12 col-xs-12">
-            <h3><span th:text="${question.title}"></span></h3>
-            <span class="text">
+            <!--问题、用户信息、编辑按钮-->
+            <div class="col-lg-12 col-md-12 col-sm12 col-xs-12">
+                <h3><span th:text="${question.title}"></span></h3>
+                <span class="text">
                 作者：<span th:text="${question.user.name}"></span>
-                阅读数：<span th:text="${question.viewCount}"></span>
-                发布时间：<span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span>
-            </span>
-            <hr>
+                | 阅读数：<span th:text="${question.viewCount}"></span>
+                | 发布时间：<span th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span>
+                </span>
+                <hr class="col-lg-12 col-md-12 col-sm12 col-xs-12">
 
-            <div class="col-lg-12 col-md-12 col-sm12 col-xs-12" th:text="${question.description}"></div>
+                <!--内容-->
+                <div class="col-lg-12 col-md-12 col-sm12 col-xs-12" id="question-view">
+                    <textarea style="display:none;" th:text="${question.description}">
+                    </textarea>
+                </div>
+                <!--代码编辑形式显示数据库代码信息-->
+                <script type="text/javascript">
+                    $(function () {
+                        editormd.markdownToHTML("question-view", {});
+                    });
+                </script>
+
+                <hr class="col-lg-12 col-md-12 col-sm12 col-xs-12">
+
+                <!--标签-->
+                <div class="col-lg-12 col-md-12 col-sm12 col-xs-12 ">
+                    <span class="label label-info question-tag" th:each="tag : ${question.tag.split(',')}">
+                        <span class="glyphicon glyphicon-tags"></span>
+                      <span class="label label-info " th:text="${tag}"></span>
+                    </span>
+                </div>
+                <!-- 编辑按钮-->
+                <hr class="col-lg-12 col-md-12 col-sm12 col-xs-12">
+                <div class="col-lg-12 col-md-12 col-sm12 col-xs-12 ">
+                    <a th:href="@{'/publish/'+${question.id}}"
+                       th:if="${session.user!=null && session.user.id==question.creator}">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true">编辑</span>
+                    </a>
+                </div>
+
+            </div>
+
+            <!--回复内容-->
+            <div class="col-lg-12 col-md-12 col-sm12 col-xs-12"
+                 th:each="comment : ${comments}">
+                <hr>
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object"
+                                 th:src="${comment.user.avatarUrl}">
+                        </a>
+                    </div>
+
+                    <div class="media-body" th:id="${'comment-body-'+comment.id}">
+                        <h5 class="media-heading">
+                            <span th:text="${question.user.name}"></span>
+                        </h5>
+                        <div th:text="${comment.content}"></div>
+                        <div class="menu">
+                            <span class="glyphicon glyphicon-thumbs-up icon"></span>
+                            <span th:data-id="${comment.id}" onclick="collapseComments(this)">
+                                <span class="glyphicon glyphicon-comment icon">
+                                    <span th:text="${comment.commentCount}"></span>
+                                </span>
+                            </span>
+                            <span class="pull-right" th:text="${#dates.format(comment.gmtCreat,'yyyy-MM-dd')}"></span>
+                        </div>
+                        <!--二级评论-->
+                        <div class="col-lg-12 col-md-12 col-sm12 col-xs-12 collapse sub-comment"
+                             th:id="${'comment-'+comment.id}">
+                            <!--                            被js替换了-->
+                            <!--                            <div class="col-lg-12 col-md-12 col-sm12 col-xs-12"-->
+                            <!--                                 th:each="comment : ${comments}">-->
+                            <!--                                <hr>-->
+                            <!--                                <div class="media">-->
+                            <!--                                    <div class="media-left">-->
+                            <!--                                        <a href="#">-->
+                            <!--                                            <img class="media-object"-->
+                            <!--                                                 th:src="${comment.user.avatarUrl}">-->
+                            <!--                                        </a>-->
+                            <!--                                    </div>-->
+                            <!--                                    <div class="media-body">-->
+                            <!--                                        <h5 class="media-heading">-->
+                            <!--                                            <span th:text="${question.user.name}"></span>-->
+                            <!--                                        </h5>-->
+                            <!--                                        <div th:text="${comment.content}"></div>-->
+                            <!--                                        <div class="menu">-->
+                            <!--                                            <span class="pull-right"-->
+                            <!--                                                  th:text="${#dates.format(comment.gmtCreat,'yyyy-MM-dd')}"></span>-->
+                            <!--                                        </div>-->
+                            <!--                                    </div>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
+                            <div class="col-lg-12 col-md-12 col-sm12 col-xs-12">
+                                <input type="text" class="form-control" placeholder="评论一下"
+                                       th:id="${'input-'+comment.id}">
+                                <button type="button" class="btn btn-success pull-right"
+                                        onclick="comment(this)" th:data-id="${comment.id}">评论
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <hr class="col-lg-12 col-md-12 col-sm12 col-xs-12">
-            <a th:href="@{'/publish/'+${question.id}}" th:if="${session.user!=null && session.user.id==question.creator}">
-                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>编辑</a>
+            <!--            用户信息展示-->
+            <div class="col-lg-12 col-md-12 col-sm12 col-xs-12" id="comment_section">
+                <div class="media">
+                    <div class="media-left">
+                        <a href="#">
+                            <img class="media-object"
+                                 th:src="${session.user!=null ? session.user.avatarUrl:'/img/defaultAvatar.png'}">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            <span th:text="${session.user!=null ? session.user.name:'匿名用户'}"></span>
+                        </h4>
+                    </div>
+                    <hr>
+                </div>
+
+                <input type="hidden" id="question_id" th:value="${question.id}">
+                <textarea class="form-control comment" rows="6" id="comment_content"></textarea>
+                <button type="button" class="btn btn-success comment-btn" onclick="post()">回复</button>
+            </div>
 
         </div>
-
+        <!--右边信息块-->
         <div class="col-lg-3 col-md-12 col-sm12 col-xs-12">
             <div class="col-lg-12 col-md-12 col-sm12 col-xs-12">
                 <h4>发起人</h4>
@@ -47,7 +171,6 @@
                         <h4 class="media-heading">
                             <span th:text="${question.user.name}"></span>
                         </h4>
-                        <span th:text="${question.description}"></span><br>
                         <span class="text">
                         <span th:text="${question.commentCount}"></span> 个回复 .
                         <span th:text="${question.viewCount}"></span> 次浏览 .
@@ -55,10 +178,24 @@
                     </span>
                     </div>
                 </div>
-
             </div>
+            <!--微信-->
+            <hr class="col-lg-12 col-md-12 col-sm12 col-xs-12">
+            <div class="col-lg-12 col-md-12 col-sm12 col-xs-12">
+                <h4>班长微信</h4>
+                <img src="/img/wechat.jpg" class="question-wechat">
+            </div>
+            <hr class="col-lg-12 col-md-12 col-sm12 col-xs-12">
+            <!--相关问题-->
             <div class="col-lg-12 col-md-12 col-sm12 col-xs-12">
                 <h4>相关问题</h4>
+                <ul>
+                    <li th:each="related : ${relateQuestions}">
+                        <a th:href="@{'/question/'+${related.id}}" th:text="${related.title}">
+
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
