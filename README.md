@@ -9,8 +9,9 @@ set global time_zone = '+8:00';
 flush privileges;
 ##项目启动虚拟机配置
 -Dspring.profiles.active=production          
-java -jar -Dspring.profiles.active=production target/demo-0.0.1-SNAPSHOT.jar
+（启动项目）java -jar -Dspring.profiles.active=production target/demo-0.0.1-SNAPSHOT.jar
 ##更新项目
 ps -aux | grep java（查看进程）
 git pull(git拉代码)
 mvn package
+（启动项目）java -jar -Dspring.profiles.active=production target/demo-0.0.1-SNAPSHOT.jar
