@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TagCache {
+public class  TagCache {
     public static List<TagDTO> get(){
         List<TagDTO> tagDTOS = new ArrayList<>();
 
