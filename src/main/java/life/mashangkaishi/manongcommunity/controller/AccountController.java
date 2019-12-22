@@ -7,7 +7,6 @@ import life.mashangkaishi.manongcommunity.util.SendMail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,7 +42,7 @@ public class AccountController {
         Student selectStudent = studentService.selectStudentByPassword(student);
         StudentDTO studentDTO = new StudentDTO();
         if (selectStudent==null){
-            studentDTO.setMsg("该用户不存在");
+            studentDTO.setMsg("该用户不存在或密码错误");
             return studentDTO;
         }else {
             studentDTO.setMsg("success");
@@ -71,4 +70,24 @@ public class AccountController {
             return studentDTO;
         }
     }
+
+    @Transactional
+    @ResponseBody
+    @PostMapping("/api/user/validationemail")  //(需要传入用户名）
+    public StudentDTO ValidationEmail(@RequestBody Student student){
+        int random=(int)((Math.random()*9+1)*100000);
+        student.setVerificationCode(random);
+        StudentDTO studentDTO = new StudentDTO();
+        int tag=sendMail.send(student.getEmail(),student.getVerificationCode());
+        if (tag==1){
+            studentDTO.setMsg("邮件已发送");
+            studentDTO.setStudent(student);
+            return studentDTO;
+        }else {
+            studentDTO.setMsg("邮件发送失败");
+            studentDTO.setStudent(student);
+            return studentDTO;
+        }
+    }
+
 }

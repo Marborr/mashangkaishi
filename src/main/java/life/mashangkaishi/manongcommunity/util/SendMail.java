@@ -28,7 +28,6 @@ public class SendMail {
 
             System.out.println("测试邮件发送邮件时发生异常了！"+e);
         }
-        mailSender.send(mainMessage);
         return 1;
     }
 }
