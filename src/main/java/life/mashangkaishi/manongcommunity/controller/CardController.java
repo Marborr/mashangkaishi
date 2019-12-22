@@ -33,8 +33,8 @@ public class CardController {
     @ResponseBody
     @PostMapping("/api/user/cardclockin") //打卡(传入用户名）
     public StudentDTO Clockin(@RequestBody Student student){
-        StudentDTO students=new StudentDTO();
-        students.setMsg("打卡成功");
+        StudentDTO studentDTO=new StudentDTO();
+        studentDTO.setMsg("打卡成功");
         Student studentclockin = studentService.selectStudent(student);
         if (studentclockin.getCardNumber()!=null){
             studentclockin.setCardNumber(studentclockin.getCardNumber()+1);
@@ -42,8 +42,7 @@ public class CardController {
             studentclockin.setCardNumber((long)1);
         }
         studentService.createOrUpdate(studentclockin);
-        students.setStudent(studentclockin);
-        return students;
+        studentDTO.setStudent(studentclockin);
+        return studentDTO;
     }
-
 }
