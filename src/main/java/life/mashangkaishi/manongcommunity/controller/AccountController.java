@@ -73,7 +73,7 @@ public class AccountController {
 
     @Transactional
     @ResponseBody
-    @PostMapping("/api/user/validationemail")  //(需要传入用户名）
+    @PostMapping("/api/user/validationemail")  //(邮箱验证）
     public StudentDTO ValidationEmail(@RequestBody Student student){
         int random=(int)((Math.random()*9+1)*100000);
         student.setVerificationCode(random);

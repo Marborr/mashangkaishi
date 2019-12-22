@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -30,14 +31,19 @@ public class CardController {
 
     @Transactional
     @ResponseBody
-    @PostMapping("/api/user/cardpage") //排名
-    public StudentDTO Clockin(){
-        StudentDTO student=new StudentDTO();
-        student.setMsg("打卡成功");
-
-        return student;
+    @PostMapping("/api/user/cardclockin") //打卡(传入用户名）
+    public StudentDTO Clockin(@RequestBody Student student){
+        StudentDTO students=new StudentDTO();
+        students.setMsg("打卡成功");
+        Student studentclockin = studentService.selectStudent(student);
+        if (studentclockin.getCardNumber()!=null){
+            studentclockin.setCardNumber(studentclockin.getCardNumber()+1);
+        }else {
+            studentclockin.setCardNumber((long)1);
+        }
+        studentService.createOrUpdate(studentclockin);
+        students.setStudent(studentclockin);
+        return students;
     }
-
-
 
 }
