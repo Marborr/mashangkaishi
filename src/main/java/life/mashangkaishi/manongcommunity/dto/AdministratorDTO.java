@@ -1,10 +1,10 @@
 package life.mashangkaishi.manongcommunity.dto;
 
-import life.mashangkaishi.manongcommunity.controller.Administrator;
+import life.mashangkaishi.manongcommunity.controller.AdministratorController;
 import lombok.Data;
 
 @Data
 public class AdministratorDTO {
     String msg;
-    Administrator administrator;
+    AdministratorController administrator;
 }
