@@ -28,16 +28,13 @@ public class ClassService {
         Class classMassege = new Class();
         classMassege.setClassNumber(Integer.parseInt(teacherClass.getClassNumber()));
         classMassege.setClassName(teacherClass.getClassName());
-
         AdministratorExample administratorExample = new AdministratorExample();
         administratorExample.createCriteria().andUsernameEqualTo(teacherClass.getTeacherName());
         List<Administrator> administrators = administratorMapper.selectByExample(administratorExample);
-
         ClassExample example = new ClassExample();
         example.createCriteria().andClassNameEqualTo(classMassege.getClassName())
                 .andClassNumberEqualTo(classMassege.getClassNumber());
         List<Class> classes = classMapper.selectByExample(example);
-
         if (administrators.size() != 0) {
             if (classes.size() == 0) {
                 if (administrators.get(0).getClassName() == null) {
@@ -52,6 +49,7 @@ public class ClassService {
                 classMassege.setId(classExtMapper.selectClassNumber(classMassege) + 1);
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
                 classMassege.setGmtCreat(df.format(new Date()));
+                classMassege.setMainTeacher(teacherClass.getTeacherName());
                 classMapper.insert(classMassege);
                 administratorMapper.updateByPrimaryKey(administrators.get(0));
                 return "班级创建成功";

@@ -66,6 +66,4 @@ public class AdministratorController {
         administratorDTO.setTask(task);
         return administratorDTO;
     }
-
-
 }
