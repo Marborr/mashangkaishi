@@ -6,6 +6,9 @@ import life.mashangkaishi.manongcommunity.model.Student;
 import life.mashangkaishi.manongcommunity.model.StudentExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,8 +25,9 @@ public class StudentService {
         example.createCriteria().andUsernameEqualTo(student.getUsername());
         List<Student> students = studentMapper.selectByExample(example);
         if(students.size() ==0){
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
             //插入
-            student.setGmtCreate(System.currentTimeMillis());
+            student.setGmtCreate(df.format(new Date()));
             studentMapper.insert(student);
             return student;
         }else {

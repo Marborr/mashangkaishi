@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="life.mashangkaishi.manongcommunity.mapper.ClassExtMapper">
+    <resultMap id="BaseResultMap" type="life.mashangkaishi.manongcommunity.model.Class">
+
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="class_number" jdbcType="INTEGER" property="classNumber" />
+        <result column="class_name" jdbcType="VARCHAR" property="className" />
+        <result column="students" jdbcType="VARCHAR" property="students" />
+        <result column="main_teacher" jdbcType="VARCHAR" property="mainTeacher" />
+        <result column="teachers" jdbcType="VARCHAR" property="teachers" />
+        <result column="gmt_creat" jdbcType="VARCHAR" property="gmtCreat" />
+    </resultMap>
+
+    <select id="selectClassNumber"
+            parameterType="life.mashangkaishi.manongcommunity.model.Class"
+            resultType="java.lang.Integer">
+    select count(1) from class
+  </select>
+
+</mapper>

@@ -15,3 +15,6 @@ ps -aux | grep java（查看进程）
 git pull(git拉代码)
 mvn package
 （启动项目）java -jar -Dspring.profiles.active=production target/demo-0.0.1-SNAPSHOT.jar
+##mysql密码更改（ip地址变更时需重新更改密码）
+进入mysql库进行修改：
+update user set password="*6BB4837EB74329105EE4568DDA7DC67ED2CA2AD9" where host="%";

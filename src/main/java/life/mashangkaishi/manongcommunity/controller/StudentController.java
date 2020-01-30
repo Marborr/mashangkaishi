@@ -1,9 +1,13 @@
 package life.mashangkaishi.manongcommunity.controller;
 
+import life.mashangkaishi.manongcommunity.dto.AdministratorDTO;
 import life.mashangkaishi.manongcommunity.dto.DataDTO;
+import life.mashangkaishi.manongcommunity.dto.JoinClassDTO;
 import life.mashangkaishi.manongcommunity.dto.StudentDTO;
+import life.mashangkaishi.manongcommunity.model.Class;
 import life.mashangkaishi.manongcommunity.model.Data;
 import life.mashangkaishi.manongcommunity.model.Student;
+import life.mashangkaishi.manongcommunity.service.ClassService;
 import life.mashangkaishi.manongcommunity.service.DataService;
 import life.mashangkaishi.manongcommunity.service.StudentService;
 import life.mashangkaishi.manongcommunity.util.SendMail;
@@ -22,6 +26,8 @@ public class StudentController {
     StudentService studentService;
     @Autowired
     DataService dataService;
+    @Autowired
+    ClassService classService;
 
     @Transactional
     @ResponseBody
@@ -107,4 +113,23 @@ public class StudentController {
         dataDTO.setMsg( dataService.creatOrUpdateData(data));
         return dataDTO;
     }
+
+    @Transactional
+    @ResponseBody
+    @PostMapping("/api/user/joinClass")
+    public AdministratorDTO creatClass(@RequestBody JoinClassDTO joinClassDTO) {
+        Class joinclass = new Class();
+        Student student = new Student();
+        joinclass.setClassName(joinClassDTO.getClassName());
+        joinclass.setClassNumber(joinClassDTO.getClassNumber());
+        student.setUsername(joinClassDTO.getStudentUsername());
+        student.setClassNumber(String.valueOf(joinClassDTO.getClassNumber()));
+        student.setClassName(joinClassDTO.getClassName());
+        String result=classService.joinClass(joinclass,student);
+        AdministratorDTO administratorDTO = new AdministratorDTO();
+        administratorDTO.setMsg(result);
+        administratorDTO.setClassName(joinClassDTO.getClassName());
+        return administratorDTO;
+    }
+
 }

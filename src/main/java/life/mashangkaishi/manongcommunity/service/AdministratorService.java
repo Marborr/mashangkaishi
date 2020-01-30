@@ -7,6 +7,8 @@ import life.mashangkaishi.manongcommunity.model.AdministratorExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -33,8 +35,9 @@ public class AdministratorService {
         example.createCriteria().andUsernameEqualTo(administrator.getUsername());
         List<Administrator> administrators = administratorMapper.selectByExample(example);
         if(administrators.size() ==0){
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
             //插入
-            administrator.setGmtCreate((int)System.currentTimeMillis());
+            administrator.setGmtCreate(df.format(new Date()));
             administratorMapper.insert(administrator);
             return administrator;
         }else {
