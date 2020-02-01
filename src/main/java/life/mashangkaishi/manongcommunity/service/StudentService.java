@@ -28,6 +28,8 @@ public class StudentService {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
             //插入
             student.setGmtCreate(df.format(new Date()));
+            student.setTaskDone(0);
+            student.setTaskNotDone(0);
             studentMapper.insert(student);
             return student;
         }else {

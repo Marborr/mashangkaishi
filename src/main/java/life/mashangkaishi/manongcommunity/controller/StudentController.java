@@ -7,9 +7,11 @@ import life.mashangkaishi.manongcommunity.dto.StudentDTO;
 import life.mashangkaishi.manongcommunity.model.Class;
 import life.mashangkaishi.manongcommunity.model.Data;
 import life.mashangkaishi.manongcommunity.model.Student;
+import life.mashangkaishi.manongcommunity.model.Task;
 import life.mashangkaishi.manongcommunity.service.ClassService;
 import life.mashangkaishi.manongcommunity.service.DataService;
 import life.mashangkaishi.manongcommunity.service.StudentService;
+import life.mashangkaishi.manongcommunity.service.TaskService;
 import life.mashangkaishi.manongcommunity.util.SendMail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 public class StudentController {
@@ -28,6 +32,8 @@ public class StudentController {
     DataService dataService;
     @Autowired
     ClassService classService;
+    @Autowired
+    TaskService taskService;
 
     @Transactional
     @ResponseBody
@@ -129,6 +135,25 @@ public class StudentController {
         AdministratorDTO administratorDTO = new AdministratorDTO();
         administratorDTO.setMsg(result);
         administratorDTO.setClassName(joinClassDTO.getClassName());
+        return administratorDTO;
+    }
+
+    @Transactional
+    @ResponseBody
+    @PostMapping("/api/user/studentSelectTask")
+    public List<Task> studentSelectTask(@RequestBody Task task) {
+        List<Task> tasks=taskService.selectTask(task);
+        return tasks;
+    }
+
+    @Transactional
+    @ResponseBody
+    @PostMapping("/api/user/studentCreatOrUpdateTask")
+    public AdministratorDTO studentCreatOrUpdateTask(@RequestBody Task task) {
+        String result=taskService.studentCreatOrUpdateTask(task);
+        AdministratorDTO administratorDTO = new AdministratorDTO();
+        administratorDTO.setMsg(result);
+        administratorDTO.setTask(task);
         return administratorDTO;
     }
 

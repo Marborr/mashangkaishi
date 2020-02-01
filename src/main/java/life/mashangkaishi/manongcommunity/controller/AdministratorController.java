@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 public class AdministratorController {
     @Autowired
@@ -65,5 +67,13 @@ public class AdministratorController {
         administratorDTO.setMsg(result);
         administratorDTO.setTask(task);
         return administratorDTO;
+    }
+
+    @Transactional
+    @ResponseBody
+    @PostMapping("/api/user/selectClassStudentTask")//查作业
+    public List<Task> selectClassStudentTask(@RequestBody Task task) {
+        List<Task> tasks=taskService.selectClassStudentTask(task);
+        return tasks;
     }
 }

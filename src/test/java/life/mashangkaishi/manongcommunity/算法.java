@@ -10,7 +10,9 @@ import java.util.Date;
 public class 算法 {
     @Test
     public void 负载均衡(){
-        System.out.println("负载均衡");
+        String s1="2020-01-31 17:17:12";
+        String s2="2020-02-01 17:17:12";
+        System.out.println(s2.compareTo(s1));
     }
     @Test
     @Scheduled(fixedDelay = 5000)
