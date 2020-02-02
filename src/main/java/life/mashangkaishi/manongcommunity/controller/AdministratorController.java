@@ -28,7 +28,7 @@ public class AdministratorController {
 
     @Transactional
     @ResponseBody
-    @PostMapping("/api/user/administratorRegister")
+    @PostMapping("/api/user/teacherRegister")
     public AdministratorDTO regist(@RequestBody Administrator administrator) {
         Administrator administratorSelected = administratorService.selectAdministrator(administrator);
         if (administratorSelected==null){
@@ -46,13 +46,15 @@ public class AdministratorController {
 
     @Transactional
     @ResponseBody
-    @PostMapping("/api/user/administratorLogin")
+    @PostMapping("/api/user/teacherLogin")
     public AdministratorDTO login(@RequestBody Administrator administrator) {
         Administrator administrator1 = administratorService.selectAdministrator(administrator);
         AdministratorDTO administratorDTO = new AdministratorDTO();
         if (administrator1==null){
-            administratorDTO.setMsg("该用户不存在或密码错误");
+            administratorDTO.setMsg("该用户不存在或密码错误 ");
+
             return administratorDTO;
+
         }else {
             administratorDTO.setMsg("success");
             administratorDTO.setAdministrator(administrator);
