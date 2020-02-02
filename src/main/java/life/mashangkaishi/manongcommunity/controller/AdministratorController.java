@@ -83,6 +83,8 @@ public class AdministratorController {
         administratorDTO.setMsg(result);
         Class aClass = new Class();
         aClass.setClassName(teacherClassDTO.getClassName());
+        aClass.setClassNumber(random);
+        aClass.setMainTeacher(teacherClassDTO.getTeacherName());
         administratorDTO.setClassMessege(aClass);
         return administratorDTO;
     }
