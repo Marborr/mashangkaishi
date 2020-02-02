@@ -2,8 +2,11 @@ package life.mashangkaishi.manongcommunity.service;
 
 import life.mashangkaishi.manongcommunity.mapper.AdministratorExtMapper;
 import life.mashangkaishi.manongcommunity.mapper.AdministratorMapper;
+import life.mashangkaishi.manongcommunity.mapper.ClassMapper;
 import life.mashangkaishi.manongcommunity.model.Administrator;
 import life.mashangkaishi.manongcommunity.model.AdministratorExample;
+import life.mashangkaishi.manongcommunity.model.Class;
+import life.mashangkaishi.manongcommunity.model.ClassExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +25,12 @@ public class AdministratorService {
             example.createCriteria().andUsernameEqualTo(administrator.getUsername())
             .andPasswordEqualTo(administrator.getPassword());
             List<Administrator> administrators = administratorMapper.selectByExample(example);
-            if (administrators.size()==0){
+        if (administrators.size()==0){
                 return null;
-            }
+            }else {
             return administrators.get(0);
+        }
+
     }
 
     public Administrator createOrUpdate(Administrator administrator) {

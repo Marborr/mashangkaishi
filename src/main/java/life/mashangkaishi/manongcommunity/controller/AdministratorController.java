@@ -2,8 +2,10 @@ package life.mashangkaishi.manongcommunity.controller;
 
 import life.mashangkaishi.manongcommunity.dto.AdministratorDTO;
 import life.mashangkaishi.manongcommunity.dto.TeacherClassDTO;
+import life.mashangkaishi.manongcommunity.mapper.ClassMapper;
 import life.mashangkaishi.manongcommunity.model.Administrator;
 import life.mashangkaishi.manongcommunity.model.Class;
+import life.mashangkaishi.manongcommunity.model.ClassExample;
 import life.mashangkaishi.manongcommunity.model.Task;
 import life.mashangkaishi.manongcommunity.service.AdministratorService;
 import life.mashangkaishi.manongcommunity.service.ClassService;
@@ -25,6 +27,8 @@ public class AdministratorController {
     ClassService classService;
     @Autowired
     TaskService taskService;
+    @Autowired
+    ClassMapper classMapper;
 
     @Transactional
     @ResponseBody
@@ -52,12 +56,14 @@ public class AdministratorController {
         AdministratorDTO administratorDTO = new AdministratorDTO();
         if (administrator1==null){
             administratorDTO.setMsg("该用户不存在或密码错误 ");
-
             return administratorDTO;
-
         }else {
+            ClassExample example1 = new ClassExample();
+            example1.createCriteria().andMainTeacherEqualTo(administrator.getUsername());
+            List<Class> classes = classMapper.selectByExample(example1);
             administratorDTO.setMsg("success");
             administratorDTO.setAdministrator(administrator);
+            administratorDTO.setClasses(classes);
             return administratorDTO;
         }
     }

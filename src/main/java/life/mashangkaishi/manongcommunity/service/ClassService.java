@@ -46,10 +46,12 @@ public class ClassService {
                     administrators.get(0).setClassName(administrators.get(0).getClassName()
                             + "," + teacherClass.getClassName());
                 }
+                int random=(int)((Math.random()*9+1)*100000);
                 classMassege.setId(classExtMapper.selectClassNumber(classMassege) + 1);
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
                 classMassege.setGmtCreat(df.format(new Date()));
                 classMassege.setMainTeacher(teacherClass.getTeacherName());
+                classMassege.setClassNumber(random);
                 classMapper.insert(classMassege);
                 administratorMapper.updateByPrimaryKey(administrators.get(0));
                 return "班级创建成功";
