@@ -46,6 +46,22 @@ public class AdministratorController {
 
     @Transactional
     @ResponseBody
+    @PostMapping("/api/user/administratorLogin")
+    public AdministratorDTO login(@RequestBody Administrator administrator) {
+        Administrator administrator1 = administratorService.selectAdministrator(administrator);
+        AdministratorDTO administratorDTO = new AdministratorDTO();
+        if (administrator1==null){
+            administratorDTO.setMsg("该用户不存在或密码错误");
+            return administratorDTO;
+        }else {
+            administratorDTO.setMsg("success");
+            administratorDTO.setAdministrator(administrator);
+            return administratorDTO;
+        }
+    }
+
+    @Transactional
+    @ResponseBody
     @PostMapping("/api/user/creatClass")
     public AdministratorDTO creatClass(@RequestBody TeacherClassDTO teacherClassDTO) {
         String result=classService.creatOrUpdateClass(teacherClassDTO);
@@ -76,4 +92,5 @@ public class AdministratorController {
         List<Task> tasks=taskService.selectClassStudentTask(task);
         return tasks;
     }
+
 }

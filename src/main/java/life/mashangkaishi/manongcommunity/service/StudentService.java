@@ -30,6 +30,7 @@ public class StudentService {
             student.setGmtCreate(df.format(new Date()));
             student.setTaskDone(0);
             student.setTaskNotDone(0);
+            student.setIdentify("student");
             studentMapper.insert(student);
             return student;
         }else {

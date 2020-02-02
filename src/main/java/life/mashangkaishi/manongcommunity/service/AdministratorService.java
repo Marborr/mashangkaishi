@@ -19,7 +19,8 @@ public class AdministratorService {
     AdministratorExtMapper administratorExtMapper;
     public Administrator selectAdministrator(Administrator administrator) {
            AdministratorExample example=new AdministratorExample();
-            example.createCriteria().andUsernameEqualTo(administrator.getUsername());
+            example.createCriteria().andUsernameEqualTo(administrator.getUsername())
+            .andPasswordEqualTo(administrator.getPassword());
             List<Administrator> administrators = administratorMapper.selectByExample(example);
             if (administrators.size()==0){
                 return null;
@@ -38,6 +39,7 @@ public class AdministratorService {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
             //插入
             administrator.setGmtCreate(df.format(new Date()));
+            administrator.setIdentify("teacher");
             administratorMapper.insert(administrator);
             return administrator;
         }else {
