@@ -2,6 +2,7 @@ package life.mashangkaishi.manongcommunity.controller;
 
 import life.mashangkaishi.manongcommunity.dto.AdministratorDTO;
 import life.mashangkaishi.manongcommunity.dto.TeacherClassDTO;
+import life.mashangkaishi.manongcommunity.dto.TeacherClassDTO2;
 import life.mashangkaishi.manongcommunity.mapper.ClassMapper;
 import life.mashangkaishi.manongcommunity.model.Administrator;
 import life.mashangkaishi.manongcommunity.model.Class;
@@ -71,13 +72,12 @@ public class AdministratorController {
     @Transactional
     @ResponseBody
     @PostMapping("/api/user/creatClass")
-    public AdministratorDTO creatClass(@RequestBody TeacherClassDTO teacherClassDTO) {
+    public AdministratorDTO creatClass(@RequestBody TeacherClassDTO2 teacherClassDTO) {
         String result=classService.creatOrUpdateClass(teacherClassDTO);
         AdministratorDTO administratorDTO = new AdministratorDTO();
         administratorDTO.setMsg(result);
         Class aClass = new Class();
         aClass.setClassName(teacherClassDTO.getClassName());
-        aClass.setClassNumber(Integer.parseInt(teacherClassDTO.getClassNumber()));
         administratorDTO.setClassMessege(aClass);
         return administratorDTO;
     }
@@ -100,5 +100,4 @@ public class AdministratorController {
         List<Task> tasks=taskService.selectClassStudentTask(task);
         return tasks;
     }
-
 }

@@ -1,6 +1,7 @@
 package life.mashangkaishi.manongcommunity.service;
 
 import life.mashangkaishi.manongcommunity.dto.TeacherClassDTO;
+import life.mashangkaishi.manongcommunity.dto.TeacherClassDTO2;
 import life.mashangkaishi.manongcommunity.mapper.AdministratorMapper;
 import life.mashangkaishi.manongcommunity.mapper.ClassExtMapper;
 import life.mashangkaishi.manongcommunity.mapper.ClassMapper;
@@ -24,9 +25,9 @@ public class ClassService {
     StudentMapper studentMapper;
     @Autowired
     AdministratorMapper administratorMapper;
-    public String creatOrUpdateClass(TeacherClassDTO teacherClass) {
+    public String creatOrUpdateClass(TeacherClassDTO2 teacherClass) {
         Class classMassege = new Class();
-        classMassege.setClassNumber(Integer.parseInt(teacherClass.getClassNumber()));
+        classMassege.setClassNumber((int)((Math.random()*9+1)*100000));
         classMassege.setClassName(teacherClass.getClassName());
         AdministratorExample administratorExample = new AdministratorExample();
         administratorExample.createCriteria().andUsernameEqualTo(teacherClass.getTeacherName());
@@ -39,19 +40,17 @@ public class ClassService {
             if (classes.size() == 0) {
                 if (administrators.get(0).getClassName() == null) {
                     administrators.get(0).setClassName(teacherClass.getClassName());
-                    administrators.get(0).setClassNumber(teacherClass.getClassNumber());
+                    administrators.get(0).setClassNumber(String.valueOf(classMassege.getClassNumber()));
                 } else {
                     administrators.get(0).setClassNumber(administrators.get(0).getClassNumber()
-                            + "," + teacherClass.getClassNumber());
+                            + "," + classMassege.getClassNumber());
                     administrators.get(0).setClassName(administrators.get(0).getClassName()
                             + "," + teacherClass.getClassName());
                 }
-                int random=(int)((Math.random()*9+1)*100000);
                 classMassege.setId(classExtMapper.selectClassNumber(classMassege) + 1);
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
                 classMassege.setGmtCreat(df.format(new Date()));
                 classMassege.setMainTeacher(teacherClass.getTeacherName());
-                classMassege.setClassNumber(random);
                 classMapper.insert(classMassege);
                 administratorMapper.updateByPrimaryKey(administrators.get(0));
                 return "班级创建成功";
