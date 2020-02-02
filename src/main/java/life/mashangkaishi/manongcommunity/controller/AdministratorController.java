@@ -72,7 +72,12 @@ public class AdministratorController {
     @Transactional
     @ResponseBody
     @PostMapping("/api/user/creatClass")
-    public AdministratorDTO creatClass(@RequestBody TeacherClassDTO2 teacherClassDTO) {
+    public AdministratorDTO creatClass(@RequestBody TeacherClassDTO2 teacherClassDTO2) {
+        int random=(int)((Math.random()*9+1)*100000);
+        TeacherClassDTO teacherClassDTO = new TeacherClassDTO();
+        teacherClassDTO.setClassName(teacherClassDTO2.getClassName());
+        teacherClassDTO.setClassNumber(String.valueOf(random));
+        teacherClassDTO.setTeacherName(teacherClassDTO2.getTeacherName());
         String result=classService.creatOrUpdateClass(teacherClassDTO);
         AdministratorDTO administratorDTO = new AdministratorDTO();
         administratorDTO.setMsg(result);

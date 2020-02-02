@@ -1,7 +1,6 @@
 package life.mashangkaishi.manongcommunity.service;
 
 import life.mashangkaishi.manongcommunity.dto.TeacherClassDTO;
-import life.mashangkaishi.manongcommunity.dto.TeacherClassDTO2;
 import life.mashangkaishi.manongcommunity.mapper.AdministratorMapper;
 import life.mashangkaishi.manongcommunity.mapper.ClassExtMapper;
 import life.mashangkaishi.manongcommunity.mapper.ClassMapper;
@@ -25,9 +24,9 @@ public class ClassService {
     StudentMapper studentMapper;
     @Autowired
     AdministratorMapper administratorMapper;
-    public String creatOrUpdateClass(TeacherClassDTO2 teacherClass) {
+    public String creatOrUpdateClass(TeacherClassDTO teacherClass) {
         Class classMassege = new Class();
-        classMassege.setClassNumber((int)((Math.random()*9+1)*100000));
+        classMassege.setClassNumber(Integer.parseInt(teacherClass.getClassNumber()));
         classMassege.setClassName(teacherClass.getClassName());
         AdministratorExample administratorExample = new AdministratorExample();
         administratorExample.createCriteria().andUsernameEqualTo(teacherClass.getTeacherName());
@@ -40,10 +39,10 @@ public class ClassService {
             if (classes.size() == 0) {
                 if (administrators.get(0).getClassName() == null) {
                     administrators.get(0).setClassName(teacherClass.getClassName());
-                    administrators.get(0).setClassNumber(String.valueOf(classMassege.getClassNumber()));
+                    administrators.get(0).setClassNumber(teacherClass.getClassNumber());
                 } else {
                     administrators.get(0).setClassNumber(administrators.get(0).getClassNumber()
-                            + "," + classMassege.getClassNumber());
+                            + "," + teacherClass.getClassNumber());
                     administrators.get(0).setClassName(administrators.get(0).getClassName()
                             + "," + teacherClass.getClassName());
                 }
