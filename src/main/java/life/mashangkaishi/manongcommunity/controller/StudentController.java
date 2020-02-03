@@ -157,4 +157,12 @@ public class StudentController {
         return administratorDTO;
     }
 
+    @Transactional
+    @ResponseBody
+    @PostMapping("/api/user/studentMessage")
+    public Task studentMessage(@RequestBody Task task) {
+        Task task1 = taskService.selectStudentTask(task);
+        return task1;
+    }
+
 }

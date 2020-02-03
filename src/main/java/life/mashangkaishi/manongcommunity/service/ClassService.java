@@ -99,4 +99,10 @@ public class ClassService {
     }
 
 
+    public List<Class> selectClasses(Administrator administrator) {
+        ClassExample example = new ClassExample();
+        example.createCriteria().andMainTeacherEqualTo(administrator.getUsername());
+        List<Class> classes = classMapper.selectByExample(example);
+        return classes;
+    }
 }

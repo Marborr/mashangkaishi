@@ -1,6 +1,7 @@
 package life.mashangkaishi.manongcommunity.controller;
 
 import life.mashangkaishi.manongcommunity.dto.AdministratorDTO;
+import life.mashangkaishi.manongcommunity.dto.StudentTaskStateDTO;
 import life.mashangkaishi.manongcommunity.dto.TeacherClassDTO;
 import life.mashangkaishi.manongcommunity.dto.TeacherClassDTO2;
 import life.mashangkaishi.manongcommunity.mapper.ClassMapper;
@@ -102,9 +103,27 @@ public class AdministratorController {
 
     @Transactional
     @ResponseBody
-    @PostMapping("/api/user/selectClassStudentTask")//查作业
-    public List<Task> selectClassStudentTask(@RequestBody Task task) {
-        List<Task> tasks=taskService.selectClassStudentTask(task);
+    @PostMapping("/api/user/selectClassTask")//查任务
+    public List<Task> selectClassTask(@RequestBody Task task) {
+        List<Task> tasks=taskService.selectClassTask(task);
         return tasks;
     }
+
+    @Transactional
+    @ResponseBody
+    @PostMapping("/api/user/selectClasses")//查班级
+    public List<Class> selectClasses(@RequestBody Administrator administrator) {
+        List<Class> classes=classService.selectClasses(administrator);
+        return classes;
+    }
+
+    @Transactional
+    @ResponseBody
+    @PostMapping("/api/user/selectClassStudentTask")//查学生任务
+    public List<StudentTaskStateDTO> selectClassStudentTask(@RequestBody Task task) {
+        List<StudentTaskStateDTO> selectStudentClassTask=taskService.selectStudentClassTask(task);
+        return selectStudentClassTask;
+    }
+
+
 }
