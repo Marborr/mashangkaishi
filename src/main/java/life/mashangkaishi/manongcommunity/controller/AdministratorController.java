@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -123,12 +124,17 @@ public class AdministratorController {
     @Transactional
     @ResponseBody
     @PostMapping("/api/user/selectClassStudent")//查学生
-    public StudentNameDTO selectClassStudent(@RequestBody Class aclass) {
-
+    public List<StudentNameDTO> selectClassStudent(@RequestBody Class aclass) {
+        ArrayList<StudentNameDTO> studentNameDTOS = new ArrayList<>();
         Class StudentClass=taskService.selectStudentClass(aclass);
-        StudentNameDTO studentNameDTO = new StudentNameDTO();
-        studentNameDTO.setStudentName(StudentClass.getStudents());
-        return studentNameDTO;
+        String[] split = StudentClass.getStudents().split(",");
+        for (String s:split
+             ) {
+            StudentNameDTO studentNameDTO = new StudentNameDTO();
+            studentNameDTO.setStudentName(s);
+            studentNameDTOS.add(studentNameDTO);
+        }
+        return studentNameDTOS;
     }
 
 
