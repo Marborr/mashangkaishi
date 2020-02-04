@@ -220,3 +220,38 @@ Caused by: com.mysql.cj.exceptions.InvalidConnectionAttributeException: The serv
 2020-02-04 22:53:20.556 DEBUG 18744 --- [http-nio-80-exec-1] l.m.m.m.A.updateByPrimaryKey             : ==>  Preparing: update administrator set username = ?, password = ?, teacher_name = ?, departments = ?, state = ?, email = ?, security_issue = ?, verification = ?, gmt_create = ?, class_number = ?, class_name = ?, task_name = ?, identify = ?, sex = ? where id = ? 
 2020-02-04 22:53:20.557 DEBUG 18744 --- [http-nio-80-exec-1] l.m.m.m.A.updateByPrimaryKey             : ==> Parameters: S180(String), 12345678(String), null, null, 1(Integer), 749286375@qq.com(String), null, null, 2020-01-23 16:56:35(String), 123,457773(String), s,计算机5班(String), null, null, null, 3(Integer)
 2020-02-04 22:53:20.559 DEBUG 18744 --- [http-nio-80-exec-1] l.m.m.m.A.updateByPrimaryKey             : <==    Updates: 1
+2020-02-04 23:20:23.900  INFO 11944 --- [restartedMain] l.m.m.ManongcommunityApplication         : Starting ManongcommunityApplication on DESKTOP-6MLM9A1 with PID 11944 (started by marboo in D:\eclipes工作空间\mashangkaishi)
+2020-02-04 23:20:23.903  INFO 11944 --- [restartedMain] l.m.m.ManongcommunityApplication         : No active profile set, falling back to default profiles: default
+2020-02-04 23:20:23.954  INFO 11944 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-02-04 23:20:23.955  INFO 11944 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-02-04 23:20:25.178  INFO 11944 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
+2020-02-04 23:20:25.188  INFO 11944 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-02-04 23:20:25.189  INFO 11944 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
+2020-02-04 23:20:25.286  INFO 11944 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-02-04 23:20:25.286  INFO 11944 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1331 ms
+2020-02-04 23:20:26.032  INFO 11944 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-02-04 23:20:26.093  INFO 11944 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-02-04 23:20:26.225  INFO 11944 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2020-02-04 23:20:26.434  INFO 11944 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-02-04 23:20:26.490  INFO 11944 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
+2020-02-04 23:20:26.493  INFO 11944 --- [restartedMain] l.m.m.ManongcommunityApplication         : Started ManongcommunityApplication in 2.978 seconds (JVM running for 3.837)
+2020-02-04 23:20:35.835  INFO 11944 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-02-04 23:20:35.836  INFO 11944 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-02-04 23:20:35.842  INFO 11944 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2020-02-04 23:20:35.911  INFO 11944 --- [http-nio-80-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-02-04 23:20:36.382  INFO 11944 --- [http-nio-80-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-02-04 23:20:36.436 DEBUG 11944 --- [http-nio-80-exec-1] l.m.m.m.A.selectByExample                : ==>  Preparing: select id, username, password, teacher_name, departments, state, email, security_issue, verification, gmt_create, class_number, class_name, task_name, identify, sex from administrator WHERE ( username = ? ) 
+2020-02-04 23:20:36.457 DEBUG 11944 --- [http-nio-80-exec-1] l.m.m.m.A.selectByExample                : ==> Parameters: S180(String)
+2020-02-04 23:20:36.474 DEBUG 11944 --- [http-nio-80-exec-1] l.m.m.m.A.selectByExample                : <==      Total: 1
+2020-02-04 23:20:36.482 DEBUG 11944 --- [http-nio-80-exec-1] l.m.m.m.ClassMapper.selectByExample      : ==>  Preparing: select id, class_number, class_name, students, main_teacher, teachers, gmt_creat, task_name from class WHERE ( class_name = ? and class_number = ? ) 
+2020-02-04 23:20:36.482 DEBUG 11944 --- [http-nio-80-exec-1] l.m.m.m.ClassMapper.selectByExample      : ==> Parameters: 计算机5班(String), 912572(Integer)
+2020-02-04 23:20:36.484 DEBUG 11944 --- [http-nio-80-exec-1] l.m.m.m.ClassMapper.selectByExample      : <==      Total: 0
+2020-02-04 23:20:36.485 DEBUG 11944 --- [http-nio-80-exec-1] l.m.m.m.C.selectClassNumber              : ==>  Preparing: select count(1) from class 
+2020-02-04 23:20:36.486 DEBUG 11944 --- [http-nio-80-exec-1] l.m.m.m.C.selectClassNumber              : ==> Parameters: 
+2020-02-04 23:20:36.489 DEBUG 11944 --- [http-nio-80-exec-1] l.m.m.m.C.selectClassNumber              : <==      Total: 1
+2020-02-04 23:20:36.491 DEBUG 11944 --- [http-nio-80-exec-1] l.m.m.mapper.ClassMapper.insert          : ==>  Preparing: insert into class (id, class_number, class_name, students, main_teacher, teachers, gmt_creat, task_name) values (?, ?, ?, ?, ?, ?, ?, ?) 
+2020-02-04 23:20:36.492 DEBUG 11944 --- [http-nio-80-exec-1] l.m.m.mapper.ClassMapper.insert          : ==> Parameters: 8(Integer), 912572(Integer), 计算机5班(String), null, S180(String), null, 2020-02-04 23:20:36(String), null
+2020-02-04 23:20:36.495 DEBUG 11944 --- [http-nio-80-exec-1] l.m.m.mapper.ClassMapper.insert          : <==    Updates: 1
+2020-02-04 23:20:36.496 DEBUG 11944 --- [http-nio-80-exec-1] l.m.m.m.A.updateByPrimaryKey             : ==>  Preparing: update administrator set username = ?, password = ?, teacher_name = ?, departments = ?, state = ?, email = ?, security_issue = ?, verification = ?, gmt_create = ?, class_number = ?, class_name = ?, task_name = ?, identify = ?, sex = ? where id = ? 
+2020-02-04 23:20:36.497 DEBUG 11944 --- [http-nio-80-exec-1] l.m.m.m.A.updateByPrimaryKey             : ==> Parameters: S180(String), 12345678(String), null, null, 1(Integer), 749286375@qq.com(String), null, null, 2020-01-23 16:56:35(String), 123,457773,912572(String), s,计算机5班,计算机5班(String), null, null, null, 3(Integer)
+2020-02-04 23:20:36.499 DEBUG 11944 --- [http-nio-80-exec-1] l.m.m.m.A.updateByPrimaryKey             : <==    Updates: 1

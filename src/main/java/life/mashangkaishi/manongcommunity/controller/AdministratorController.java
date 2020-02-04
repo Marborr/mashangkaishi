@@ -76,6 +76,7 @@ public class AdministratorController {
         teacherClassDTO.setClassNumber(String.valueOf(random));
         teacherClassDTO.setTeacherName(teacherClassDTO2.getTeacherName());
         String result=classService.creatOrUpdateClass(teacherClassDTO);
+        System.out.println(result);
         AdministratorDTO administratorDTO = new AdministratorDTO();
         administratorDTO.setMsg(result);
         Class aClass = new Class();
@@ -83,6 +84,7 @@ public class AdministratorController {
         aClass.setClassNumber(random);
         aClass.setMainTeacher(teacherClassDTO.getTeacherName());
         administratorDTO.setClassMessege(aClass);
+        System.out.println(administratorDTO.toString());
         return administratorDTO;
     }
 
