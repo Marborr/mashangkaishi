@@ -122,8 +122,9 @@ public class AdministratorController {
 
     @Transactional
     @ResponseBody
-    @PostMapping("/api/user/selectClassStudentTask")//查学生任务
+    @PostMapping("/api/user/selectClassStudent")//查学生
     public StudentNameDTO selectClassStudent(@RequestBody Class aclass) {
+
         Class StudentClass=taskService.selectStudentClass(aclass);
         StudentNameDTO studentNameDTO = new StudentNameDTO();
         studentNameDTO.setStudentName(StudentClass.getStudents());
