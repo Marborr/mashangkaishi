@@ -127,15 +127,15 @@ public class AdministratorController {
     public List<StudentNameDTO> selectClassStudent(@RequestBody Class aclass) {
         ArrayList<StudentNameDTO> studentNameDTOS = new ArrayList<>();
         Class StudentClass=taskService.selectStudentClass(aclass);
-        String[] split = StudentClass.getStudents().split(",");
-        for (String s:split
-             ) {
-            StudentNameDTO studentNameDTO = new StudentNameDTO();
-            studentNameDTO.setStudentName(s);
-            studentNameDTOS.add(studentNameDTO);
+        if (StudentClass.getStudents()!=null){
+            String[] split = StudentClass.getStudents().split(",");
+            for (String s:split
+            ) {
+                StudentNameDTO studentNameDTO = new StudentNameDTO();
+                studentNameDTO.setStudentName(s);
+                studentNameDTOS.add(studentNameDTO);
+            }
         }
         return studentNameDTOS;
     }
-
-
 }
