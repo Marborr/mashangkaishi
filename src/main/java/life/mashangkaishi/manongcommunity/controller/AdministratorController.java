@@ -1,14 +1,9 @@
 package life.mashangkaishi.manongcommunity.controller;
 
-import life.mashangkaishi.manongcommunity.dto.AdministratorDTO;
-import life.mashangkaishi.manongcommunity.dto.StudentTaskStateDTO;
-import life.mashangkaishi.manongcommunity.dto.TeacherClassDTO;
-import life.mashangkaishi.manongcommunity.dto.TeacherClassDTO2;
+import life.mashangkaishi.manongcommunity.dto.*;
 import life.mashangkaishi.manongcommunity.mapper.ClassMapper;
-import life.mashangkaishi.manongcommunity.model.Administrator;
+import life.mashangkaishi.manongcommunity.model.*;
 import life.mashangkaishi.manongcommunity.model.Class;
-import life.mashangkaishi.manongcommunity.model.ClassExample;
-import life.mashangkaishi.manongcommunity.model.Task;
 import life.mashangkaishi.manongcommunity.service.AdministratorService;
 import life.mashangkaishi.manongcommunity.service.ClassService;
 import life.mashangkaishi.manongcommunity.service.TaskService;
@@ -123,6 +118,16 @@ public class AdministratorController {
     public List<StudentTaskStateDTO> selectClassStudentTask(@RequestBody Task task) {
         List<StudentTaskStateDTO> selectStudentClassTask=taskService.selectStudentClassTask(task);
         return selectStudentClassTask;
+    }
+
+    @Transactional
+    @ResponseBody
+    @PostMapping("/api/user/selectClassStudentTask")//查学生任务
+    public StudentNameDTO selectClassStudent(@RequestBody Class aclass) {
+        Class StudentClass=taskService.selectStudentClass(aclass);
+        StudentNameDTO studentNameDTO = new StudentNameDTO();
+        studentNameDTO.setStudentName(StudentClass.getStudents());
+        return studentNameDTO;
     }
 
 

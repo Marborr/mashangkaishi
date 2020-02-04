@@ -2,6 +2,7 @@ package life.mashangkaishi.manongcommunity.service;
 
 import life.mashangkaishi.manongcommunity.dto.AdministratorDTO;
 import life.mashangkaishi.manongcommunity.dto.StudentTaskStateDTO;
+import life.mashangkaishi.manongcommunity.mapper.ClassMapper;
 import life.mashangkaishi.manongcommunity.mapper.StudentMapper;
 import life.mashangkaishi.manongcommunity.mapper.TaskExtMapper;
 import life.mashangkaishi.manongcommunity.mapper.TaskMapper;
@@ -24,6 +25,8 @@ public class TaskService {
     TaskExtMapper taskExtMapper;
     @Autowired
     StudentMapper studentMapper;
+    @Autowired
+    ClassMapper classMapper;
 
     public String creatOrUpdateTask(Task task) {
         task.setId(taskExtMapper.selectTaskNumber(task) + 1);
@@ -123,5 +126,12 @@ public class TaskService {
             return tasks.get(0);
         }
 
+    }
+
+    public Class selectStudentClass(Class aclass) {
+        ClassExample example = new ClassExample();
+        example.createCriteria().andClassNumberEqualTo(aclass.getClassNumber());
+        List<Class> classes = classMapper.selectByExample(example);
+        return classes.get(0);
     }
 }
