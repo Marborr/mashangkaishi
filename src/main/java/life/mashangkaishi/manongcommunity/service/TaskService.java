@@ -1,6 +1,5 @@
 package life.mashangkaishi.manongcommunity.service;
 
-import life.mashangkaishi.manongcommunity.dto.AdministratorDTO;
 import life.mashangkaishi.manongcommunity.dto.StudentTaskStateDTO;
 import life.mashangkaishi.manongcommunity.mapper.ClassMapper;
 import life.mashangkaishi.manongcommunity.mapper.StudentMapper;
@@ -9,8 +8,8 @@ import life.mashangkaishi.manongcommunity.mapper.TaskMapper;
 import life.mashangkaishi.manongcommunity.model.*;
 import life.mashangkaishi.manongcommunity.model.Class;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -76,6 +75,7 @@ public class TaskService {
         }
     }
 
+
     public List<Task> selectClassTask(Task task) {
         TaskExample example = new TaskExample();
         example.createCriteria()
@@ -125,7 +125,6 @@ public class TaskService {
         } else {
             return tasks.get(0);
         }
-
     }
 
     public Class selectStudentClass(Class aclass) {

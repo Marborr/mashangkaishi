@@ -8,6 +8,7 @@ import life.mashangkaishi.manongcommunity.service.AdministratorService;
 import life.mashangkaishi.manongcommunity.service.ClassService;
 import life.mashangkaishi.manongcommunity.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -107,7 +108,7 @@ public class AdministratorController {
         return tasks;
     }
 
-    @Transactional
+    @Async("asyncExecutor")
     @ResponseBody
     @PostMapping("/api/user/selectClasses")//查班级
     public List<Class> selectClasses(@RequestBody Administrator administrator) {
