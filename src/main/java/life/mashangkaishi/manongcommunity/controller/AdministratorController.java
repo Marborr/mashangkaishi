@@ -58,7 +58,7 @@ public class AdministratorController {
             return administratorDTO;
         }else {
             ClassExample example1 = new ClassExample();
-            example1.createCriteria().andMainTeacherEqualTo(administrator.getUsername());
+            example1.createCriteria().andMainTeacherEqualTo(administrator.getTeacherId());
             List<Class> classes = classMapper.selectByExample(example1);
             administratorDTO.setMsg("success");
             administratorDTO.setAdministrator(administrator);

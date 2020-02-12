@@ -52,7 +52,7 @@ public class TaskService {
                 .andTaskNameEqualTo(task.getTaskName());
         List<Task> tasks = taskMapper.selectByExample(example);
         StudentExample example1 = new StudentExample();
-        example1.createCriteria().andUsernameEqualTo(task.getStudentNumber());
+        example1.createCriteria().andStuIdEqualTo(task.getStudentNumber());
         List<Student> students = studentMapper.selectByExample(example1);
         if (students.size() != 0) {
             if (tasks.size() != 0) {
@@ -100,11 +100,11 @@ public class TaskService {
         for (Student s :
                 students) {
             StudentTaskStateDTO studentTaskStateDTO = new StudentTaskStateDTO();
-            studentTaskStateDTO.setUsername(s.getUsername());
+            studentTaskStateDTO.setUsername(s.getStuId());
             studentTaskStateDTO.setSate("未完成");
             for (Task t :
                     tasks) {
-                if (s.getUsername().equals(t.getStudentNumber())) {
+                if (s.getStuId().equals(t.getStudentNumber())) {
                     studentTaskStateDTO.setSate("完成");
                 }
             }

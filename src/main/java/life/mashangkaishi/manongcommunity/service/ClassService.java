@@ -29,7 +29,7 @@ public class ClassService {
         classMassege.setClassNumber(Integer.parseInt(teacherClass.getClassNumber()));
         classMassege.setClassName(teacherClass.getClassName());
         AdministratorExample administratorExample = new AdministratorExample();
-        administratorExample.createCriteria().andUsernameEqualTo(teacherClass.getTeacherName());
+        administratorExample.createCriteria().andTeacherIdEqualTo(teacherClass.getTeacherName());
         List<Administrator> administrators = administratorMapper.selectByExample(administratorExample);
         ClassExample example = new ClassExample();
         example.createCriteria().andClassNameEqualTo(classMassege.getClassName())
@@ -68,13 +68,13 @@ public class ClassService {
         List<Class> classes = classMapper.selectByExample(example);
         if (classes.size() != 0) {
             StudentExample example1 = new StudentExample();
-            example1.createCriteria().andUsernameEqualTo(student.getUsername());
+            example1.createCriteria().andStuIdEqualTo(student.getStuId());
             List<Student> students = studentMapper.selectByExample(example1);
             if (students.size() != 0) {
                 if (classes.get(0).getStudents() == null) {
-                    classes.get(0).setStudents(student.getUsername());
+                    classes.get(0).setStudents(student.getStuId());
                 } else {
-                    classes.get(0).setStudents(classes.get(0).getStudents() + "," + student.getUsername());
+                    classes.get(0).setStudents(classes.get(0).getStudents() + "," + student.getStuId());
                 }
                 classMapper.updateByPrimaryKey(classes.get(0));
                 if (students.get(0).getClassNumber() == null && students.get(0).getClassName() == null) {
@@ -101,7 +101,7 @@ public class ClassService {
 
     public List<Class> selectClasses(Administrator administrator) {
         ClassExample example = new ClassExample();
-        example.createCriteria().andMainTeacherEqualTo(administrator.getUsername());
+        example.createCriteria().andMainTeacherEqualTo(administrator.getTeacherId());
         List<Class> classes = classMapper.selectByExample(example);
         return classes;
     }

@@ -128,7 +128,7 @@ public class StudentController {
         Student student = new Student();
         joinclass.setClassName(joinClassDTO.getClassName());
         joinclass.setClassNumber(joinClassDTO.getClassNumber());
-        student.setUsername(joinClassDTO.getStudentUsername());
+        student.setStuId(joinClassDTO.getStudentUsername());
         student.setClassNumber(String.valueOf(joinClassDTO.getClassNumber()));
         student.setClassName(joinClassDTO.getClassName());
         String result=classService.joinClass(joinclass,student);

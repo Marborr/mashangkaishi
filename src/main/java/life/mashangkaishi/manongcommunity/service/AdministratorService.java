@@ -22,7 +22,7 @@ public class AdministratorService {
     AdministratorExtMapper administratorExtMapper;
     public Administrator selectAdministrator(Administrator administrator) {
            AdministratorExample example=new AdministratorExample();
-            example.createCriteria().andUsernameEqualTo(administrator.getUsername())
+            example.createCriteria().andTeacherIdEqualTo(administrator.getTeacherId())
             .andPasswordEqualTo(administrator.getPassword());
             List<Administrator> administrators = administratorMapper.selectByExample(example);
         if (administrators.size()==0){
@@ -38,7 +38,7 @@ public class AdministratorService {
             administrator.setId(administratorExtMapper.selectAdministratorNumber(administrator)+1);//查询所有老师的总数
         }
         AdministratorExample example=new AdministratorExample();
-        example.createCriteria().andUsernameEqualTo(administrator.getUsername());
+        example.createCriteria().andTeacherIdEqualTo(administrator.getTeacherId());
         List<Administrator> administrators = administratorMapper.selectByExample(example);
         if(administrators.size() ==0){
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式

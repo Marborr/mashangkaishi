@@ -22,7 +22,7 @@ public class StudentService {
             student.setId(studentExtMapper.selectStudentNumber(student)+1);//查询所有学生的总数
         }
         StudentExample example=new StudentExample();
-        example.createCriteria().andUsernameEqualTo(student.getUsername());
+        example.createCriteria().andStuIdEqualTo(student.getStuId());
         List<Student> students = studentMapper.selectByExample(example);
         if(students.size() ==0){
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
@@ -50,7 +50,7 @@ public class StudentService {
 
     public Student selectStudent(Student student){
         StudentExample example=new StudentExample();
-        example.createCriteria().andUsernameEqualTo(student.getUsername());
+        example.createCriteria().andStuIdEqualTo(student.getStuId());
         List<Student> students = studentMapper.selectByExample(example);
         if (students.size()==0){
             return null;
@@ -75,7 +75,7 @@ public class StudentService {
     public Student selectStudentByPassword(Student student) {
         StudentExample example=new StudentExample();
         example.createCriteria().andPasswordEqualTo(student.getPassword())
-                .andUsernameEqualTo(student.getUsername());
+                .andStuIdEqualTo(student.getStuId());
         List<Student> students = studentMapper.selectByExample(example);
         if (students.size()==0){
             return null;
