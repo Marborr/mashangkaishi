@@ -1,9 +1,6 @@
 package life.mashangkaishi.manongcommunity.controller;
 
-import life.mashangkaishi.manongcommunity.dto.AdministratorDTO;
-import life.mashangkaishi.manongcommunity.dto.DataDTO;
-import life.mashangkaishi.manongcommunity.dto.JoinClassDTO;
-import life.mashangkaishi.manongcommunity.dto.StudentDTO;
+import life.mashangkaishi.manongcommunity.dto.*;
 import life.mashangkaishi.manongcommunity.model.Class;
 import life.mashangkaishi.manongcommunity.model.Data;
 import life.mashangkaishi.manongcommunity.model.Student;
@@ -14,6 +11,7 @@ import life.mashangkaishi.manongcommunity.service.StudentService;
 import life.mashangkaishi.manongcommunity.service.TaskService;
 import life.mashangkaishi.manongcommunity.util.SendMail;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -157,12 +155,13 @@ public class StudentController {
         return administratorDTO;
     }
 
+    //@Async("asyncExecutor")
     @Transactional
     @ResponseBody
     @PostMapping("/api/user/studentMessage")
-    public Task studentMessage(@RequestBody Task task) {
-        Task task1 = taskService.selectStudentTask(task);
-        return task1;
+    public StudentTaskDAO studentMessage(@RequestBody Student student) {
+        StudentTaskDAO studentTaskDAO = taskService.selectStudentTask(student);
+        System.out.println(studentTaskDAO+"controller");
+        return studentTaskDAO;
     }
-
 }

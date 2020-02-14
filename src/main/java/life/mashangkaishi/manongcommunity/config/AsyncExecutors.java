@@ -26,6 +26,5 @@ public class AsyncExecutors {
         threadPoolExecutor.setMaxPoolSize(asyncMaxPoolSize);
         threadPoolExecutor.setQueueCapacity(asyncQueueCapacity);
         return threadPoolExecutor;
-
     }
 }

@@ -108,7 +108,8 @@ public class AdministratorController {
         return tasks;
     }
 
-    @Async("asyncExecutor")
+    //@Async("asyncExecutor")
+    @Transactional
     @ResponseBody
     @PostMapping("/api/user/selectClasses")//查班级
     public List<Class> selectClasses(@RequestBody Administrator administrator) {

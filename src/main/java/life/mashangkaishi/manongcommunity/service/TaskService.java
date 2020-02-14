@@ -1,5 +1,6 @@
 package life.mashangkaishi.manongcommunity.service;
 
+import life.mashangkaishi.manongcommunity.dto.StudentTaskDAO;
 import life.mashangkaishi.manongcommunity.dto.StudentTaskStateDTO;
 import life.mashangkaishi.manongcommunity.mapper.ClassMapper;
 import life.mashangkaishi.manongcommunity.mapper.StudentMapper;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -113,17 +115,38 @@ public class TaskService {
         return studentTaskStateDTOS;
     }
 
-    public Task selectStudentTask(Task task) {
-        TaskExample example = new TaskExample();
-        example.createCriteria()
-                .andStudentNumberEqualTo(task.getStudentNumber())
-                .andTaskNameEqualTo(task.getTaskName())
-                .andTeacherEqualTo(task.getTeacher());
-        List<Task> tasks = taskMapper.selectByExampleWithBLOBs(example);
-        if (tasks.size() == 0) {
+
+    public StudentTaskDAO selectStudentTask(Student student) {
+        StudentExample Studentexample = new StudentExample();
+        Studentexample.createCriteria().andStuIdEqualTo(student.getStuId());
+        List<Student> students = studentMapper.selectByExample(Studentexample);
+        if (students.size()==0){
             return null;
-        } else {
-            return tasks.get(0);
+        }else {
+            StudentTaskDAO studentTaskDAO = new StudentTaskDAO();
+            ArrayList<Class> listclass = new ArrayList<>();
+            String[] classesNumber = students.get(0).getClassNumber().split(",");
+
+            System.out.println(Arrays.toString(classesNumber));
+
+            if (classesNumber.length!=0){
+                ClassExample classexample = new ClassExample();
+                for (String classes :
+                        classesNumber) {
+                    classexample.createCriteria()
+                            .andClassNumberEqualTo(Integer.parseInt(classes));
+                    List<Class> classes1 = classMapper.selectByExample(classexample);
+                    listclass.add(classes1.get(0));
+                }
+            }
+            studentTaskDAO.setClasses(listclass);
+
+            TaskExample example = new TaskExample();
+            example.createCriteria()
+                    .andStudentNumberEqualTo(students.get(0).getStuId());
+            List<Task> tasks = taskMapper.selectByExampleWithBLOBs(example);
+            studentTaskDAO.setTasks(tasks);
+            return studentTaskDAO;
         }
     }
 

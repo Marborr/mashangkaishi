@@ -45,6 +45,6 @@
         <table tableName="data" domainObjectName="Data" ></table>
         <table tableName="class" domainObjectName="Class" ></table>
         <table tableName="task" domainObjectName="Task" ></table>
-
+        <table tableName="test_table" domainObjectName="testTable" ></table>
     </context>
 </generatorConfiguration>
