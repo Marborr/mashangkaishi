@@ -18,9 +18,9 @@ public class StudentService {
     @Autowired
     StudentExtMapper studentExtMapper;
     public Student createOrUpdate(Student student){
-        if (student.getId()==null){
-            student.setId(studentExtMapper.selectStudentNumber(student)+1);//查询所有学生的总数
-        }
+//        if (student.getId()==null){
+//            student.setId(studentExtMapper.selectStudentNumber(student)+1);//查询所有学生的总数
+//        }
         StudentExample example=new StudentExample();
         example.createCriteria().andStuIdEqualTo(student.getStuId());
         List<Student> students = studentMapper.selectByExample(example);
@@ -33,6 +33,7 @@ public class StudentService {
             student.setIdentify("student");
             studentMapper.insert(student);
             return student;
+
         }else {
             //更新
             Student dbStudent = students.get(0);

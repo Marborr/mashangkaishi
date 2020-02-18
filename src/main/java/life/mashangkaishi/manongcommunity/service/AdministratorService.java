@@ -34,9 +34,6 @@ public class AdministratorService {
     }
 
     public Administrator createOrUpdate(Administrator administrator) {
-        if (administrator.getId()==null){
-            administrator.setId(administratorExtMapper.selectAdministratorNumber(administrator)+1);//查询所有老师的总数
-        }
         AdministratorExample example=new AdministratorExample();
         example.createCriteria().andTeacherIdEqualTo(administrator.getTeacherId());
         List<Administrator> administrators = administratorMapper.selectByExample(example);

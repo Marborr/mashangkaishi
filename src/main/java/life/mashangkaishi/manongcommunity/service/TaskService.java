@@ -6,12 +6,12 @@ import life.mashangkaishi.manongcommunity.mapper.ClassMapper;
 import life.mashangkaishi.manongcommunity.mapper.StudentMapper;
 import life.mashangkaishi.manongcommunity.mapper.TaskExtMapper;
 import life.mashangkaishi.manongcommunity.mapper.TaskMapper;
-import life.mashangkaishi.manongcommunity.model.*;
 import life.mashangkaishi.manongcommunity.model.Class;
+import life.mashangkaishi.manongcommunity.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +30,21 @@ public class TaskService {
     ClassMapper classMapper;
 
     public String creatOrUpdateTask(Task task) {
-        task.setId(taskExtMapper.selectTaskNumber(task) + 1);
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            long nowTime = new Date().getTime();
+            String[] ts = task.getDeadline().split("T");
+            String split = ts[1].substring(0, 9);
+            String s = ts[0] + " " + split;
+            long time = sdf.parse(s).getTime();
+            if (time - nowTime > 0) {
+                task.setState("进行中");
+            } else {
+                task.setState("已过期");
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         task.setGmtCreat(df.format(new Date()));
         taskMapper.insert(task);
@@ -38,11 +52,38 @@ public class TaskService {
     }
 
     public List<Task> selectTask(Task task) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        long nowTime = new Date().getTime();
         TaskExample example = new TaskExample();
-        example.createCriteria().andClassMessageEqualTo(task.getClassMessage())
-                .andTeacherEqualTo(task.getTeacher());
+        example.createCriteria()
+                .andTeacherEqualTo(task.getTeacher())
+                .andStudentNumberIsNull();
         List<Task> tasks = taskMapper.selectByExample(example);
-        return tasks;
+        if (tasks.size() == 0) {
+            return tasks;
+        } else {
+            try {
+                for (int i = 0; i < tasks.size(); i++) {
+                    Task t = tasks.get(i);
+                    String[] ts = t.getDeadline().split("T");
+                    String split = ts[1].substring(0, 9);
+                    String s = ts[0] + " " + split;
+                    long time = sdf.parse(s).getTime();
+                    if (time - nowTime > 0) {
+                        t.setState("进行中");
+                        tasks.get(i).setState("进行中");
+                    } else {
+                        t.setState("已过期");
+                        tasks.get(i).setState("已过期");
+                    }
+                    System.out.println(tasks.get(i));
+                    taskMapper.updateByPrimaryKey(t);
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return tasks;
+        }
     }
 
     public String studentCreatOrUpdateTask(Task task) {
@@ -64,7 +105,7 @@ public class TaskService {
                 taskMapper.updateByExampleWithBLOBs(tasks.get(0), taskExample);
                 return "提交成功";
             } else {
-                task.setId(taskExtMapper.selectTaskNumber(task) + 1);
+                //task.setId(taskExtMapper.selectTaskNumber(task) + 1);
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
                 task.setGmtCreat(df.format(new Date()));
                 students.get(0).setTaskDone(students.get(0).getTaskDone() + 1);
@@ -85,6 +126,7 @@ public class TaskService {
                 .andTeacherEqualTo(task.getTeacher())
                 .andStudentNumberIsNull();
         List<Task> tasks = taskMapper.selectByExampleWithBLOBs(example);
+
         return tasks;
     }
 
@@ -120,16 +162,16 @@ public class TaskService {
         StudentExample Studentexample = new StudentExample();
         Studentexample.createCriteria().andStuIdEqualTo(student.getStuId());
         List<Student> students = studentMapper.selectByExample(Studentexample);
-        if (students.size()==0){
+        if (students.size() == 0) {
             return null;
-        }else {
+        } else {
             StudentTaskDAO studentTaskDAO = new StudentTaskDAO();
             ArrayList<Class> listclass = new ArrayList<>();
             String[] classesNumber = students.get(0).getClassNumber().split(",");
 
             System.out.println(Arrays.toString(classesNumber));
 
-            if (classesNumber.length!=0){
+            if (classesNumber.length != 0) {
                 ClassExample classexample = new ClassExample();
                 for (String classes :
                         classesNumber) {
@@ -156,4 +198,5 @@ public class TaskService {
         List<Class> classes = classMapper.selectByExample(example);
         return classes.get(0);
     }
+
 }

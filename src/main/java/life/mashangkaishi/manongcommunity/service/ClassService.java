@@ -46,7 +46,7 @@ public class ClassService {
                     administrators.get(0).setClassName(administrators.get(0).getClassName()
                             + "," + teacherClass.getClassName());
                 }
-                classMassege.setId(classExtMapper.selectClassNumber(classMassege) + 1);
+//                classMassege.setId(classExtMapper.selectClassNumber(classMassege) + 1);
                 SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
                 classMassege.setGmtCreat(df.format(new Date()));
                 classMassege.setMainTeacher(teacherClass.getTeacherName());

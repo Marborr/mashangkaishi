@@ -37,6 +37,7 @@ public class StudentController {
     @ResponseBody
     @PostMapping("/api/user/registerOrUpdate")
     public StudentDTO regist(@RequestBody Student student) {
+        System.out.println(student.toString());
         Student selectStudent = studentService.selectStudent(student);
         if (selectStudent==null){
             studentService.createOrUpdate(student);
@@ -118,6 +119,7 @@ public class StudentController {
         return dataDTO;
     }
 
+
     @Transactional
     @ResponseBody
     @PostMapping("/api/user/joinClass")
@@ -161,7 +163,8 @@ public class StudentController {
     @PostMapping("/api/user/studentMessage")
     public StudentTaskDAO studentMessage(@RequestBody Student student) {
         StudentTaskDAO studentTaskDAO = taskService.selectStudentTask(student);
-        System.out.println(studentTaskDAO+"controller");
         return studentTaskDAO;
     }
+
+
 }

@@ -142,4 +142,13 @@ public class AdministratorController {
         }
         return studentNameDTOS;
     }
+
+    @Transactional
+    @ResponseBody
+    @PostMapping("/api/user/SelectTeacherTask")
+    public List<Task> selectTeacherTask(@RequestBody Task task) {
+        List<Task> tasks=taskService.selectTask(task);
+        return tasks;
+    }
+
 }
