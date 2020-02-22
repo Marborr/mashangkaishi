@@ -1,336 +1,94 @@
-2020-02-18 21:08:42.191  INFO 18312 --- [restartedMain] l.m.m.ManongcommunityApplication         : Starting ManongcommunityApplication on DESKTOP-6MLM9A1 with PID 18312 (started by marboo in D:\eclipes工作空间\mashangkaishi)
-2020-02-18 21:08:42.198  INFO 18312 --- [restartedMain] l.m.m.ManongcommunityApplication         : No active profile set, falling back to default profiles: default
-2020-02-18 21:08:42.823  INFO 18312 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2020-02-18 21:08:42.824  INFO 18312 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2020-02-18 21:08:47.933  INFO 18312 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
-2020-02-18 21:08:47.956  INFO 18312 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-02-18 21:08:47.957  INFO 18312 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
-2020-02-18 21:08:48.109  INFO 18312 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-02-18 21:08:48.109  INFO 18312 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 5285 ms
-2020-02-18 21:08:49.473  INFO 18312 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'asyncExecutor'
-2020-02-18 21:08:49.855  INFO 18312 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2020-02-18 21:08:50.307  INFO 18312 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
-2020-02-18 21:08:51.082  INFO 18312 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2020-02-18 21:08:51.187  INFO 18312 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
-2020-02-18 21:08:51.189  INFO 18312 --- [restartedMain] l.m.m.ManongcommunityApplication         : Started ManongcommunityApplication in 10.824 seconds (JVM running for 13.011)
-2020-02-18 21:09:04.405  INFO 18312 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-02-18 21:09:04.406  INFO 18312 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-02-18 21:09:04.442  INFO 18312 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 36 ms
-2020-02-18 21:09:04.751  INFO 18312 --- [http-nio-80-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2020-02-18 21:09:05.414  INFO 18312 --- [http-nio-80-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2020-02-18 21:09:05.587 DEBUG 18312 --- [http-nio-80-exec-1] l.m.m.m.StudentMapper.selectByExample    : ==>  Preparing: select id, stu_id, password, sex, gmt_create, state, email, card_number, rank_number, security_issue, verification_code, class_number, class_name, task_done, task_not_done, identify, student_name from student WHERE ( stu_id = ? ) 
-2020-02-18 21:09:05.732 DEBUG 18312 --- [http-nio-80-exec-1] l.m.m.m.StudentMapper.selectByExample    : ==> Parameters: 123(String)
-2020-02-18 21:09:05.751 DEBUG 18312 --- [http-nio-80-exec-1] l.m.m.m.StudentMapper.selectByExample    : <==      Total: 1
-2020-02-18 21:09:05.758 DEBUG 18312 --- [http-nio-80-exec-1] l.m.m.m.ClassMapper.selectByExample      : ==>  Preparing: select id, class_number, class_name, students, main_teacher, teachers, gmt_creat, task_name from class WHERE ( class_number = ? ) 
-2020-02-18 21:09:05.759 DEBUG 18312 --- [http-nio-80-exec-1] l.m.m.m.ClassMapper.selectByExample      : ==> Parameters: 123(Integer)
-2020-02-18 21:09:05.763 DEBUG 18312 --- [http-nio-80-exec-1] l.m.m.m.ClassMapper.selectByExample      : <==      Total: 1
-2020-02-18 21:09:05.767 DEBUG 18312 --- [http-nio-80-exec-1] l.m.m.m.T.selectByExampleWithBLOBs       : ==>  Preparing: select id, class_message, gmt_creat, deadline, supplement, task_name, student_number, teacher , description from task WHERE ( student_number = ? ) 
-2020-02-18 21:09:05.768 DEBUG 18312 --- [http-nio-80-exec-1] l.m.m.m.T.selectByExampleWithBLOBs       : ==> Parameters: 123(String)
-2020-02-18 21:09:05.770 DEBUG 18312 --- [http-nio-80-exec-1] l.m.m.m.T.selectByExampleWithBLOBs       : <==      Total: 2
-2020-02-18 21:12:12.257  WARN 18312 --- [http-nio-80-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unexpected character ('?' (code 239)): was expecting comma to separate Object entries; nested exception is com.fasterxml.jackson.core.JsonParseException: Unexpected character ('?' (code 239)): was expecting comma to separate Object entries
- at [Source: (PushbackInputStream); line: 2, column: 17]]
-2020-02-18 21:16:15.172  INFO 17488 --- [restartedMain] l.m.m.ManongcommunityApplication         : Starting ManongcommunityApplication on DESKTOP-6MLM9A1 with PID 17488 (started by marboo in D:\eclipes工作空间\mashangkaishi)
-2020-02-18 21:16:15.175  INFO 17488 --- [restartedMain] l.m.m.ManongcommunityApplication         : No active profile set, falling back to default profiles: default
-2020-02-18 21:16:15.231  INFO 17488 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2020-02-18 21:16:15.232  INFO 17488 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2020-02-18 21:16:16.413  INFO 17488 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
-2020-02-18 21:16:16.419  INFO 17488 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-02-18 21:16:16.420  INFO 17488 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
-2020-02-18 21:16:16.502  INFO 17488 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-02-18 21:16:16.502  INFO 17488 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1270 ms
-2020-02-18 21:16:17.102  INFO 17488 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'asyncExecutor'
-2020-02-18 21:16:17.270  INFO 17488 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2020-02-18 21:16:17.397  INFO 17488 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
-2020-02-18 21:16:17.596  INFO 17488 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2020-02-18 21:16:17.640  INFO 17488 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
-2020-02-18 21:16:17.643  INFO 17488 --- [restartedMain] l.m.m.ManongcommunityApplication         : Started ManongcommunityApplication in 2.889 seconds (JVM running for 3.82)
-2020-02-18 21:16:23.356  INFO 17488 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-02-18 21:16:23.357  INFO 17488 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-02-18 21:16:23.362  INFO 17488 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 5 ms
-2020-02-18 21:16:23.480  WARN 17488 --- [http-nio-80-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unexpected character ('?' (code 239)): was expecting comma to separate Object entries; nested exception is com.fasterxml.jackson.core.JsonParseException: Unexpected character ('?' (code 239)): was expecting comma to separate Object entries
- at [Source: (PushbackInputStream); line: 2, column: 17]]
-2020-02-18 21:18:23.573  INFO 16148 --- [restartedMain] l.m.m.ManongcommunityApplication         : Starting ManongcommunityApplication on DESKTOP-6MLM9A1 with PID 16148 (started by marboo in D:\eclipes工作空间\mashangkaishi)
-2020-02-18 21:18:23.577  INFO 16148 --- [restartedMain] l.m.m.ManongcommunityApplication         : No active profile set, falling back to default profiles: default
-2020-02-18 21:18:23.647  INFO 16148 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2020-02-18 21:18:23.647  INFO 16148 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2020-02-18 21:18:25.286  INFO 16148 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
-2020-02-18 21:18:25.295  INFO 16148 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-02-18 21:18:25.295  INFO 16148 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
-2020-02-18 21:18:25.384  INFO 16148 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-02-18 21:18:25.384  INFO 16148 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1737 ms
-2020-02-18 21:18:26.041  INFO 16148 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'asyncExecutor'
-2020-02-18 21:18:26.263  INFO 16148 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2020-02-18 21:18:26.414  INFO 16148 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
-2020-02-18 21:18:26.613  INFO 16148 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2020-02-18 21:18:26.662  INFO 16148 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
-2020-02-18 21:18:26.665  INFO 16148 --- [restartedMain] l.m.m.ManongcommunityApplication         : Started ManongcommunityApplication in 3.591 seconds (JVM running for 5.551)
-2020-02-18 21:18:30.346  INFO 16148 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-02-18 21:18:30.347  INFO 16148 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-02-18 21:18:30.356  INFO 16148 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
-2020-02-18 21:18:30.500  WARN 16148 --- [http-nio-80-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unexpected character ('?' (code 239)): was expecting comma to separate Object entries; nested exception is com.fasterxml.jackson.core.JsonParseException: Unexpected character ('?' (code 239)): was expecting comma to separate Object entries
- at [Source: (PushbackInputStream); line: 2, column: 17]]
-2020-02-18 21:19:03.526  WARN 16148 --- [http-nio-80-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unexpected character ('?' (code 239)): was expecting comma to separate Object entries; nested exception is com.fasterxml.jackson.core.JsonParseException: Unexpected character ('?' (code 239)): was expecting comma to separate Object entries
- at [Source: (PushbackInputStream); line: 2, column: 17]]
-2020-02-18 21:20:53.026  INFO 16148 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
-2020-02-18 21:20:53.027  INFO 16148 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'asyncExecutor'
-2020-02-18 21:20:56.041  INFO 18220 --- [restartedMain] l.m.m.ManongcommunityApplication         : Starting ManongcommunityApplication on DESKTOP-6MLM9A1 with PID 18220 (started by marboo in D:\eclipes工作空间\mashangkaishi)
-2020-02-18 21:20:56.045  INFO 18220 --- [restartedMain] l.m.m.ManongcommunityApplication         : No active profile set, falling back to default profiles: default
-2020-02-18 21:20:56.124  INFO 18220 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2020-02-18 21:20:56.125  INFO 18220 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2020-02-18 21:20:57.887  INFO 18220 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
-2020-02-18 21:20:57.896  INFO 18220 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-02-18 21:20:57.897  INFO 18220 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
-2020-02-18 21:20:57.999  INFO 18220 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-02-18 21:20:58.000  INFO 18220 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1875 ms
-2020-02-18 21:20:58.732  INFO 18220 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'asyncExecutor'
-2020-02-18 21:20:58.991  INFO 18220 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2020-02-18 21:20:59.182  INFO 18220 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
-2020-02-18 21:20:59.380  INFO 18220 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2020-02-18 21:20:59.436  INFO 18220 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
-2020-02-18 21:20:59.439  INFO 18220 --- [restartedMain] l.m.m.ManongcommunityApplication         : Started ManongcommunityApplication in 3.927 seconds (JVM running for 5.358)
-2020-02-18 21:21:02.093  INFO 18220 --- [http-nio-80-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-02-18 21:21:02.093  INFO 18220 --- [http-nio-80-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-02-18 21:21:02.100  INFO 18220 --- [http-nio-80-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
-2020-02-18 21:21:02.244  WARN 18220 --- [http-nio-80-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unexpected character ('?' (code 239)): was expecting comma to separate Object entries; nested exception is com.fasterxml.jackson.core.JsonParseException: Unexpected character ('?' (code 239)): was expecting comma to separate Object entries
- at [Source: (PushbackInputStream); line: 2, column: 17]]
-2020-02-18 21:21:28.778  INFO 18220 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
-2020-02-18 21:21:28.780  INFO 18220 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'asyncExecutor'
-2020-02-18 21:21:34.011  INFO 11232 --- [restartedMain] l.m.m.ManongcommunityApplication         : Starting ManongcommunityApplication on DESKTOP-6MLM9A1 with PID 11232 (started by marboo in D:\eclipes工作空间\mashangkaishi)
-2020-02-18 21:21:34.014  INFO 11232 --- [restartedMain] l.m.m.ManongcommunityApplication         : No active profile set, falling back to default profiles: default
-2020-02-18 21:21:34.074  INFO 11232 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2020-02-18 21:21:34.075  INFO 11232 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2020-02-18 21:21:35.409  INFO 11232 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
-2020-02-18 21:21:35.417  INFO 11232 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-02-18 21:21:35.417  INFO 11232 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
-2020-02-18 21:21:35.506  INFO 11232 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-02-18 21:21:35.506  INFO 11232 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1431 ms
-2020-02-18 21:21:36.150  INFO 11232 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'asyncExecutor'
-2020-02-18 21:21:36.322  INFO 11232 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2020-02-18 21:21:36.454  INFO 11232 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
-2020-02-18 21:21:36.647  INFO 11232 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2020-02-18 21:21:36.712  INFO 11232 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
-2020-02-18 21:21:36.715  INFO 11232 --- [restartedMain] l.m.m.ManongcommunityApplication         : Started ManongcommunityApplication in 3.065 seconds (JVM running for 4.056)
-2020-02-18 21:21:40.966  INFO 11232 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-02-18 21:21:40.967  INFO 11232 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-02-18 21:21:40.973  INFO 11232 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
-2020-02-18 21:21:41.093  WARN 11232 --- [http-nio-80-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: JSON parse error: Unexpected character ('?' (code 239)): was expecting comma to separate Object entries; nested exception is com.fasterxml.jackson.core.JsonParseException: Unexpected character ('?' (code 239)): was expecting comma to separate Object entries
- at [Source: (PushbackInputStream); line: 2, column: 17]]
-2020-02-18 21:22:38.724  INFO 11232 --- [http-nio-80-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2020-02-18 21:22:39.268  INFO 11232 --- [http-nio-80-exec-2] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2020-02-18 21:22:39.318 DEBUG 11232 --- [http-nio-80-exec-2] l.m.m.m.StudentMapper.selectByExample    : ==>  Preparing: select id, stu_id, password, sex, gmt_create, state, email, card_number, rank_number, security_issue, verification_code, class_number, class_name, task_done, task_not_done, identify, student_name from student WHERE ( stu_id = ? ) 
-2020-02-18 21:22:39.336 DEBUG 11232 --- [http-nio-80-exec-2] l.m.m.m.StudentMapper.selectByExample    : ==> Parameters: 123(String)
-2020-02-18 21:22:39.351 DEBUG 11232 --- [http-nio-80-exec-2] l.m.m.m.StudentMapper.selectByExample    : <==      Total: 1
-2020-02-18 21:22:53.255 DEBUG 11232 --- [http-nio-80-exec-3] l.m.m.m.StudentMapper.selectByExample    : ==>  Preparing: select id, stu_id, password, sex, gmt_create, state, email, card_number, rank_number, security_issue, verification_code, class_number, class_name, task_done, task_not_done, identify, student_name from student WHERE ( stu_id = ? ) 
-2020-02-18 21:22:53.256 DEBUG 11232 --- [http-nio-80-exec-3] l.m.m.m.StudentMapper.selectByExample    : ==> Parameters: 555(String)
-2020-02-18 21:22:53.257 DEBUG 11232 --- [http-nio-80-exec-3] l.m.m.m.StudentMapper.selectByExample    : <==      Total: 0
-2020-02-18 21:22:53.259 DEBUG 11232 --- [http-nio-80-exec-3] l.m.m.mapper.StudentMapper.insert        : ==>  Preparing: insert into student (id, stu_id, password, sex, gmt_create, state, email, card_number, rank_number, security_issue, verification_code, class_number, class_name, task_done, task_not_done, identify, student_name) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 
-2020-02-18 21:22:53.261 DEBUG 11232 --- [http-nio-80-exec-3] l.m.m.mapper.StudentMapper.insert        : ==> Parameters: null, 555(String), 123(String), 1(Integer), 2020-02-18 21:22:53(String), 1(Integer), 123(String), null, null, null, null, null, null, 0(Integer), 0(Integer), student(String), 小明(String)
-2020-02-18 21:22:53.265 DEBUG 11232 --- [http-nio-80-exec-3] l.m.m.mapper.StudentMapper.insert        : <==    Updates: 1
-2020-02-18 21:32:37.637  INFO 11232 --- [Thread-11] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
-2020-02-18 21:32:37.638  INFO 11232 --- [Thread-11] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'asyncExecutor'
-2020-02-18 21:32:37.640  INFO 11232 --- [Thread-11] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2020-02-18 21:32:37.658  INFO 11232 --- [Thread-11] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2020-02-18 21:32:38.332  INFO 11232 --- [restartedMain] l.m.m.ManongcommunityApplication         : Starting ManongcommunityApplication on DESKTOP-6MLM9A1 with PID 11232 (started by marboo in D:\eclipes工作空间\mashangkaishi)
-2020-02-18 21:32:38.332  INFO 11232 --- [restartedMain] l.m.m.ManongcommunityApplication         : No active profile set, falling back to default profiles: default
-2020-02-18 21:32:38.637  WARN 11232 --- [restartedMain] org.apache.tomcat.util.modeler.Registry  : The MBean registry cannot be disabled because it has already been initialised
-2020-02-18 21:32:38.674  INFO 11232 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
-2020-02-18 21:32:38.675  INFO 11232 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-02-18 21:32:38.675  INFO 11232 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
-2020-02-18 21:32:38.707  INFO 11232 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-02-18 21:32:38.708  INFO 11232 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 372 ms
-2020-02-18 21:32:38.948  INFO 11232 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'asyncExecutor'
-2020-02-18 21:32:39.021  INFO 11232 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2020-02-18 21:32:39.076  INFO 11232 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
-2020-02-18 21:32:39.248  INFO 11232 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2020-02-18 21:32:39.275  INFO 11232 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
-2020-02-18 21:32:39.275  INFO 11232 --- [restartedMain] l.m.m.ManongcommunityApplication         : Started ManongcommunityApplication in 0.974 seconds (JVM running for 666.617)
-2020-02-18 21:32:39.277  INFO 11232 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
-2020-02-18 21:47:57.976  INFO 11232 --- [Thread-18] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
-2020-02-18 21:47:57.977  INFO 11232 --- [Thread-18] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'asyncExecutor'
-2020-02-18 21:47:58.425  INFO 11232 --- [restartedMain] l.m.m.ManongcommunityApplication         : Starting ManongcommunityApplication on DESKTOP-6MLM9A1 with PID 11232 (started by marboo in D:\eclipes工作空间\mashangkaishi)
-2020-02-18 21:47:58.426  INFO 11232 --- [restartedMain] l.m.m.ManongcommunityApplication         : No active profile set, falling back to default profiles: default
-2020-02-18 21:47:58.751  WARN 11232 --- [restartedMain] org.apache.tomcat.util.modeler.Registry  : The MBean registry cannot be disabled because it has already been initialised
-2020-02-18 21:47:58.784  INFO 11232 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
-2020-02-18 21:47:58.785  INFO 11232 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-02-18 21:47:58.785  INFO 11232 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
-2020-02-18 21:47:58.805  INFO 11232 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-02-18 21:47:58.805  INFO 11232 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 377 ms
-2020-02-18 21:47:59.030  INFO 11232 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'asyncExecutor'
-2020-02-18 21:47:59.107  INFO 11232 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2020-02-18 21:47:59.167  INFO 11232 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
-2020-02-18 21:47:59.333  INFO 11232 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2020-02-18 21:47:59.350  INFO 11232 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
-2020-02-18 21:47:59.351  INFO 11232 --- [restartedMain] l.m.m.ManongcommunityApplication         : Started ManongcommunityApplication in 0.954 seconds (JVM running for 1586.692)
-2020-02-18 21:47:59.351  INFO 11232 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
-2020-02-18 21:50:59.792  INFO 11232 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-02-18 21:50:59.793  INFO 11232 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-02-18 21:50:59.799  INFO 11232 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
-2020-02-18 21:50:59.803  INFO 11232 --- [http-nio-80-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
-2020-02-18 21:50:59.816  INFO 11232 --- [http-nio-80-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
-2020-02-18 21:50:59.826 DEBUG 11232 --- [http-nio-80-exec-1] l.m.m.m.T.selectByExampleWithBLOBs       : ==>  Preparing: select id, class_message, gmt_creat, deadline, supplement, task_name, student_number, teacher , description from task WHERE ( class_message = ? and teacher = ? and student_number is null ) 
-2020-02-18 21:50:59.826 DEBUG 11232 --- [http-nio-80-exec-1] l.m.m.m.T.selectByExampleWithBLOBs       : ==> Parameters: 123(String), S180(String)
-2020-02-18 21:50:59.829 DEBUG 11232 --- [http-nio-80-exec-1] l.m.m.m.T.selectByExampleWithBLOBs       : <==      Total: 1
-2020-02-18 23:53:58.365  INFO 18252 --- [restartedMain] l.m.m.ManongcommunityApplication         : Starting ManongcommunityApplication on DESKTOP-6MLM9A1 with PID 18252 (started by marboo in D:\eclipes工作空间\mashangkaishi)
-2020-02-18 23:53:58.369  INFO 18252 --- [restartedMain] l.m.m.ManongcommunityApplication         : No active profile set, falling back to default profiles: default
-2020-02-18 23:53:58.434  INFO 18252 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2020-02-18 23:53:58.434  INFO 18252 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2020-02-18 23:53:59.738  INFO 18252 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
-2020-02-18 23:53:59.746  INFO 18252 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-02-18 23:53:59.746  INFO 18252 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
-2020-02-18 23:53:59.901  INFO 18252 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-02-18 23:53:59.902  INFO 18252 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1467 ms
-2020-02-18 23:54:00.749  INFO 18252 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'asyncExecutor'
-2020-02-18 23:54:00.938  INFO 18252 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2020-02-18 23:54:01.100  INFO 18252 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
-2020-02-18 23:54:01.305  INFO 18252 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2020-02-18 23:54:01.360  INFO 18252 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
-2020-02-18 23:54:01.363  INFO 18252 --- [restartedMain] l.m.m.ManongcommunityApplication         : Started ManongcommunityApplication in 3.39 seconds (JVM running for 4.358)
-2020-02-18 23:57:28.905  INFO 18252 --- [Thread-12] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
-2020-02-18 23:57:28.906  INFO 18252 --- [Thread-12] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'asyncExecutor'
-2020-02-18 23:57:29.360  INFO 18252 --- [restartedMain] l.m.m.ManongcommunityApplication         : Starting ManongcommunityApplication on DESKTOP-6MLM9A1 with PID 18252 (started by marboo in D:\eclipes工作空间\mashangkaishi)
-2020-02-18 23:57:29.361  INFO 18252 --- [restartedMain] l.m.m.ManongcommunityApplication         : No active profile set, falling back to default profiles: default
-2020-02-18 23:57:29.721  WARN 18252 --- [restartedMain] org.apache.tomcat.util.modeler.Registry  : The MBean registry cannot be disabled because it has already been initialised
-2020-02-18 23:57:29.767  INFO 18252 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
-2020-02-18 23:57:29.769  INFO 18252 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-02-18 23:57:29.769  INFO 18252 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
-2020-02-18 23:57:29.803  INFO 18252 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-02-18 23:57:29.804  INFO 18252 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 439 ms
-2020-02-18 23:57:30.133  INFO 18252 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'asyncExecutor'
-2020-02-18 23:57:30.230  INFO 18252 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2020-02-18 23:57:30.305  INFO 18252 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
-2020-02-18 23:57:30.536  INFO 18252 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2020-02-18 23:57:30.569  INFO 18252 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
-2020-02-18 23:57:30.571  INFO 18252 --- [restartedMain] l.m.m.ManongcommunityApplication         : Started ManongcommunityApplication in 1.239 seconds (JVM running for 213.566)
-2020-02-18 23:57:30.573  INFO 18252 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
-2020-02-19 00:02:18.149  INFO 18608 --- [restartedMain] l.m.m.ManongcommunityApplication         : Starting ManongcommunityApplication on DESKTOP-6MLM9A1 with PID 18608 (started by marboo in D:\eclipes工作空间\mashangkaishi)
-2020-02-19 00:02:18.152  INFO 18608 --- [restartedMain] l.m.m.ManongcommunityApplication         : No active profile set, falling back to default profiles: default
-2020-02-19 00:02:18.198  INFO 18608 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2020-02-19 00:02:18.198  INFO 18608 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2020-02-19 00:02:19.483  INFO 18608 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
-2020-02-19 00:02:19.491  INFO 18608 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-02-19 00:02:19.491  INFO 18608 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
-2020-02-19 00:02:19.572  INFO 18608 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-02-19 00:02:19.572  INFO 18608 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1373 ms
-2020-02-19 00:02:20.188  INFO 18608 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'asyncExecutor'
-2020-02-19 00:02:20.352  INFO 18608 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2020-02-19 00:02:20.482  INFO 18608 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
-2020-02-19 00:02:20.659  INFO 18608 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2020-02-19 00:02:20.704  INFO 18608 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
-2020-02-19 00:02:20.706  INFO 18608 --- [restartedMain] l.m.m.ManongcommunityApplication         : Started ManongcommunityApplication in 2.879 seconds (JVM running for 3.789)
-2020-02-19 00:02:51.624  INFO 18608 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-02-19 00:02:51.624  INFO 18608 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-02-19 00:02:51.632  INFO 18608 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
-2020-02-19 00:02:51.736  INFO 18608 --- [http-nio-80-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2020-02-19 00:02:52.226  INFO 18608 --- [http-nio-80-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2020-02-19 00:02:52.273 DEBUG 18608 --- [http-nio-80-exec-1] l.m.m.mapper.TaskMapper.selectByExample  : ==>  Preparing: select id, class_message, gmt_creat, deadline, supplement, task_name, student_number, teacher, state from task WHERE ( teacher = ? and student_number is null ) 
-2020-02-19 00:02:52.291 DEBUG 18608 --- [http-nio-80-exec-1] l.m.m.mapper.TaskMapper.selectByExample  : ==> Parameters: S180(String)
-2020-02-19 00:02:52.308 DEBUG 18608 --- [http-nio-80-exec-1] l.m.m.mapper.TaskMapper.selectByExample  : <==      Total: 5
-2020-02-19 00:02:52.379  WARN 18608 --- [http-nio-80-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [java.lang.NullPointerException]
-2020-02-19 00:11:16.188  INFO 13420 --- [restartedMain] l.m.m.ManongcommunityApplication         : Starting ManongcommunityApplication on DESKTOP-6MLM9A1 with PID 13420 (started by marboo in D:\eclipes工作空间\mashangkaishi)
-2020-02-19 00:11:16.191  INFO 13420 --- [restartedMain] l.m.m.ManongcommunityApplication         : No active profile set, falling back to default profiles: default
-2020-02-19 00:11:16.243  INFO 13420 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2020-02-19 00:11:16.243  INFO 13420 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2020-02-19 00:11:17.524  INFO 13420 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
-2020-02-19 00:11:17.535  INFO 13420 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-02-19 00:11:17.536  INFO 13420 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
-2020-02-19 00:11:17.620  INFO 13420 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-02-19 00:11:17.621  INFO 13420 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1378 ms
-2020-02-19 00:11:18.267  INFO 13420 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'asyncExecutor'
-2020-02-19 00:11:18.440  INFO 13420 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2020-02-19 00:11:18.569  INFO 13420 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
-2020-02-19 00:11:18.768  INFO 13420 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2020-02-19 00:11:18.818  INFO 13420 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
-2020-02-19 00:11:18.821  INFO 13420 --- [restartedMain] l.m.m.ManongcommunityApplication         : Started ManongcommunityApplication in 2.964 seconds (JVM running for 3.882)
-2020-02-19 00:11:22.879  INFO 13420 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-02-19 00:11:22.879  INFO 13420 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-02-19 00:11:22.887  INFO 13420 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
-2020-02-19 00:11:22.959  INFO 13420 --- [http-nio-80-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2020-02-19 00:11:23.486  INFO 13420 --- [http-nio-80-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2020-02-19 00:11:23.534 DEBUG 13420 --- [http-nio-80-exec-1] l.m.m.mapper.TaskMapper.selectByExample  : ==>  Preparing: select id, class_message, gmt_creat, deadline, supplement, task_name, student_number, teacher, state from task WHERE ( teacher = ? and student_number is null ) 
-2020-02-19 00:11:23.553 DEBUG 13420 --- [http-nio-80-exec-1] l.m.m.mapper.TaskMapper.selectByExample  : ==> Parameters: S180(String)
-2020-02-19 00:11:23.571 DEBUG 13420 --- [http-nio-80-exec-1] l.m.m.mapper.TaskMapper.selectByExample  : <==      Total: 5
-2020-02-19 00:11:23.649  WARN 13420 --- [http-nio-80-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [java.lang.NullPointerException]
-2020-02-19 00:11:59.421  INFO 17896 --- [restartedMain] l.m.m.ManongcommunityApplication         : Starting ManongcommunityApplication on DESKTOP-6MLM9A1 with PID 17896 (started by marboo in D:\eclipes工作空间\mashangkaishi)
-2020-02-19 00:11:59.427  INFO 17896 --- [restartedMain] l.m.m.ManongcommunityApplication         : No active profile set, falling back to default profiles: default
-2020-02-19 00:11:59.505  INFO 17896 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2020-02-19 00:11:59.506  INFO 17896 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2020-02-19 00:12:01.073  INFO 17896 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
-2020-02-19 00:12:01.086  INFO 17896 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-02-19 00:12:01.086  INFO 17896 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
-2020-02-19 00:12:01.207  INFO 17896 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-02-19 00:12:01.207  INFO 17896 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1700 ms
-2020-02-19 00:12:01.897  INFO 17896 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'asyncExecutor'
-2020-02-19 00:12:02.120  INFO 17896 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2020-02-19 00:12:02.283  INFO 17896 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
-2020-02-19 00:12:02.467  INFO 17896 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2020-02-19 00:12:02.519  INFO 17896 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
-2020-02-19 00:12:02.522  INFO 17896 --- [restartedMain] l.m.m.ManongcommunityApplication         : Started ManongcommunityApplication in 3.621 seconds (JVM running for 4.665)
-2020-02-19 00:12:07.086  INFO 17896 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-02-19 00:12:07.087  INFO 17896 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-02-19 00:12:07.094  INFO 17896 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
-2020-02-19 00:12:07.180  INFO 17896 --- [http-nio-80-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2020-02-19 00:12:07.705  INFO 17896 --- [http-nio-80-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2020-02-19 00:12:07.767 DEBUG 17896 --- [http-nio-80-exec-1] l.m.m.mapper.TaskMapper.selectByExample  : ==>  Preparing: select id, class_message, gmt_creat, deadline, supplement, task_name, student_number, teacher, state from task WHERE ( teacher = ? and student_number is null ) 
-2020-02-19 00:12:07.789 DEBUG 17896 --- [http-nio-80-exec-1] l.m.m.mapper.TaskMapper.selectByExample  : ==> Parameters: S180(String)
-2020-02-19 00:12:07.817 DEBUG 17896 --- [http-nio-80-exec-1] l.m.m.mapper.TaskMapper.selectByExample  : <==      Total: 5
-2020-02-19 00:12:37.511  WARN 17896 --- [http-nio-80-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [java.lang.NullPointerException]
-2020-02-19 00:12:37.616  INFO 17896 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
-2020-02-19 00:12:37.617  INFO 17896 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'asyncExecutor'
-2020-02-19 00:12:37.618  INFO 17896 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2020-02-19 00:12:37.688  INFO 17896 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-2020-02-19 00:13:46.858  INFO 11340 --- [restartedMain] l.m.m.ManongcommunityApplication         : Starting ManongcommunityApplication on DESKTOP-6MLM9A1 with PID 11340 (started by marboo in D:\eclipes工作空间\mashangkaishi)
-2020-02-19 00:13:46.863  INFO 11340 --- [restartedMain] l.m.m.ManongcommunityApplication         : No active profile set, falling back to default profiles: default
-2020-02-19 00:13:46.918  INFO 11340 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2020-02-19 00:13:46.919  INFO 11340 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2020-02-19 00:13:48.257  INFO 11340 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
-2020-02-19 00:13:48.266  INFO 11340 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-02-19 00:13:48.267  INFO 11340 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
-2020-02-19 00:13:48.357  INFO 11340 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-02-19 00:13:48.358  INFO 11340 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1439 ms
-2020-02-19 00:13:49.039  INFO 11340 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'asyncExecutor'
-2020-02-19 00:13:49.233  INFO 11340 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2020-02-19 00:13:49.378  INFO 11340 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
-2020-02-19 00:13:49.580  INFO 11340 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2020-02-19 00:13:49.634  INFO 11340 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
-2020-02-19 00:13:49.637  INFO 11340 --- [restartedMain] l.m.m.ManongcommunityApplication         : Started ManongcommunityApplication in 3.155 seconds (JVM running for 4.104)
-2020-02-19 00:13:52.586  INFO 11340 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-02-19 00:13:52.587  INFO 11340 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-02-19 00:13:52.593  INFO 11340 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
-2020-02-19 00:13:52.675  INFO 11340 --- [http-nio-80-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2020-02-19 00:13:53.192  INFO 11340 --- [http-nio-80-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2020-02-19 00:13:53.240 DEBUG 11340 --- [http-nio-80-exec-1] l.m.m.mapper.TaskMapper.selectByExample  : ==>  Preparing: select id, class_message, gmt_creat, deadline, supplement, task_name, student_number, teacher, state from task WHERE ( teacher = ? and student_number is null ) 
-2020-02-19 00:13:53.257 DEBUG 11340 --- [http-nio-80-exec-1] l.m.m.mapper.TaskMapper.selectByExample  : ==> Parameters: S180(String)
-2020-02-19 00:13:53.273 DEBUG 11340 --- [http-nio-80-exec-1] l.m.m.mapper.TaskMapper.selectByExample  : <==      Total: 5
-2020-02-19 00:13:53.278 DEBUG 11340 --- [http-nio-80-exec-1] l.m.m.m.TaskMapper.updateByPrimaryKey    : ==>  Preparing: update task set class_message = ?, gmt_creat = ?, deadline = ?, supplement = ?, task_name = ?, student_number = ?, teacher = ?, state = ? where id = ? 
-2020-02-19 00:13:53.279 DEBUG 11340 --- [http-nio-80-exec-1] l.m.m.m.TaskMapper.updateByPrimaryKey    : ==> Parameters: 12356789(String), 2020-02-01 11:08:06(String), 2020-02-18T22:48:00.000Z(String), 1803(String), null, null, S180(String), 已过期(String), 2(Integer)
-2020-02-19 00:13:53.281 DEBUG 11340 --- [http-nio-80-exec-1] l.m.m.m.TaskMapper.updateByPrimaryKey    : <==    Updates: 1
-2020-02-19 00:13:53.281 DEBUG 11340 --- [http-nio-80-exec-1] l.m.m.m.TaskMapper.updateByPrimaryKey    : ==>  Preparing: update task set class_message = ?, gmt_creat = ?, deadline = ?, supplement = ?, task_name = ?, student_number = ?, teacher = ?, state = ? where id = ? 
-2020-02-19 00:13:53.281 DEBUG 11340 --- [http-nio-80-exec-1] l.m.m.m.TaskMapper.updateByPrimaryKey    : ==> Parameters: 12356789(String), 2020-02-01 11:57:49(String), 2020-02-18T22:48:00.000Z(String), null, 1803(String), null, S180(String), 已过期(String), 3(Integer)
-2020-02-19 00:13:53.283 DEBUG 11340 --- [http-nio-80-exec-1] l.m.m.m.TaskMapper.updateByPrimaryKey    : <==    Updates: 1
-2020-02-19 00:13:53.283 DEBUG 11340 --- [http-nio-80-exec-1] l.m.m.m.TaskMapper.updateByPrimaryKey    : ==>  Preparing: update task set class_message = ?, gmt_creat = ?, deadline = ?, supplement = ?, task_name = ?, student_number = ?, teacher = ?, state = ? where id = ? 
-2020-02-19 00:13:53.284 DEBUG 11340 --- [http-nio-80-exec-1] l.m.m.m.TaskMapper.updateByPrimaryKey    : ==> Parameters: 12356789(String), 2020-02-01 21:22:48(String), 2020-02-18T22:48:00.000Z(String), null, 1804(String), null, S180(String), 已过期(String), 5(Integer)
-2020-02-19 00:13:53.286 DEBUG 11340 --- [http-nio-80-exec-1] l.m.m.m.TaskMapper.updateByPrimaryKey    : <==    Updates: 1
-2020-02-19 00:13:53.287 DEBUG 11340 --- [http-nio-80-exec-1] l.m.m.m.TaskMapper.updateByPrimaryKey    : ==>  Preparing: update task set class_message = ?, gmt_creat = ?, deadline = ?, supplement = ?, task_name = ?, student_number = ?, teacher = ?, state = ? where id = ? 
-2020-02-19 00:13:53.288 DEBUG 11340 --- [http-nio-80-exec-1] l.m.m.m.TaskMapper.updateByPrimaryKey    : ==> Parameters: 12356789(String), 2020-02-01 21:22:53(String), 2020-02-18T22:48:00.000Z(String), null, 1805(String), null, S180(String), 已过期(String), 6(Integer)
-2020-02-19 00:13:53.289 DEBUG 11340 --- [http-nio-80-exec-1] l.m.m.m.TaskMapper.updateByPrimaryKey    : <==    Updates: 1
-2020-02-19 00:13:53.289 DEBUG 11340 --- [http-nio-80-exec-1] l.m.m.m.TaskMapper.updateByPrimaryKey    : ==>  Preparing: update task set class_message = ?, gmt_creat = ?, deadline = ?, supplement = ?, task_name = ?, student_number = ?, teacher = ?, state = ? where id = ? 
-2020-02-19 00:13:53.290 DEBUG 11340 --- [http-nio-80-exec-1] l.m.m.m.TaskMapper.updateByPrimaryKey    : ==> Parameters: 123(String), 2020-02-01 21:37:47(String), 2020-02-18T22:48:00.000Z(String), null, 1805(String), null, S180(String), 已过期(String), 7(Integer)
-2020-02-19 00:13:53.290 DEBUG 11340 --- [http-nio-80-exec-1] l.m.m.m.TaskMapper.updateByPrimaryKey    : <==    Updates: 1
-2020-02-19 00:14:38.016 DEBUG 11340 --- [http-nio-80-exec-2] l.m.m.mapper.TaskMapper.selectByExample  : ==>  Preparing: select id, class_message, gmt_creat, deadline, supplement, task_name, student_number, teacher, state from task WHERE ( teacher = ? and student_number is null ) 
-2020-02-19 00:14:38.017 DEBUG 11340 --- [http-nio-80-exec-2] l.m.m.mapper.TaskMapper.selectByExample  : ==> Parameters: S180(String)
-2020-02-19 00:14:38.019 DEBUG 11340 --- [http-nio-80-exec-2] l.m.m.mapper.TaskMapper.selectByExample  : <==      Total: 5
-2020-02-19 00:14:38.021 DEBUG 11340 --- [http-nio-80-exec-2] l.m.m.m.TaskMapper.updateByPrimaryKey    : ==>  Preparing: update task set class_message = ?, gmt_creat = ?, deadline = ?, supplement = ?, task_name = ?, student_number = ?, teacher = ?, state = ? where id = ? 
-2020-02-19 00:14:38.022 DEBUG 11340 --- [http-nio-80-exec-2] l.m.m.m.TaskMapper.updateByPrimaryKey    : ==> Parameters: 12356789(String), 2020-02-01 11:08:06(String), 2020-02-18T22:48:00.000Z(String), 1803(String), null, null, S180(String), 已过期(String), 2(Integer)
-2020-02-19 00:14:38.023 DEBUG 11340 --- [http-nio-80-exec-2] l.m.m.m.TaskMapper.updateByPrimaryKey    : <==    Updates: 1
-2020-02-19 00:14:38.024 DEBUG 11340 --- [http-nio-80-exec-2] l.m.m.m.TaskMapper.updateByPrimaryKey    : ==>  Preparing: update task set class_message = ?, gmt_creat = ?, deadline = ?, supplement = ?, task_name = ?, student_number = ?, teacher = ?, state = ? where id = ? 
-2020-02-19 00:14:38.024 DEBUG 11340 --- [http-nio-80-exec-2] l.m.m.m.TaskMapper.updateByPrimaryKey    : ==> Parameters: 12356789(String), 2020-02-01 11:57:49(String), 2020-02-18T22:48:00.000Z(String), null, 1803(String), null, S180(String), 已过期(String), 3(Integer)
-2020-02-19 00:14:38.026 DEBUG 11340 --- [http-nio-80-exec-2] l.m.m.m.TaskMapper.updateByPrimaryKey    : <==    Updates: 1
-2020-02-19 00:14:38.027 DEBUG 11340 --- [http-nio-80-exec-2] l.m.m.m.TaskMapper.updateByPrimaryKey    : ==>  Preparing: update task set class_message = ?, gmt_creat = ?, deadline = ?, supplement = ?, task_name = ?, student_number = ?, teacher = ?, state = ? where id = ? 
-2020-02-19 00:14:38.029 DEBUG 11340 --- [http-nio-80-exec-2] l.m.m.m.TaskMapper.updateByPrimaryKey    : ==> Parameters: 12356789(String), 2020-02-01 21:22:48(String), 2020-02-18T22:48:00.000Z(String), null, 1804(String), null, S180(String), 已过期(String), 5(Integer)
-2020-02-19 00:14:38.030 DEBUG 11340 --- [http-nio-80-exec-2] l.m.m.m.TaskMapper.updateByPrimaryKey    : <==    Updates: 1
-2020-02-19 00:14:38.031 DEBUG 11340 --- [http-nio-80-exec-2] l.m.m.m.TaskMapper.updateByPrimaryKey    : ==>  Preparing: update task set class_message = ?, gmt_creat = ?, deadline = ?, supplement = ?, task_name = ?, student_number = ?, teacher = ?, state = ? where id = ? 
-2020-02-19 00:14:38.031 DEBUG 11340 --- [http-nio-80-exec-2] l.m.m.m.TaskMapper.updateByPrimaryKey    : ==> Parameters: 12356789(String), 2020-02-01 21:22:53(String), 2020-02-18T22:48:00.000Z(String), null, 1805(String), null, S180(String), 已过期(String), 6(Integer)
-2020-02-19 00:14:38.033 DEBUG 11340 --- [http-nio-80-exec-2] l.m.m.m.TaskMapper.updateByPrimaryKey    : <==    Updates: 1
-2020-02-19 00:14:38.034 DEBUG 11340 --- [http-nio-80-exec-2] l.m.m.m.TaskMapper.updateByPrimaryKey    : ==>  Preparing: update task set class_message = ?, gmt_creat = ?, deadline = ?, supplement = ?, task_name = ?, student_number = ?, teacher = ?, state = ? where id = ? 
-2020-02-19 00:14:38.035 DEBUG 11340 --- [http-nio-80-exec-2] l.m.m.m.TaskMapper.updateByPrimaryKey    : ==> Parameters: 123(String), 2020-02-01 21:37:47(String), 2020-02-20T22:48:00.000Z(String), null, 1805(String), null, S180(String), 进行中(String), 7(Integer)
-2020-02-19 00:14:38.038 DEBUG 11340 --- [http-nio-80-exec-2] l.m.m.m.TaskMapper.updateByPrimaryKey    : <==    Updates: 1
+2020-02-22 20:42:33.041  INFO 7820 --- [restartedMain] l.m.m.ManongcommunityApplication         : Starting ManongcommunityApplication on DESKTOP-6MLM9A1 with PID 7820 (started by marboo in D:\eclipes工作空间\mashangkaishi)
+2020-02-22 20:42:33.047  INFO 7820 --- [restartedMain] l.m.m.ManongcommunityApplication         : No active profile set, falling back to default profiles: default
+2020-02-22 20:42:33.605  INFO 7820 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-02-22 20:42:33.605  INFO 7820 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-02-22 20:42:39.282  INFO 7820 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
+2020-02-22 20:42:39.305  INFO 7820 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-02-22 20:42:39.305  INFO 7820 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
+2020-02-22 20:42:39.515  INFO 7820 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-02-22 20:42:39.516  INFO 7820 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 5910 ms
+2020-02-22 20:42:40.842  INFO 7820 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'asyncExecutor'
+2020-02-22 20:42:41.165  INFO 7820 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-02-22 20:42:41.565  INFO 7820 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2020-02-22 20:42:42.181  INFO 7820 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-02-22 20:42:42.251  INFO 7820 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
+2020-02-22 20:42:42.254  INFO 7820 --- [restartedMain] l.m.m.ManongcommunityApplication         : Started ManongcommunityApplication in 11.29 seconds (JVM running for 13.387)
+2020-02-22 20:43:06.446  INFO 7820 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-02-22 20:43:06.447  INFO 7820 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-02-22 20:43:06.454  INFO 7820 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2020-02-22 20:43:06.791  INFO 7820 --- [http-nio-80-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-02-22 20:43:07.795  INFO 7820 --- [http-nio-80-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-02-22 20:43:07.808 DEBUG 7820 --- [http-nio-80-exec-1] l.m.m.m.QuestionExtMapper.countBySearch  : ==>  Preparing: select count(*) from question 
+2020-02-22 20:43:07.839 DEBUG 7820 --- [http-nio-80-exec-1] l.m.m.m.QuestionExtMapper.countBySearch  : ==> Parameters: 
+2020-02-22 20:43:08.048 DEBUG 7820 --- [http-nio-80-exec-1] l.m.m.m.QuestionExtMapper.countBySearch  : <==      Total: 1
+2020-02-22 20:43:08.057 DEBUG 7820 --- [http-nio-80-exec-1] l.m.m.m.Q.selectBySearch                 : ==>  Preparing: select * from question order by gmt_create desc limit ?,? 
+2020-02-22 20:43:08.058 DEBUG 7820 --- [http-nio-80-exec-1] l.m.m.m.Q.selectBySearch                 : ==> Parameters: 0(Integer), 5(Integer)
+2020-02-22 20:43:08.070 DEBUG 7820 --- [http-nio-80-exec-1] l.m.m.m.Q.selectBySearch                 : <==      Total: 5
+2020-02-22 20:43:08.071 DEBUG 7820 --- [http-nio-80-exec-1] l.m.m.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select id, account_id, name, token, gmt_create, gmt_modified, bio, avatar_url from user where id = ? 
+2020-02-22 20:43:08.071 DEBUG 7820 --- [http-nio-80-exec-1] l.m.m.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 10(Long)
+2020-02-22 20:43:08.082 DEBUG 7820 --- [http-nio-80-exec-1] l.m.m.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2020-02-22 20:43:08.091 DEBUG 7820 --- [http-nio-80-exec-1] l.m.m.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select id, account_id, name, token, gmt_create, gmt_modified, bio, avatar_url from user where id = ? 
+2020-02-22 20:43:08.091 DEBUG 7820 --- [http-nio-80-exec-1] l.m.m.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 10(Long)
+2020-02-22 20:43:08.092 DEBUG 7820 --- [http-nio-80-exec-1] l.m.m.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2020-02-22 20:43:08.093 DEBUG 7820 --- [http-nio-80-exec-1] l.m.m.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select id, account_id, name, token, gmt_create, gmt_modified, bio, avatar_url from user where id = ? 
+2020-02-22 20:43:08.093 DEBUG 7820 --- [http-nio-80-exec-1] l.m.m.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 10(Long)
+2020-02-22 20:43:08.096 DEBUG 7820 --- [http-nio-80-exec-1] l.m.m.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2020-02-22 20:43:08.096 DEBUG 7820 --- [http-nio-80-exec-1] l.m.m.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select id, account_id, name, token, gmt_create, gmt_modified, bio, avatar_url from user where id = ? 
+2020-02-22 20:43:08.096 DEBUG 7820 --- [http-nio-80-exec-1] l.m.m.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 10(Long)
+2020-02-22 20:43:08.099 DEBUG 7820 --- [http-nio-80-exec-1] l.m.m.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2020-02-22 20:43:08.100 DEBUG 7820 --- [http-nio-80-exec-1] l.m.m.m.UserMapper.selectByPrimaryKey    : ==>  Preparing: select id, account_id, name, token, gmt_create, gmt_modified, bio, avatar_url from user where id = ? 
+2020-02-22 20:43:08.100 DEBUG 7820 --- [http-nio-80-exec-1] l.m.m.m.UserMapper.selectByPrimaryKey    : ==> Parameters: 10(Long)
+2020-02-22 20:43:08.101 DEBUG 7820 --- [http-nio-80-exec-1] l.m.m.m.UserMapper.selectByPrimaryKey    : <==      Total: 1
+2020-02-22 20:47:31.368  INFO 11988 --- [restartedMain] l.m.m.ManongcommunityApplication         : Starting ManongcommunityApplication on DESKTOP-6MLM9A1 with PID 11988 (started by marboo in D:\eclipes工作空间\mashangkaishi)
+2020-02-22 20:47:31.371  INFO 11988 --- [restartedMain] l.m.m.ManongcommunityApplication         : No active profile set, falling back to default profiles: default
+2020-02-22 20:47:31.417  INFO 11988 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-02-22 20:47:31.417  INFO 11988 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-02-22 20:47:32.771  INFO 11988 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
+2020-02-22 20:47:32.779  INFO 11988 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-02-22 20:47:32.779  INFO 11988 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
+2020-02-22 20:47:32.889  INFO 11988 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-02-22 20:47:32.889  INFO 11988 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1471 ms
+2020-02-22 20:47:33.637  INFO 11988 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'asyncExecutor'
+2020-02-22 20:47:33.811  INFO 11988 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-02-22 20:47:33.951  INFO 11988 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2020-02-22 20:47:34.168  INFO 11988 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-02-22 20:47:34.213  INFO 11988 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
+2020-02-22 20:47:34.217  INFO 11988 --- [restartedMain] l.m.m.ManongcommunityApplication         : Started ManongcommunityApplication in 3.246 seconds (JVM running for 4.195)
+2020-02-22 20:48:05.379  INFO 11988 --- [Thread-12] o.s.s.c.ThreadPoolTaskScheduler          : Shutting down ExecutorService 'taskScheduler'
+2020-02-22 20:48:05.380  INFO 11988 --- [Thread-12] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'asyncExecutor'
+2020-02-22 20:48:05.860  INFO 11988 --- [restartedMain] l.m.m.ManongcommunityApplication         : Starting ManongcommunityApplication on DESKTOP-6MLM9A1 with PID 11988 (started by marboo in D:\eclipes工作空间\mashangkaishi)
+2020-02-22 20:48:05.861  INFO 11988 --- [restartedMain] l.m.m.ManongcommunityApplication         : No active profile set, falling back to default profiles: default
+2020-02-22 20:48:06.183  WARN 11988 --- [restartedMain] org.apache.tomcat.util.modeler.Registry  : The MBean registry cannot be disabled because it has already been initialised
+2020-02-22 20:48:06.227  INFO 11988 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
+2020-02-22 20:48:06.227  INFO 11988 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-02-22 20:48:06.228  INFO 11988 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
+2020-02-22 20:48:06.266  INFO 11988 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-02-22 20:48:06.266  INFO 11988 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 403 ms
+2020-02-22 20:48:06.542  INFO 11988 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'asyncExecutor'
+2020-02-22 20:48:06.618  INFO 11988 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-02-22 20:48:06.701  INFO 11988 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2020-02-22 20:48:06.922  INFO 11988 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-02-22 20:48:06.944  INFO 11988 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
+2020-02-22 20:48:06.945  INFO 11988 --- [restartedMain] l.m.m.ManongcommunityApplication         : Started ManongcommunityApplication in 1.12 seconds (JVM running for 36.922)
+2020-02-22 20:48:06.947  INFO 11988 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2020-02-22 20:48:07.033  INFO 11988 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-02-22 20:48:07.034  INFO 11988 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-02-22 20:48:07.044  INFO 11988 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2020-02-22 20:49:55.067  INFO 6764 --- [restartedMain] l.m.m.ManongcommunityApplication         : Starting ManongcommunityApplication on DESKTOP-6MLM9A1 with PID 6764 (started by marboo in D:\eclipes工作空间\mashangkaishi)
+2020-02-22 20:49:55.071  INFO 6764 --- [restartedMain] l.m.m.ManongcommunityApplication         : No active profile set, falling back to default profiles: default
+2020-02-22 20:49:55.125  INFO 6764 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-02-22 20:49:55.125  INFO 6764 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-02-22 20:49:56.344  INFO 6764 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
+2020-02-22 20:49:56.352  INFO 6764 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-02-22 20:49:56.352  INFO 6764 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
+2020-02-22 20:49:56.430  INFO 6764 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-02-22 20:49:56.430  INFO 6764 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1305 ms
+2020-02-22 20:49:57.029  INFO 6764 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'asyncExecutor'
+2020-02-22 20:49:57.217  INFO 6764 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-02-22 20:49:57.348  INFO 6764 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2020-02-22 20:49:57.559  INFO 6764 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-02-22 20:49:57.608  INFO 6764 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
+2020-02-22 20:49:57.611  INFO 6764 --- [restartedMain] l.m.m.ManongcommunityApplication         : Started ManongcommunityApplication in 2.88 seconds (JVM running for 3.785)
+2020-02-22 20:50:02.821  INFO 6764 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-02-22 20:50:02.822  INFO 6764 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-02-22 20:50:02.829  INFO 6764 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
