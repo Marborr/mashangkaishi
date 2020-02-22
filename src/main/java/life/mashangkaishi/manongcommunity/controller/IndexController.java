@@ -30,4 +30,12 @@ public class IndexController {
 //        model.addAttribute("search",search);
         return "login";
     }
+    @GetMapping("/student")
+    public String student() {
+        return "student";
+    }
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin";
+    }
 }
