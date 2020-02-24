@@ -31,7 +31,7 @@ public class StudentService {
         if (mailIdentifies.size()==0){
             return null;
         }
-        if (student.getEmail().equals(mailIdentifies.get(0))){
+        if (student.getEmail().equals(mailIdentifies.get(0).getEmail())){
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
             student.setGmtCreate(df.format(new Date()));
             student.setTaskDone(0);
@@ -53,7 +53,7 @@ public class StudentService {
         if (mailIdentifies.size()==0 ||student1==null){
             return null;
         }
-        if (student.getEmail().equals(mailIdentifies.get(0))){
+        if (student.getEmail().equals(mailIdentifies.get(0).getEmail())){
             StudentExample example = new StudentExample();
             example.createCriteria().andStuIdEqualTo(student.getStuId());
             studentMapper.updateByExample(student,example);

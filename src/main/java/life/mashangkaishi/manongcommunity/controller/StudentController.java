@@ -75,6 +75,7 @@ public class StudentController {
     public StudentDTO findPassword(@RequestBody Student student){
         Student updateStudent = studentService.updatepassword(student);
         StudentDTO studentDTO = new StudentDTO();
+
         if (updateStudent!=null){
             studentDTO.setMsg("密码更新成功");
             studentDTO.setStudent(updateStudent);
