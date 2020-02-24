@@ -29,15 +29,16 @@ public class AdministratorController {
     @Autowired
     ClassMapper classMapper;
 
+
+
     @Transactional
     @ResponseBody
     @PostMapping("/api/user/teacherRegister")
     public AdministratorDTO regist(@RequestBody Administrator administrator) {
-        Administrator administratorSelected = administratorService.selectAdministrator(administrator);
+        Administrator administratorSelected = administratorService.selectAdministratorByTecherId(administrator);
         if (administratorSelected==null){
-            administratorService.createOrUpdate(administrator);
             AdministratorDTO administratorDTO = new AdministratorDTO();
-            administratorDTO.setMsg("success");
+            administratorDTO.setMsg(administratorService.create(administrator));
             administratorDTO.setAdministrator(administrator);
             return administratorDTO;
         }else {
@@ -45,6 +46,16 @@ public class AdministratorController {
             administratorDTO.setMsg("用户已存在");
             return administratorDTO;
         }
+    }
+
+    @Transactional
+    @ResponseBody
+    @PostMapping("/api/user/teacherFindPassWord")
+    public AdministratorDTO Update(@RequestBody Administrator administrator) {
+        AdministratorDTO administratorDTO = new AdministratorDTO();
+        administratorDTO.setMsg(administratorService.Update(administrator));
+        administratorDTO.setAdministrator(administrator);
+        return administratorDTO;
     }
 
     @Transactional
