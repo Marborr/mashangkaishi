@@ -1,7 +1,9 @@
 package life.mashangkaishi.manongcommunity.controller;
 
 import life.mashangkaishi.manongcommunity.dto.StudentDTO;
+import life.mashangkaishi.manongcommunity.mapper.StudentMapper;
 import life.mashangkaishi.manongcommunity.model.Student;
+import life.mashangkaishi.manongcommunity.model.StudentExample;
 import life.mashangkaishi.manongcommunity.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,8 @@ import java.util.List;
 public class CardController {
     @Autowired
     StudentService studentService;
+    @Autowired
+    StudentMapper studentMapper;
 
     @Transactional
     @ResponseBody
@@ -41,8 +45,9 @@ public class CardController {
         }else {
             studentclockin.setCardNumber((long)1);
         }
-        studentService.createOrUpdate(studentclockin);
+        studentMapper.updateByPrimaryKey(studentclockin);
         studentDTO.setStudent(studentclockin);
         return studentDTO;
     }
+
 }

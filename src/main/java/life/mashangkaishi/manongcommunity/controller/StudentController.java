@@ -5,10 +5,7 @@ import life.mashangkaishi.manongcommunity.model.Class;
 import life.mashangkaishi.manongcommunity.model.Data;
 import life.mashangkaishi.manongcommunity.model.Student;
 import life.mashangkaishi.manongcommunity.model.Task;
-import life.mashangkaishi.manongcommunity.service.ClassService;
-import life.mashangkaishi.manongcommunity.service.DataService;
-import life.mashangkaishi.manongcommunity.service.StudentService;
-import life.mashangkaishi.manongcommunity.service.TaskService;
+import life.mashangkaishi.manongcommunity.service.*;
 import life.mashangkaishi.manongcommunity.util.SendMail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -32,18 +29,23 @@ public class StudentController {
     ClassService classService;
     @Autowired
     TaskService taskService;
+    @Autowired
+    MailService mailService;
 
     @Transactional
     @ResponseBody
-    @PostMapping("/api/user/registerOrUpdate")
+    @PostMapping("/api/user/register")
     public StudentDTO regist(@RequestBody Student student) {
         System.out.println(student.toString());
         Student selectStudent = studentService.selectStudent(student);
         if (selectStudent==null){
-            studentService.createOrUpdate(student);
+            Student student1 = studentService.create(student);
             StudentDTO studentDTO = new StudentDTO();
-            studentDTO.setMsg("success");
+            if (student1!=null)
+                studentDTO.setMsg("success");
+            else studentDTO.setMsg("验证码有误或失效");
             return studentDTO;
+
         }else {
             StudentDTO studentDTO = new StudentDTO();
             studentDTO.setMsg("用户已存在");
@@ -71,18 +73,14 @@ public class StudentController {
     @ResponseBody
     @PostMapping("/api/user/findpassword")  //(需要传入用户名）
     public StudentDTO findPassword(@RequestBody Student student){
-        int random=(int)((Math.random()*9+1)*100000);
-        student.setVerificationCode(random);
-        Student updateStudent = studentService.createOrUpdate(student);
+        Student updateStudent = studentService.updatepassword(student);
         StudentDTO studentDTO = new StudentDTO();
-        int tag=sendMail.send(updateStudent.getEmail(),updateStudent.getVerificationCode());
-        if (tag==1){
-            studentDTO.setMsg("邮件已发送");
+        if (updateStudent!=null){
+            studentDTO.setMsg("密码更新成功");
             studentDTO.setStudent(updateStudent);
             return studentDTO;
         }else {
-            studentDTO.setMsg("邮件发送失败");
-            studentDTO.setStudent(updateStudent);
+            studentDTO.setMsg("密码更新失败");
             return studentDTO;
         }
     }
@@ -96,6 +94,7 @@ public class StudentController {
         StudentDTO studentDTO = new StudentDTO();
         int tag=sendMail.send(student.getEmail(),student.getVerificationCode());
         if (tag==1){
+            mailService.InsertData(student.getEmail(),String.valueOf(random));
             studentDTO.setMsg("邮件已发送");
             studentDTO.setStudent(student);
             return studentDTO;
