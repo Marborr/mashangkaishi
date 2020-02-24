@@ -54,9 +54,8 @@ public class StudentService {
             return null;
         }
         if (student.getEmail().equals(mailIdentifies.get(0).getEmail())){
-            StudentExample example = new StudentExample();
-            example.createCriteria().andStuIdEqualTo(student.getStuId());
-            studentMapper.updateByExample(student,example);
+            student1.setPassword(student.getPassword());
+            studentMapper.updateByPrimaryKey(student1);
             return student;
         }else
             return null;
