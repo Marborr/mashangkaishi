@@ -31,7 +31,7 @@ public class StudentService {
         if (mailIdentifies.size()==0){
             return null;
         }
-        if (student.getEmail().equals(mailIdentifies.get(0).getEmail())){
+        if (String.valueOf(student.getVerificationCode()).equals(mailIdentifies.get(mailIdentifies.size()-1).getIdentifyNumber())){
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
             student.setGmtCreate(df.format(new Date()));
             student.setTaskDone(0);
@@ -53,7 +53,8 @@ public class StudentService {
         if (mailIdentifies.size()==0 ||student1==null){
             return null;
         }
-        if (student.getEmail().equals(mailIdentifies.get(0).getEmail())){
+        System.out.println(mailIdentifies.get(mailIdentifies.size()-1).getIdentifyNumber());
+        if (String.valueOf(student.getVerificationCode()).equals(mailIdentifies.get(mailIdentifies.size()-1).getIdentifyNumber())){
             student1.setPassword(student.getPassword());
             studentMapper.updateByPrimaryKey(student1);
             return student;
