@@ -87,6 +87,7 @@ public class AdministratorController {
         teacherClassDTO.setClassName(teacherClassDTO2.getClassName());
         teacherClassDTO.setClassNumber(String.valueOf(random));
         teacherClassDTO.setTeacherName(teacherClassDTO2.getTeacherName());
+
         String result=classService.creatOrUpdateClass(teacherClassDTO);
         System.out.println(result);
         AdministratorDTO administratorDTO = new AdministratorDTO();
@@ -102,9 +103,19 @@ public class AdministratorController {
 
     @Transactional
     @ResponseBody
+    @PostMapping("/api/user/creatTaskToClass")
+    public AdministratorDTO creatTaskToClass(@RequestBody Task task) {
+        String result=taskService.creatOrUpdateTask(task);
+        AdministratorDTO administratorDTO = new AdministratorDTO();
+        administratorDTO.setMsg(result);
+        administratorDTO.setTask(task);
+        return administratorDTO;
+    }
+    @Transactional
+    @ResponseBody
     @PostMapping("/api/user/creatTask")
     public AdministratorDTO creatTask(@RequestBody Task task) {
-        String result=taskService.creatOrUpdateTask(task);
+        String result=taskService.creatTask(task);
         AdministratorDTO administratorDTO = new AdministratorDTO();
         administratorDTO.setMsg(result);
         administratorDTO.setTask(task);

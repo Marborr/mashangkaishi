@@ -30,6 +30,7 @@ public class ClassService {
         classMassege.setClassName(teacherClass.getClassName());
         AdministratorExample administratorExample = new AdministratorExample();
         administratorExample.createCriteria().andTeacherIdEqualTo(teacherClass.getTeacherName());
+
         List<Administrator> administrators = administratorMapper.selectByExample(administratorExample);
         ClassExample example = new ClassExample();
         example.createCriteria().andClassNameEqualTo(classMassege.getClassName())

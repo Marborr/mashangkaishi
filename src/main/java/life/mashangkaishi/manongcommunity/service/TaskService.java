@@ -126,7 +126,6 @@ public class TaskService {
                 .andTeacherEqualTo(task.getTeacher())
                 .andStudentNumberIsNull();
         List<Task> tasks = taskMapper.selectByExampleWithBLOBs(example);
-
         return tasks;
     }
 
@@ -198,5 +197,21 @@ public class TaskService {
         List<Class> classes = classMapper.selectByExample(example);
         return classes.get(0);
     }
+
+    public String creatTask(Task task) {
+        TaskExample example = new TaskExample();
+        example.createCriteria()
+                .andTaskNameEqualTo(task.getTaskName())
+                .andTeacherEqualTo(task.getTeacher())
+                .andStudentNumberIsNull();
+        List<Task> tasks = taskMapper.selectByExampleWithBLOBs(example);
+        if (tasks.size()==0){
+            taskMapper.insert(task);
+        }else {
+            return "任务已存在";
+        }
+        return "创建成功";
+    }
+
 
 }
