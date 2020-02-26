@@ -9,6 +9,7 @@ import life.mashangkaishi.manongcommunity.mapper.TaskExtMapper;
 import life.mashangkaishi.manongcommunity.mapper.TaskMapper;
 import life.mashangkaishi.manongcommunity.model.Class;
 import life.mashangkaishi.manongcommunity.model.*;
+import life.mashangkaishi.manongcommunity.util.TimeFlush;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,16 +27,13 @@ public class TaskService {
     StudentMapper studentMapper;
     @Autowired
     ClassMapper classMapper;
+    @Autowired
+    TimeFlush timeFlush;
 
     public String creatOrUpdateTask(Task task) {
         try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            long nowTime = new Date().getTime();
-            String[] ts = task.getDeadline().split("T");
-            String split = ts[1].substring(0, 9);
-            String s = ts[0] + " " + split;
-            long time = sdf.parse(s).getTime();
-            if (time - nowTime > 0) {
+            boolean timeout = timeFlush.timeout(task.getDeadline());
+            if (!timeout) {
                 task.setState("进行中");
             } else {
                 task.setState("已过期");
@@ -49,13 +47,12 @@ public class TaskService {
         return "任务创建成功";
     }
 
+
     public List<Task> selectTask(Task task) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        long nowTime = new Date().getTime();
         TaskExample example = new TaskExample();
         example.createCriteria()
-                .andTeacherEqualTo(task.getTeacher())
-                .andStudentNumberIsNull();
+        .andTaskNameEqualTo(task.getTaskName())
+        .andStudentNumberIsNotNull();
         List<Task> tasks = taskMapper.selectByExample(example);
         if (tasks.size() == 0) {
             return tasks;
@@ -63,11 +60,8 @@ public class TaskService {
             try {
                 for (int i = 0; i < tasks.size(); i++) {
                     Task t = tasks.get(i);
-                    String[] ts = t.getDeadline().split("T");
-                    String split = ts[1].substring(0, 9);
-                    String s = ts[0] + " " + split;
-                    long time = sdf.parse(s).getTime();
-                    if (time - nowTime > 0) {
+                    boolean timeout = timeFlush.timeout(t.getDeadline());
+                    if (!timeout) {
                         t.setState("进行中");
                         tasks.get(i).setState("进行中");
                     } else {
@@ -155,38 +149,11 @@ public class TaskService {
     }
 
 
-    public StudentTaskDAO selectStudentTask(Student student) {
-        StudentExample Studentexample = new StudentExample();
-        Studentexample.createCriteria().andStuIdEqualTo(student.getStuId());
-        List<Student> students = studentMapper.selectByExample(Studentexample);
-        if (students.size() == 0) {
-            return null;
-        } else {
-            StudentTaskDAO studentTaskDAO = new StudentTaskDAO();
-            ArrayList<Class> listclass = new ArrayList<>();
-            String[] classesNumber = students.get(0).getClassNumber().split(",");
-
-            System.out.println(Arrays.toString(classesNumber));
-
-            if (classesNumber.length != 0) {
-                ClassExample classexample = new ClassExample();
-                for (String classes :
-                        classesNumber) {
-                    classexample.createCriteria()
-                            .andClassNumberEqualTo(Integer.parseInt(classes));
-                    List<Class> classes1 = classMapper.selectByExample(classexample);
-                    listclass.add(classes1.get(0));
-                }
-            }
-            studentTaskDAO.setClasses(listclass);
-
-            TaskExample example = new TaskExample();
-            example.createCriteria()
-                    .andStudentNumberEqualTo(students.get(0).getStuId());
-            List<Task> tasks = taskMapper.selectByExampleWithBLOBs(example);
-            studentTaskDAO.setTasks(tasks);
-            return studentTaskDAO;
-        }
+    public List<Task> selectStudentTask(Student student) {
+        TaskExample example = new TaskExample();
+        example.createCriteria().andStudentNumberEqualTo(student.getStuId());
+        List<Task> tasks = taskMapper.selectByExample(example);
+        return tasks;
     }
 
     public Class selectStudentClass(Class aclass) {

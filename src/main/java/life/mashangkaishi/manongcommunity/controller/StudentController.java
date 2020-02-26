@@ -146,6 +146,7 @@ public class StudentController {
         return tasks;
     }
 
+
     @Transactional
     @ResponseBody
     @PostMapping("/api/user/studentCreatOrUpdateTask")
@@ -161,10 +162,11 @@ public class StudentController {
     @Transactional
     @ResponseBody
     @PostMapping("/api/user/studentMessage")
-    public StudentTaskDAO studentMessage(@RequestBody Student student) {
-        StudentTaskDAO studentTaskDAO = taskService.selectStudentTask(student);
-        return studentTaskDAO;
+    public List<Task> studentMessage(@RequestBody Student student) {
+        List<Task> tasks = taskService.selectStudentTask(student);
+        return tasks;
     }
+
 
 
 }

@@ -126,7 +126,7 @@ public class AdministratorController {
 
     @Transactional
     @ResponseBody
-    @PostMapping("/api/user/selectClassTask")//查任务
+    @PostMapping("/api/user/selectClassTask")//通过班级查任务
     public List<Task> selectClassTask(@RequestBody Task task) {
         List<Task> tasks=taskService.selectClassTask(task);
         return tasks;
