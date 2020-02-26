@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -111,6 +112,7 @@ public class AdministratorController {
         administratorDTO.setTask(task);
         return administratorDTO;
     }
+
     @Transactional
     @ResponseBody
     @PostMapping("/api/user/creatTask")
@@ -129,6 +131,15 @@ public class AdministratorController {
         List<Task> tasks=taskService.selectClassTask(task);
         return tasks;
     }
+
+    @Transactional
+    @ResponseBody
+    @GetMapping("/api/user/selectTeacherTask")//查任务
+    public List<TeacherTask> selectTask() {
+        List<TeacherTask> ListTeacherTask=taskService.selectTeacherTask();
+        return ListTeacherTask;
+    }
+
 
     //@Async("asyncExecutor")
     @Transactional

@@ -2,6 +2,7 @@ package life.mashangkaishi.manongcommunity.service;
 
 import life.mashangkaishi.manongcommunity.dto.StudentTaskDAO;
 import life.mashangkaishi.manongcommunity.dto.StudentTaskStateDTO;
+import life.mashangkaishi.manongcommunity.dto.TeacherTask;
 import life.mashangkaishi.manongcommunity.mapper.ClassMapper;
 import life.mashangkaishi.manongcommunity.mapper.StudentMapper;
 import life.mashangkaishi.manongcommunity.mapper.TaskExtMapper;
@@ -13,10 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class TaskService {
@@ -214,4 +212,35 @@ public class TaskService {
     }
 
 
+    public List<TeacherTask> selectTeacherTask() {
+        List<TeacherTask> teacherTasks=new ArrayList<>();
+        Set<String> teacherTaskSet=new HashSet<>();
+
+        TaskExample example = new TaskExample();
+        example.createCriteria()
+                .andStudentNumberIsNull();
+        List<Task> tasks = taskMapper.selectByExample(example);
+        System.out.println(tasks.size());
+
+        for (Task t :
+                tasks) {
+            teacherTaskSet.add(t.getTeacher());
+        }
+
+        for (String teacherName:teacherTaskSet){
+            ArrayList<Task> arrayTask = new ArrayList<>();
+            TeacherTask teacherTask = new TeacherTask();
+            for (Task t :
+                    tasks) {
+               if (teacherName.equals(t.getTeacher()))
+               {
+                   arrayTask.add(t);
+               }
+            }
+            teacherTask.setTeacherId(teacherName);
+            teacherTask.setTasks(arrayTask);
+            teacherTasks.add(teacherTask);
+        }
+        return teacherTasks;
+    }
 }
