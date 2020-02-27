@@ -24,14 +24,15 @@ public class CardController {
 
     @Transactional
     @ResponseBody
-    @GetMapping("/api/user/cardpage") //排名
-    public List<Student> CardPage(){
-        List<Student> students = studentService.selectRankStudents();
-        for (int i = 0; i <students.size(); i++) {
+    @PostMapping("/api/user/cardpage") //排名
+    public List<Student> CardPage(@RequestBody Student student){
+        List<Student> students = studentService.selectRankStudents(student);
+        for (int i = 0; i <students.size()-1; i++) {
             students.get(i).setRankNumber(i+1);
         }
         return students;
     }
+
 
     @Transactional
     @ResponseBody
@@ -43,7 +44,7 @@ public class CardController {
         if (studentclockin.getCardNumber()!=null){
             studentclockin.setCardNumber(studentclockin.getCardNumber()+1);
         }else {
-            studentclockin.setCardNumber((long)1);
+            studentclockin.setCardNumber(1);
         }
         studentMapper.updateByPrimaryKey(studentclockin);
         studentDTO.setStudent(studentclockin);

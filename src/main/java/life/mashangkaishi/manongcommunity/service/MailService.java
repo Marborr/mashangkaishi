@@ -22,7 +22,7 @@ public class MailService {
         mailIdentifyMapper.insert(mailIdentify);
 
         try {
-            Thread.sleep(600*1000);
+            Thread.sleep(60*1000);
             mailIdentifyExample example = new mailIdentifyExample();
             example.createCriteria().andEmailEqualTo(email);
             mailIdentifyMapper.deleteByExample(example);

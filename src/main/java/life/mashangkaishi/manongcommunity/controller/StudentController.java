@@ -94,6 +94,7 @@ public class StudentController {
         student.setVerificationCode(random);
         StudentDTO studentDTO = new StudentDTO();
         int tag=sendMail.send(student.getEmail(),student.getVerificationCode());
+
         if (tag==1){
             mailService.InsertData(student.getEmail(),String.valueOf(random));
             studentDTO.setMsg("邮件已发送");

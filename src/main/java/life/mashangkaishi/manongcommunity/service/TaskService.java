@@ -88,6 +88,7 @@ public class TaskService {
         StudentExample example1 = new StudentExample();
         example1.createCriteria().andStuIdEqualTo(task.getStudentNumber());
         List<Student> students = studentMapper.selectByExample(example1);
+
         if (students.size() != 0) {
             if (tasks.size() != 0) {
                 tasks.get(0).setDescription(task.getDescription());

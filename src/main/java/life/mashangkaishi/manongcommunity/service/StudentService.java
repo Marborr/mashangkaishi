@@ -8,9 +8,11 @@ import life.mashangkaishi.manongcommunity.model.StudentExample;
 import life.mashangkaishi.manongcommunity.model.mailIdentify;
 import life.mashangkaishi.manongcommunity.model.mailIdentifyExample;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,6 +38,7 @@ public class StudentService {
             student.setGmtCreate(df.format(new Date()));
             student.setTaskDone(0);
             student.setTaskNotDone(0);
+            student.setCardNumber(0);
             student.setIdentify("student");
             studentMapper.insert(student);
             return student;
@@ -73,17 +76,37 @@ public class StudentService {
         return students.get(0);
     }
 
-    public List<Student> selectRankStudents(){
+
+    public List<Student> selectRankStudents(Student student){
+        int i=0;
+        List<Student> studentList = new ArrayList<>();
+        Student student1=new Student();
         StudentExample example=new StudentExample();
-        example.setOrderByClause("card_number desc");
+        example.setOrderByClause("task_done desc,stu_id asc");
         List<Student> students = studentMapper.selectByExample(example);
+
+        for (Student stu :
+                students) {
+            i++;
+            if (stu.getStuId().equals(student.getStuId()))
+            {
+                student1=stu;
+                student1.setRankNumber(i);
+            }
+
+        }
+
         if (students.size()==0){
             return null;
         }
         if (students.size()<10){
-            return students.subList(0,students.size());
+            studentList.addAll(students.subList(0,students.size()));
+            studentList.add(student1);
+            return studentList;
         }else {
-            return students.subList(0,10);
+            studentList.addAll(students.subList(0,10));
+            studentList.add(student1);
+            return studentList;
         }
     }
 
