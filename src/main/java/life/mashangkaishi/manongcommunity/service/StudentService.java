@@ -87,6 +87,7 @@ public class StudentService {
 
         for (Student stu :
                 students) {
+            students.get(i).setPassword("您的密码由于涉及国家机密，已销毁");
             i++;
             if (stu.getStuId().equals(student.getStuId()))
             {
