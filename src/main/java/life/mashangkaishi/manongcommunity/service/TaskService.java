@@ -53,7 +53,7 @@ public class TaskService {
         example.createCriteria()
         .andTaskNameEqualTo(task.getTaskName())
         .andStudentNumberIsNotNull();
-        List<Task> tasks = taskMapper.selectByExample(example);
+        List<Task> tasks = taskMapper.selectByExampleWithBLOBs(example);
         if (tasks.size() == 0) {
             return tasks;
         } else {
@@ -69,7 +69,7 @@ public class TaskService {
                         tasks.get(i).setState("已过期");
                     }
                     System.out.println(tasks.get(i));
-                    taskMapper.updateByPrimaryKey(t);
+                    taskMapper.updateByPrimaryKeyWithBLOBs(t);
                 }
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -83,7 +83,7 @@ public class TaskService {
         example.createCriteria()
                 .andStudentNumberEqualTo(task.getStudentNumber())
                 .andTaskNameEqualTo(task.getTaskName());
-        List<Task> tasks = taskMapper.selectByExample(example);
+        List<Task> tasks = taskMapper.selectByExampleWithBLOBs(example);
 
         StudentExample example1 = new StudentExample();
         example1.createCriteria().andStuIdEqualTo(task.getStudentNumber());
@@ -151,7 +151,7 @@ public class TaskService {
     public List<Task> selectStudentTask(Student student) {
         TaskExample example = new TaskExample();
         example.createCriteria().andStudentNumberEqualTo(student.getStuId());
-        List<Task> tasks = taskMapper.selectByExample(example);
+        List<Task> tasks = taskMapper.selectByExampleWithBLOBs(example);
         return tasks;
     }
 
@@ -186,7 +186,7 @@ public class TaskService {
         TaskExample example = new TaskExample();
         example.createCriteria()
                 .andStudentNumberIsNull();
-        List<Task> tasks = taskMapper.selectByExample(example);
+        List<Task> tasks = taskMapper.selectByExampleWithBLOBs(example);
         System.out.println(tasks.size());
 
         for (Task t :
