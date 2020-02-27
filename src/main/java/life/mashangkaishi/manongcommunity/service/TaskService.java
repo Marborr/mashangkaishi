@@ -81,11 +81,10 @@ public class TaskService {
     public String studentCreatOrUpdateTask(Task task) {
         TaskExample example = new TaskExample();
         example.createCriteria()
-                .andClassMessageEqualTo(task.getClassMessage())
-                .andTeacherEqualTo(task.getTeacher())
                 .andStudentNumberEqualTo(task.getStudentNumber())
                 .andTaskNameEqualTo(task.getTaskName());
         List<Task> tasks = taskMapper.selectByExample(example);
+
         StudentExample example1 = new StudentExample();
         example1.createCriteria().andStuIdEqualTo(task.getStudentNumber());
         List<Student> students = studentMapper.selectByExample(example1);
