@@ -19,4 +19,5 @@ public class ScheduleTask {
     public void CurrentTime() {
         log.info("time {}", new Date());
     }
+
 }

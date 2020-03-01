@@ -37,7 +37,6 @@ public class StudentService {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
             student.setGmtCreate(df.format(new Date()));
             student.setTaskDone(0);
-            student.setTaskNotDone(0);
             student.setCardNumber(0);
             student.setIdentify("student");
             studentMapper.insert(student);

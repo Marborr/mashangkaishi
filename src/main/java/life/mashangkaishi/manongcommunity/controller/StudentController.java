@@ -2,13 +2,11 @@ package life.mashangkaishi.manongcommunity.controller;
 
 import life.mashangkaishi.manongcommunity.dto.*;
 import life.mashangkaishi.manongcommunity.model.Class;
-import life.mashangkaishi.manongcommunity.model.Data;
 import life.mashangkaishi.manongcommunity.model.Student;
 import life.mashangkaishi.manongcommunity.model.Task;
 import life.mashangkaishi.manongcommunity.service.*;
 import life.mashangkaishi.manongcommunity.util.SendMail;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,8 +21,7 @@ public class StudentController {
     SendMail sendMail;
     @Autowired
     StudentService studentService;
-    @Autowired
-    DataService dataService;
+
     @Autowired
     ClassService classService;
     @Autowired
@@ -105,19 +102,6 @@ public class StudentController {
             studentDTO.setStudent(student);
             return studentDTO;
         }
-    }
-
-    @Transactional
-    @ResponseBody
-    @PostMapping("/api/user/dataChange")  //(数据变更）
-    public DataDTO DataChange(@RequestBody DataDTO dataDTO){
-        Data data = new Data();
-        data.setTitle(dataDTO.getTitle());
-        data.setTag(dataDTO.getTag());
-        data.setDescription(dataDTO.getDescription());
-        data.setCreator(dataDTO.getUsername());
-        dataDTO.setMsg( dataService.creatOrUpdateData(data));
-        return dataDTO;
     }
 
 
