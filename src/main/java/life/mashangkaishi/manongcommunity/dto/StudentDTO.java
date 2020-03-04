@@ -5,6 +5,5 @@ import lombok.Data;
 
 @Data
 public class StudentDTO {
-    String msg;
-    Student student;
+    Mes mes;
 }

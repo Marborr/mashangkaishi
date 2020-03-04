@@ -9,10 +9,6 @@ import java.util.List;
 
 @Data
 public class AdministratorDTO {
-    String msg;
+    Mes mes;
     Administrator administrator;
-    Class classMessege;
-    List<Class> classes;
-    String className;
-    Task task;
 }

@@ -1,5 +1,6 @@
 package life.mashangkaishi.manongcommunity.service;
 
+import life.mashangkaishi.manongcommunity.dto.Mes;
 import life.mashangkaishi.manongcommunity.dto.StudentTaskDAO;
 import life.mashangkaishi.manongcommunity.dto.StudentTaskStateDTO;
 import life.mashangkaishi.manongcommunity.dto.TeacherTask;
@@ -164,19 +165,24 @@ public class TaskService {
         return classes.get(0);
     }
 
-    public String creatTask(Task task) {
+    public Mes creatTask(Task task) {
         TaskExample example = new TaskExample();
         example.createCriteria()
                 .andTaskNameEqualTo(task.getTaskName())
                 .andTeacherEqualTo(task.getTeacher())
                 .andStudentNumberIsNull();
         List<Task> tasks = taskMapper.selectByExampleWithBLOBs(example);
+        Mes mes = new Mes();
         if (tasks.size()==0){
             taskMapper.insert(task);
         }else {
-            return "任务已存在";
+            mes.setErr(1);
+            mes.setMsg("任务已存在");
+            return mes;
         }
-        return "创建成功";
+        mes.setErr(1);
+        mes.setMsg("创建成功");
+        return mes;
     }
 
 

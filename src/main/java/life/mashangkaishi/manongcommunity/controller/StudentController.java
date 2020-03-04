@@ -33,19 +33,29 @@ public class StudentController {
     @ResponseBody
     @PostMapping("/api/user/register")
     public StudentDTO regist(@RequestBody Student student) {
-        System.out.println(student.toString());
         Student selectStudent = studentService.selectStudent(student);
+        Mes mes=new Mes();
         if (selectStudent==null){
             Student student1 = studentService.create(student);
             StudentDTO studentDTO = new StudentDTO();
-            if (student1!=null)
-                studentDTO.setMsg("success");
-            else studentDTO.setMsg("验证码有误或失效");
-            return studentDTO;
 
+            if (student1!=null)
+            {
+                mes.setErr(0);
+                mes.setMsg("注册成功");
+                studentDTO.setMes(mes);
+            }
+            else {
+                mes.setErr(1);
+                mes.setMsg("验证码有误或失效");
+                studentDTO.setMes(mes);
+            }
+            return studentDTO;
         }else {
             StudentDTO studentDTO = new StudentDTO();
-            studentDTO.setMsg("用户已存在");
+            mes.setErr(1);
+            mes.setMsg("用户已存在");
+            studentDTO.setMes(mes);
             return studentDTO;
         }
     }
@@ -56,12 +66,16 @@ public class StudentController {
     public StudentDTO login(@RequestBody Student student) {
         Student selectStudent = studentService.selectStudentByPassword(student);
         StudentDTO studentDTO = new StudentDTO();
+        Mes mes=new Mes();
         if (selectStudent==null){
-            studentDTO.setMsg("该用户不存在或密码错误");
+            mes.setErr(1);
+            mes.setMsg("用户不存在或密码错误");
+            studentDTO.setMes(mes);
             return studentDTO;
         }else {
-            studentDTO.setMsg("success");
-            studentDTO.setStudent(selectStudent);
+            mes.setErr(0);
+            mes.setMsg("登录成功");
+            studentDTO.setMes(mes);
             return studentDTO;
         }
     }
@@ -72,13 +86,16 @@ public class StudentController {
     public StudentDTO findPassword(@RequestBody Student student){
         Student updateStudent = studentService.updatepassword(student);
         StudentDTO studentDTO = new StudentDTO();
-
+        Mes mes=new Mes();
         if (updateStudent!=null){
-            studentDTO.setMsg("密码更新成功");
-            studentDTO.setStudent(updateStudent);
+            mes.setErr(0);
+            mes.setMsg("密码更新成功");
+            studentDTO.setMes(mes);
             return studentDTO;
         }else {
-            studentDTO.setMsg("密码更新失败");
+            mes.setErr(1);
+            mes.setMsg("密码更新失败");
+            studentDTO.setMes(mes);
             return studentDTO;
         }
     }
@@ -91,15 +108,17 @@ public class StudentController {
         student.setVerificationCode(random);
         StudentDTO studentDTO = new StudentDTO();
         int tag=sendMail.send(student.getEmail(),student.getVerificationCode());
-
+        Mes mes=new Mes();
         if (tag==1){
             mailService.InsertData(student.getEmail(),String.valueOf(random));
-            studentDTO.setMsg("邮件已发送");
-            studentDTO.setStudent(student);
+            mes.setErr(0);
+            mes.setMsg("邮件已发送");
+            studentDTO.setMes(mes);
             return studentDTO;
         }else {
-            studentDTO.setMsg("邮件发送失败");
-            studentDTO.setStudent(student);
+            mes.setErr(1);
+            mes.setMsg("邮件发送失败");
+            studentDTO.setMes(mes);
             return studentDTO;
         }
     }
@@ -118,8 +137,8 @@ public class StudentController {
         student.setClassName(joinClassDTO.getClassName());
         String result=classService.joinClass(joinclass,student);
         AdministratorDTO administratorDTO = new AdministratorDTO();
-        administratorDTO.setMsg(result);
-        administratorDTO.setClassName(joinClassDTO.getClassName());
+//        administratorDTO.setMsg(result);
+//        administratorDTO.setClassName(joinClassDTO.getClassName());
         return administratorDTO;
     }
 
@@ -138,8 +157,8 @@ public class StudentController {
     public AdministratorDTO studentCreatOrUpdateTask(@RequestBody Task task) {
         String result=taskService.studentCreatOrUpdateTask(task);
         AdministratorDTO administratorDTO = new AdministratorDTO();
-        administratorDTO.setMsg(result);
-        administratorDTO.setTask(task);
+//        administratorDTO.setMsg(result);
+//        administratorDTO.setTask(task);
         return administratorDTO;
     }
 

@@ -1,5 +1,6 @@
 package life.mashangkaishi.manongcommunity.service;
 
+import life.mashangkaishi.manongcommunity.dto.Mes;
 import life.mashangkaishi.manongcommunity.mapper.AdministratorExtMapper;
 import life.mashangkaishi.manongcommunity.mapper.AdministratorMapper;
 import life.mashangkaishi.manongcommunity.model.*;
@@ -42,13 +43,16 @@ public class AdministratorService {
         }
     }
 
-    public String create(Administrator administrator) {
+    public Mes create(Administrator administrator) {
         mailIdentifyExample mailexample = new mailIdentifyExample();
         mailexample.createCriteria().andEmailEqualTo(administrator.getEmail());
         List<mailIdentify> mailIdentifies
                 = mailIdentifyMapper.selectByExample(mailexample);
+        Mes mes = new Mes();
         if (mailIdentifies.size() == 0) {
-            return "验证码有误";
+          mes.setErr(1);
+          mes.setMsg("验证码有误");
+            return mes;
         }
         if (String.valueOf(administrator.getVerification()).equals(mailIdentifies.get(mailIdentifies.size() - 1).getIdentifyNumber())) {
 
@@ -57,28 +61,39 @@ public class AdministratorService {
             administrator.setGmtCreate(df.format(new Date()));
             administrator.setIdentify("teacher");
             administratorMapper.insert(administrator);
-            return "创建成功";
+            mes.setErr(0);
+            mes.setMsg("创建成功");
+            return mes;
         } else
-            return "验证码有误";
+            mes.setErr(1);
+            mes.setMsg("创建失败");
+            return mes;
     }
 
-    public String Update(Administrator administrator) {
+    public Mes Update(Administrator administrator) {
         Administrator administrator1 = selectAdministratorByTecherId(administrator);
 
         mailIdentifyExample mailexample = new mailIdentifyExample();
         mailexample.createCriteria().andEmailEqualTo(administrator.getEmail());
         List<mailIdentify> mailIdentifies
                 = mailIdentifyMapper.selectByExample(mailexample);
+        Mes mes = new Mes();
         if (mailIdentifies.size() == 0) {
-            return "验证码有误";
+            mes.setErr(1);
+            mes.setMsg("验证码有误");
+            return mes;
         }
         if (String.valueOf(administrator.getVerification()).equals(mailIdentifies.get(mailIdentifies.size() - 1).getIdentifyNumber())) {
 
             AdministratorExample example1 = new AdministratorExample();
             example1.createCriteria().andIdEqualTo(administrator1.getId());
             administratorMapper.updateByExampleSelective(administrator, example1);
-            return "更新成功";
+            mes.setErr(0);
+            mes.setMsg("更新成功");
+            return mes;
         } else
-            return "验证码有误";
+            mes.setErr(1);
+            mes.setMsg("验证码有误");
+            return mes;
     }
 }

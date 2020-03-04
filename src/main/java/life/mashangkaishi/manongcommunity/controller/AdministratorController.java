@@ -39,12 +39,15 @@ public class AdministratorController {
         Administrator administratorSelected = administratorService.selectAdministratorByTecherId(administrator);
         if (administratorSelected==null){
             AdministratorDTO administratorDTO = new AdministratorDTO();
-            administratorDTO.setMsg(administratorService.create(administrator));
+            administratorDTO.setMes(administratorService.create(administrator));
             administratorDTO.setAdministrator(administrator);
             return administratorDTO;
         }else {
             AdministratorDTO administratorDTO = new AdministratorDTO();
-            administratorDTO.setMsg("用户已存在");
+            Mes mes = new Mes();
+            mes.setErr(1);
+            mes.setMsg("该用户已存在");
+            administratorDTO.setMes(mes);
             return administratorDTO;
         }
     }
@@ -54,8 +57,7 @@ public class AdministratorController {
     @PostMapping("/api/user/teacherFindPassWord")
     public AdministratorDTO Update(@RequestBody Administrator administrator) {
         AdministratorDTO administratorDTO = new AdministratorDTO();
-        administratorDTO.setMsg(administratorService.Update(administrator));
-        administratorDTO.setAdministrator(administrator);
+        administratorDTO.setMes(administratorService.Update(administrator));
         return administratorDTO;
     }
 
@@ -65,16 +67,19 @@ public class AdministratorController {
     public AdministratorDTO login(@RequestBody Administrator administrator) {
         Administrator administrator1 = administratorService.selectAdministrator(administrator);
         AdministratorDTO administratorDTO = new AdministratorDTO();
+        Mes mes = new Mes();
         if (administrator1==null){
-            administratorDTO.setMsg("该用户不存在或密码错误 ");
+            mes.setErr(1);
+            mes.setMsg("该用户不存在或密码错误");
+            administratorDTO.setMes(mes);
             return administratorDTO;
         }else {
             ClassExample example1 = new ClassExample();
             example1.createCriteria().andMainTeacherEqualTo(administrator.getTeacherId());
             List<Class> classes = classMapper.selectByExample(example1);
-            administratorDTO.setMsg("success");
-            administratorDTO.setAdministrator(administrator);
-            administratorDTO.setClasses(classes);
+            mes.setErr(0);
+            mes.setMsg("登录成功");
+            administratorDTO.setMes(mes);
             return administratorDTO;
         }
     }
@@ -92,12 +97,12 @@ public class AdministratorController {
         String result=classService.creatOrUpdateClass(teacherClassDTO);
         System.out.println(result);
         AdministratorDTO administratorDTO = new AdministratorDTO();
-        administratorDTO.setMsg(result);
+        //administratorDTO.setMsg(result);
         Class aClass = new Class();
         aClass.setClassName(teacherClassDTO.getClassName());
         aClass.setClassNumber(random);
         aClass.setMainTeacher(teacherClassDTO.getTeacherName());
-        administratorDTO.setClassMessege(aClass);
+
         System.out.println(administratorDTO.toString());
         return administratorDTO;
     }
@@ -108,8 +113,8 @@ public class AdministratorController {
     public AdministratorDTO creatTaskToClass(@RequestBody Task task) {
         String result=taskService.creatOrUpdateTask(task);
         AdministratorDTO administratorDTO = new AdministratorDTO();
-        administratorDTO.setMsg(result);
-        administratorDTO.setTask(task);
+//        administratorDTO.setMsg(result);
+//        administratorDTO.setTask(task);
         return administratorDTO;
     }
 
@@ -117,12 +122,13 @@ public class AdministratorController {
     @ResponseBody
     @PostMapping("/api/user/creatTask")
     public AdministratorDTO creatTask(@RequestBody Task task) {
-        String result=taskService.creatTask(task);
+        Mes result=taskService.creatTask(task);
         AdministratorDTO administratorDTO = new AdministratorDTO();
-        administratorDTO.setMsg(result);
-        administratorDTO.setTask(task);
+        administratorDTO.setMes(result);
         return administratorDTO;
     }
+
+
 
     @Transactional
     @ResponseBody

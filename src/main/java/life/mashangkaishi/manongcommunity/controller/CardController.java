@@ -1,5 +1,6 @@
 package life.mashangkaishi.manongcommunity.controller;
 
+import life.mashangkaishi.manongcommunity.dto.Mes;
 import life.mashangkaishi.manongcommunity.dto.StudentDTO;
 import life.mashangkaishi.manongcommunity.mapper.StudentMapper;
 import life.mashangkaishi.manongcommunity.model.Student;
@@ -39,7 +40,10 @@ public class CardController {
     @PostMapping("/api/user/cardclockin") //打卡(传入用户名）
     public StudentDTO Clockin(@RequestBody Student student){
         StudentDTO studentDTO=new StudentDTO();
-        studentDTO.setMsg("打卡成功");
+        Mes mes=new Mes();
+        mes.setErr(1);
+        mes.setMsg("打卡成功");
+        studentDTO.setMes(mes);
         Student studentclockin = studentService.selectStudent(student);
         if (studentclockin.getCardNumber()!=null){
             studentclockin.setCardNumber(studentclockin.getCardNumber()+1);
@@ -47,7 +51,6 @@ public class CardController {
             studentclockin.setCardNumber(1);
         }
         studentMapper.updateByPrimaryKey(studentclockin);
-        studentDTO.setStudent(studentclockin);
         return studentDTO;
     }
 
