@@ -126,24 +126,6 @@ public class StudentController {
 
     @Transactional
     @ResponseBody
-    @PostMapping("/api/user/joinClass")
-    public AdministratorDTO creatClass(@RequestBody JoinClassDTO joinClassDTO) {
-        Class joinclass = new Class();
-        Student student = new Student();
-        joinclass.setClassName(joinClassDTO.getClassName());
-        joinclass.setClassNumber(joinClassDTO.getClassNumber());
-        student.setStuId(joinClassDTO.getStudentUsername());
-        student.setClassNumber(String.valueOf(joinClassDTO.getClassNumber()));
-        student.setClassName(joinClassDTO.getClassName());
-        String result=classService.joinClass(joinclass,student);
-        AdministratorDTO administratorDTO = new AdministratorDTO();
-//        administratorDTO.setMsg(result);
-//        administratorDTO.setClassName(joinClassDTO.getClassName());
-        return administratorDTO;
-    }
-
-    @Transactional
-    @ResponseBody
     @PostMapping("/api/user/studentSelectTask")
     public List<Task> studentSelectTask(@RequestBody Task task) {
         List<Task> tasks=taskService.selectTask(task);
@@ -154,12 +136,9 @@ public class StudentController {
     @Transactional
     @ResponseBody
     @PostMapping("/api/user/studentCreatOrUpdateTask")
-    public AdministratorDTO studentCreatOrUpdateTask(@RequestBody Task task) {
-        String result=taskService.studentCreatOrUpdateTask(task);
-        AdministratorDTO administratorDTO = new AdministratorDTO();
-//        administratorDTO.setMsg(result);
-//        administratorDTO.setTask(task);
-        return administratorDTO;
+    public Mes studentCreatOrUpdateTask(@RequestBody Task task) {
+        Mes mes = taskService.studentCreatOrUpdateTask(task);
+        return mes;
     }
 
     //@Async("asyncExecutor")
