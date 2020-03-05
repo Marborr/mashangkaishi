@@ -5,8 +5,10 @@ import life.mashangkaishi.manongcommunity.model.Class;
 import life.mashangkaishi.manongcommunity.model.Student;
 import life.mashangkaishi.manongcommunity.model.Task;
 import life.mashangkaishi.manongcommunity.service.*;
+import life.mashangkaishi.manongcommunity.util.CustomStringJavaCompiler;
 import life.mashangkaishi.manongcommunity.util.SendMail;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +30,7 @@ public class StudentController {
     TaskService taskService;
     @Autowired
     MailService mailService;
+
 
     @Transactional
     @ResponseBody
@@ -148,6 +151,32 @@ public class StudentController {
     public List<Task> studentMessage(@RequestBody Student student) {
         List<Task> tasks = taskService.selectStudentTask(student);
         return tasks;
+    }
+
+    @Transactional
+    @ResponseBody
+    @PostMapping("/api/user/ExecuteJavaCode")
+    public CodeCompiler ExecuteJavaCode(@RequestBody Task task) {
+        String code=task.getDescription();
+        CustomStringJavaCompiler compiler = new CustomStringJavaCompiler(code);
+        boolean res = compiler.compiler();
+        CodeCompiler codeCompiler = new CodeCompiler();
+        if (res) {
+            codeCompiler.setCompilerMessage("编译成功");
+            codeCompiler.setCompilerTakeTime("编译时长：" + compiler.getCompilerTakeTime());
+            try {
+                compiler.runMainMethod();
+                codeCompiler.setRunTakeTime("运行时长：" + compiler.getRunTakeTime());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            codeCompiler.setResult(compiler.getRunResult());
+            //codeCompiler.setDetail("诊断信息：" + compiler.getCompilerMessage());
+        } else {
+            codeCompiler.setCompilerMessage("编译失败");
+            codeCompiler.setDetail(compiler.getCompilerMessage());
+        }
+        return codeCompiler;
     }
 
 
