@@ -52,7 +52,7 @@ public class TaskService {
     public List<Task> selectTask(Task task) {
         TaskExample example = new TaskExample();
         example.createCriteria()
-        .andTaskNameEqualTo(task.getTaskName())
+        .andTaskNameLike("%"+task.getTaskName()+"%")
         .andStudentNumberIsNotNull();
         List<Task> tasks = taskMapper.selectByExampleWithBLOBs(example);
         if (tasks.size() == 0) {
