@@ -14,26 +14,10 @@ import java.util.regex.Pattern;
 
 @Controller
 public class DataBaseTest {
-    @Autowired
-    testTableMapper testTableMapper;
 
-    @PostMapping("/test1")
-    @ResponseBody
-    public int test1(@RequestBody testTable testTable){
-        int insert = testTableMapper.insert(testTable);
-        return insert;
-    }
-    @PostMapping("/test2")
-    @ResponseBody
-    public int test2(@RequestBody testTable testTable){
-        testTableExample example = new testTableExample();
-        example.createCriteria().andIdEqualTo(testTable.getId());
-        int delete = testTableMapper.deleteByExample(example);
-        return delete;
-    }
 
     public static void main(String[] args) {
-
+        System.out.println(getFullClassName(""));
     }
     public static String getFullClassName(String sourceCode) {
         String className = "";

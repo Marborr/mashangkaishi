@@ -97,7 +97,7 @@ public class StudentController {
             return studentDTO;
         }else {
             mes.setErr(1);
-            mes.setMsg("密码更新失败");
+            mes.setMsg("用户不存在或验证码错误");
             studentDTO.setMes(mes);
             return studentDTO;
         }

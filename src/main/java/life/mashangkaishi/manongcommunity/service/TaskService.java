@@ -189,7 +189,7 @@ public class TaskService {
             mes.setMsg("任务已存在");
             return mes;
         }
-        mes.setErr(1);
+        mes.setErr(0);
         mes.setMsg("创建成功");
         return mes;
     }
