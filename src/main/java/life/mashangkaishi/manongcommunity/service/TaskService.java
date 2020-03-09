@@ -89,6 +89,7 @@ public class TaskService {
         StudentExample example1 = new StudentExample();
         example1.createCriteria().andStuIdEqualTo(task.getStudentNumber());
         List<Student> students = studentMapper.selectByExample(example1);
+
         Mes mes=new Mes();
         if (students.size() != 0) {
             if (tasks.size() != 0) {
@@ -180,6 +181,8 @@ public class TaskService {
         List<Task> tasks = taskMapper.selectByExampleWithBLOBs(example);
         Mes mes = new Mes();
         if (tasks.size()==0){
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+            task.setGmtCreat(df.format(new Date()));
             taskMapper.insert(task);
         }else {
             mes.setErr(1);
