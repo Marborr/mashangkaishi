@@ -51,6 +51,7 @@ public class TaskService {
         Integer offset = task.getLimit() * (task.getPage() - 1);//页面偏移量
 
         TaskExample example = new TaskExample();
+        TaskExample example2 = new TaskExample();
         example.setOffset(offset);
         example.setLimit(task.getLimit());
 
@@ -59,11 +60,16 @@ public class TaskService {
                 example.createCriteria()
                         .andTaskNameLike("%" + task.getTaskName() + "%")
                         .andStudentNumberIsNotNull();
-
+                example2.createCriteria()
+                        .andTaskNameLike("%" + task.getTaskName() + "%")
+                        .andStudentNumberIsNotNull();
                 break;
             }
             case "AllNameSelectTask": {
                 example.createCriteria()
+                        .andTaskNameEqualTo(task.getTaskName())
+                        .andStudentNumberIsNotNull();
+                example2.createCriteria()
                         .andTaskNameEqualTo(task.getTaskName())
                         .andStudentNumberIsNotNull();
                 break;
@@ -73,11 +79,14 @@ public class TaskService {
                 example.createCriteria()
                         .andTeacherEqualTo(task.getTeacher())
                         .andStudentNumberIsNull();
+                example2.createCriteria()
+                        .andTeacherEqualTo(task.getTeacher())
+                        .andStudentNumberIsNull();
                 break;
             }
         }
         List<Task> tasks = taskMapper.selectByExampleWithBLOBs(example);
-
+        List<Task> tasks2 = taskMapper.selectByExampleWithBLOBs(example2);
         if (tasks.size() == 0) {
             return null;
         } else {
@@ -98,12 +107,14 @@ public class TaskService {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            Integer integer = taskExtMapper.selectTaskNumber();
+            Integer integer = tasks2.size();
             PageTask pageTask = new PageTask();
-            if (integer % task.getLimit() != 0)
-                integer = integer / task.getLimit() + 1;
-            else
-                integer = integer / task.getLimit();
+            if (task.getLimit() != 0){
+                if (integer % task.getLimit() != 0)
+                    integer = integer / task.getLimit() + 1;
+                else
+                    integer = integer / task.getLimit();
+            }
             pageTask.setAllTasks(integer);
             pageTask.setTasks(tasks);
             return pageTask;
@@ -190,18 +201,23 @@ public class TaskService {
 
     public PageTask selectStudentTask(TaskAndPageDTO task) {
         TaskExample example = new TaskExample();
+        TaskExample example2 = new TaskExample();
         Integer offset = task.getLimit() * (task.getPage() - 1);//页面偏移量
 
         example.setOffset(offset);
         example.setLimit(task.getLimit());
         example.createCriteria().andStudentNumberEqualTo(task.getStuId());
+        example2.createCriteria().andStudentNumberEqualTo(task.getStuId());
         List<Task> tasks = taskMapper.selectByExampleWithBLOBs(example);
-        Integer integer = taskExtMapper.selectTaskNumber();
-        if (integer % task.getLimit() != 0)
-            integer = integer / task.getLimit() + 1;
-        else
-            integer = integer / task.getLimit();
+        List<Task> tasks2 = taskMapper.selectByExampleWithBLOBs(example2);
+        Integer integer = tasks2.size();
         PageTask pageTask = new PageTask();
+        if (task.getLimit() != 0){
+            if (integer % task.getLimit() != 0)
+                integer = integer / task.getLimit() + 1;
+            else
+                integer = integer / task.getLimit();
+        }
         pageTask.setAllTasks(integer);
         pageTask.setTasks(tasks);
 
