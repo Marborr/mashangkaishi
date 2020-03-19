@@ -15,7 +15,6 @@
   </resultMap>
 
   <select id="selectTaskNumber"
-          parameterType="life.mashangkaishi.manongcommunity.model.Task"
           resultType="java.lang.Integer">
     select count(1) from task
   </select>

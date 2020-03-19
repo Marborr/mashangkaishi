@@ -6,6 +6,7 @@ import life.mashangkaishi.manongcommunity.model.*;
 import life.mashangkaishi.manongcommunity.model.Class;
 import life.mashangkaishi.manongcommunity.service.AdministratorService;
 import life.mashangkaishi.manongcommunity.service.ClassService;
+import life.mashangkaishi.manongcommunity.service.MassageService;
 import life.mashangkaishi.manongcommunity.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -29,6 +30,7 @@ public class AdministratorController {
     TaskService taskService;
     @Autowired
     ClassMapper classMapper;
+
 
 
 
@@ -185,8 +187,11 @@ public class AdministratorController {
     @Transactional
     @ResponseBody
     @PostMapping("/api/user/SelectTeacherTask")
-    public List<Task> selectTeacherTask(@RequestBody TaskAndPageDTO task) {
-        List<Task> tasks=taskService.selectTask(task,"SelectTeacherTask");
+    public PageTask selectTeacherTask(@RequestBody TaskAndPageDTO task) {
+        PageTask tasks=taskService.selectTask(task,"SelectTeacherTask");
         return tasks;
     }
+
+
+
 }

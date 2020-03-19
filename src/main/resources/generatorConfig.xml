@@ -36,11 +36,12 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table tableName="student" domainObjectName="Student" ></table>
-        <table tableName="administrator" domainObjectName="Administrator" ></table>
-        <table tableName="class" domainObjectName="Class" ></table>
-        <table tableName="task" domainObjectName="Task" ></table>
-        <table tableName="test_table" domainObjectName="testTable" ></table>
-        <table tableName="mail_identify" domainObjectName="mailIdentify" ></table>
+<!--        <table tableName="student" domainObjectName="Student" ></table>-->
+<!--        <table tableName="administrator" domainObjectName="Administrator" ></table>-->
+<!--        <table tableName="class" domainObjectName="Class" ></table>-->
+<!--        <table tableName="task" domainObjectName="Task" ></table>-->
+<!--        <table tableName="test_table" domainObjectName="testTable" ></table>-->
+<!--        <table tableName="mail_identify" domainObjectName="mailIdentify" ></table>-->
+        <table tableName="system_message" domainObjectName="systemMessage" ></table>
     </context>
 </generatorConfiguration>

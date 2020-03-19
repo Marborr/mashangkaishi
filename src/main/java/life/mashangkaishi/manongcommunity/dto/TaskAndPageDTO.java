@@ -6,6 +6,7 @@ import lombok.Data;
 public class TaskAndPageDTO  {
     String TaskName;
     String Teacher;
+    String StuId;
     int page;
     int limit;
 }

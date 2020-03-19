@@ -9,6 +9,6 @@ import java.util.List;
 
 @Component
 public interface TaskExtMapper {
-    Integer selectTaskNumber(Task task);
+    Integer selectTaskNumber();
     List<Task> selectByExampleWithBLOBsLimit(TaskAndPageDTO taskAndPageDTO);
 }

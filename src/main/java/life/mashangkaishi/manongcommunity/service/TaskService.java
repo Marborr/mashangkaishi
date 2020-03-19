@@ -46,29 +46,29 @@ public class TaskService {
     }
 
 
-    public List<Task> selectTask(TaskAndPageDTO task, String type) {
+    public PageTask selectTask(TaskAndPageDTO task, String type) {
 
-        Integer offset=task.getLimit()*(task.getPage()-1);//页面偏移量
+        Integer offset = task.getLimit() * (task.getPage() - 1);//页面偏移量
 
         TaskExample example = new TaskExample();
         example.setOffset(offset);
         example.setLimit(task.getLimit());
 
-        switch (type){
-            case "SelectTask":{
+        switch (type) {
+            case "SelectTask": {
                 example.createCriteria()
-                        .andTaskNameLike("%"+task.getTaskName()+"%")
+                        .andTaskNameLike("%" + task.getTaskName() + "%")
                         .andStudentNumberIsNotNull();
 
                 break;
             }
-            case "AllNameSelectTask":{
+            case "AllNameSelectTask": {
                 example.createCriteria()
                         .andTaskNameEqualTo(task.getTaskName())
                         .andStudentNumberIsNotNull();
                 break;
             }
-            case "SelectTeacherTask":{
+            case "SelectTeacherTask": {
 
                 example.createCriteria()
                         .andTeacherEqualTo(task.getTeacher())
@@ -79,7 +79,7 @@ public class TaskService {
         List<Task> tasks = taskMapper.selectByExampleWithBLOBs(example);
 
         if (tasks.size() == 0) {
-            return tasks;
+            return null;
         } else {
             try {
                 for (int i = 0; i < tasks.size(); i++) {
@@ -98,7 +98,15 @@ public class TaskService {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            return tasks;
+            Integer integer = taskExtMapper.selectTaskNumber();
+            PageTask pageTask = new PageTask();
+            if (integer % task.getLimit() != 0)
+                integer = integer / task.getLimit() + 1;
+            else
+                integer = integer / task.getLimit();
+            pageTask.setAllTasks(integer);
+            pageTask.setTasks(tasks);
+            return pageTask;
         }
     }
 
@@ -113,7 +121,7 @@ public class TaskService {
         example1.createCriteria().andStuIdEqualTo(task.getStudentNumber());
         List<Student> students = studentMapper.selectByExample(example1);
 
-        Mes mes=new Mes();
+        Mes mes = new Mes();
         if (students.size() != 0) {
             if (tasks.size() != 0) {
                 tasks.get(0).setDescription(task.getDescription());
@@ -180,11 +188,24 @@ public class TaskService {
     }
 
 
-    public List<Task> selectStudentTask(Student student) {
+    public PageTask selectStudentTask(TaskAndPageDTO task) {
         TaskExample example = new TaskExample();
-        example.createCriteria().andStudentNumberEqualTo(student.getStuId());
+        Integer offset = task.getLimit() * (task.getPage() - 1);//页面偏移量
+
+        example.setOffset(offset);
+        example.setLimit(task.getLimit());
+        example.createCriteria().andStudentNumberEqualTo(task.getStuId());
         List<Task> tasks = taskMapper.selectByExampleWithBLOBs(example);
-        return tasks;
+        Integer integer = taskExtMapper.selectTaskNumber();
+        if (integer % task.getLimit() != 0)
+            integer = integer / task.getLimit() + 1;
+        else
+            integer = integer / task.getLimit();
+        PageTask pageTask = new PageTask();
+        pageTask.setAllTasks(integer);
+        pageTask.setTasks(tasks);
+
+        return pageTask;
     }
 
 
@@ -203,11 +224,11 @@ public class TaskService {
                 .andStudentNumberIsNull();
         List<Task> tasks = taskMapper.selectByExampleWithBLOBs(example);
         Mes mes = new Mes();
-        if (tasks.size()==0){
+        if (tasks.size() == 0) {
             SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
             task.setGmtCreat(df.format(new Date()));
             taskMapper.insert(task);
-        }else {
+        } else {
             mes.setErr(1);
             mes.setMsg("任务已存在");
             return mes;
@@ -219,8 +240,8 @@ public class TaskService {
 
 
     public List<TeacherTask> selectTeacherTask() {
-        List<TeacherTask> teacherTasks=new ArrayList<>();
-        Set<String> teacherTaskSet=new HashSet<>();
+        List<TeacherTask> teacherTasks = new ArrayList<>();
+        Set<String> teacherTaskSet = new HashSet<>();
 
         TaskExample example = new TaskExample();
         example.createCriteria()
@@ -233,15 +254,14 @@ public class TaskService {
             teacherTaskSet.add(t.getTeacher());
         }
 
-        for (String teacherName:teacherTaskSet){
+        for (String teacherName : teacherTaskSet) {
             ArrayList<Task> arrayTask = new ArrayList<>();
             TeacherTask teacherTask = new TeacherTask();
             for (Task t :
                     tasks) {
-               if (teacherName.equals(t.getTeacher()))
-               {
-                   arrayTask.add(t);
-               }
+                if (teacherName.equals(t.getTeacher())) {
+                    arrayTask.add(t);
+                }
             }
             teacherTask.setTeacherId(teacherName);
             teacherTask.setTasks(arrayTask);
