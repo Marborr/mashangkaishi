@@ -185,8 +185,8 @@ public class AdministratorController {
     @Transactional
     @ResponseBody
     @PostMapping("/api/user/SelectTeacherTask")
-    public List<Task> selectTeacherTask(@RequestBody Task task) {
-        List<Task> tasks=taskService.selectTask(task);
+    public List<Task> selectTeacherTask(@RequestBody TaskAndPageDTO task) {
+        List<Task> tasks=taskService.selectTask(task,"SelectTeacherTask");
         return tasks;
     }
 }

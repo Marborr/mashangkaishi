@@ -1,9 +1,6 @@
 package life.mashangkaishi.manongcommunity.service;
 
-import life.mashangkaishi.manongcommunity.dto.Mes;
-import life.mashangkaishi.manongcommunity.dto.StudentTaskDAO;
-import life.mashangkaishi.manongcommunity.dto.StudentTaskStateDTO;
-import life.mashangkaishi.manongcommunity.dto.TeacherTask;
+import life.mashangkaishi.manongcommunity.dto.*;
 import life.mashangkaishi.manongcommunity.mapper.ClassMapper;
 import life.mashangkaishi.manongcommunity.mapper.StudentMapper;
 import life.mashangkaishi.manongcommunity.mapper.TaskExtMapper;
@@ -49,12 +46,38 @@ public class TaskService {
     }
 
 
-    public List<Task> selectTask(Task task) {
+    public List<Task> selectTask(TaskAndPageDTO task, String type) {
+
+        Integer offset=task.getLimit()*(task.getPage()-1);//页面偏移量
+
         TaskExample example = new TaskExample();
-        example.createCriteria()
-        .andTaskNameLike("%"+task.getTaskName()+"%")
-        .andStudentNumberIsNotNull();
+        example.setOffset(offset);
+        example.setLimit(task.getLimit());
+
+        switch (type){
+            case "SelectTask":{
+                example.createCriteria()
+                        .andTaskNameLike("%"+task.getTaskName()+"%")
+                        .andStudentNumberIsNotNull();
+
+                break;
+            }
+            case "AllNameSelectTask":{
+                example.createCriteria()
+                        .andTaskNameEqualTo(task.getTaskName())
+                        .andStudentNumberIsNotNull();
+                break;
+            }
+            case "SelectTeacherTask":{
+
+                example.createCriteria()
+                        .andTeacherEqualTo(task.getTeacher())
+                        .andStudentNumberIsNull();
+                break;
+            }
+        }
         List<Task> tasks = taskMapper.selectByExampleWithBLOBs(example);
+
         if (tasks.size() == 0) {
             return tasks;
         } else {

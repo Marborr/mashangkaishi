@@ -130,8 +130,18 @@ public class StudentController {
     @Transactional
     @ResponseBody
     @PostMapping("/api/user/studentSelectTask")
-    public List<Task> studentSelectTask(@RequestBody Task task) {
-        List<Task> tasks=taskService.selectTask(task);
+    public List<Task> studentSelectTask(@RequestBody TaskAndPageDTO task) {
+        List<Task> tasks=taskService.selectTask(task,"SelectTask");
+        return tasks;
+    }
+
+
+
+    @Transactional
+    @ResponseBody
+    @PostMapping("/api/user/AllTaskNameStudentSelectTask")
+    public List<Task> studentAllSelectTask(@RequestBody TaskAndPageDTO task) {
+        List<Task> tasks=taskService.selectTask(task,"AllNameSelectTask");
         return tasks;
     }
 
@@ -159,6 +169,7 @@ public class StudentController {
     public CodeCompiler ExecuteJavaCode(@RequestBody Task task) {
         String code=task.getDescription();
         CustomStringJavaCompiler compiler = new CustomStringJavaCompiler(code);
+
         boolean res = compiler.compiler();
         CodeCompiler codeCompiler = new CodeCompiler();
         if (res) {
