@@ -1,5 +1,7 @@
 package life.mashangkaishi.manongcommunity.controller;
 
+import life.mashangkaishi.manongcommunity.dto.MassageInDTO;
+import life.mashangkaishi.manongcommunity.dto.MassagePageDTO;
 import life.mashangkaishi.manongcommunity.dto.Mes;
 import life.mashangkaishi.manongcommunity.model.Task;
 import life.mashangkaishi.manongcommunity.model.systemMessage;
@@ -18,12 +20,25 @@ public class MassageController {
     @Autowired
     MassageService massageService;
 
-//    @Transactional
-//    @ResponseBody
-//    @PostMapping("/api/user/MassagePush")
-//    public List<Task> MassagePush(@RequestBody systemMessage message) {
-//        massageService.pushMassage(message);
-//        Mes
-//        return tasks;
-//    }
+    @Transactional
+    @ResponseBody
+    @PostMapping("/api/user/MassagePush")
+    public Mes MassagePush(@RequestBody systemMessage message) {
+        int i = massageService.pushMassage(message);
+        Mes mes = new Mes();
+        mes.setErr(i);
+        if (i==1){
+            mes.setMsg("发布成功");
+        }else
+            mes.setMsg("发布失败，请重试");
+        return mes;
+    }
+
+    @Transactional
+    @ResponseBody
+    @PostMapping("/api/user/MassageSelect")
+    public MassagePageDTO MassageSelect(@RequestBody MassageInDTO message) {
+        MassagePageDTO massagePageDTO = massageService.selectMassage(message);
+        return massagePageDTO;
+    }
 }

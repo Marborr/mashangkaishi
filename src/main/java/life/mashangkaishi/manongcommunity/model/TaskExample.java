@@ -20,6 +20,10 @@ public class TaskExample {
      */
     protected boolean distinct;
 
+    protected int limit;
+
+    protected int offset;
+
     public int getLimit() {
         return limit;
     }
@@ -36,9 +40,7 @@ public class TaskExample {
         this.offset = offset;
     }
 
-    protected int limit;
 
-    protected int offset;
 
 
     /**

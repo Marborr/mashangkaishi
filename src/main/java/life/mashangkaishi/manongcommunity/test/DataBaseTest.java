@@ -15,6 +15,8 @@ import javax.tools.*;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,10 +27,13 @@ public class DataBaseTest {
 
     public static void main(String[] args) throws FileNotFoundException {
 
-        String s="asdasd";
-        char[] chars = s.toCharArray();
-        s.length();
-        int length = chars.length;
+        ArrayList arrayList = new ArrayList();
+        arrayList.add(1);
+        arrayList.add(2);
+        arrayList.add(3);
+        arrayList.add(4);
+        arrayList.subList(1,2);
+        System.out.println(Arrays.toString(arrayList.toArray()));
 
 //        System.out.println(getFullClassName("import java.util.*;public class Test2 {public static void main(String[] args)  {Test test=new Test(); test.test(); }}class Test {public void test(){List<Integer> ints = new ArrayList(); ints.add(1);System.out.println(ints.get(0));}}"));
 //        PrintStream PrintStream = new PrintStream("C:\\Users\\marboo\\Desktop\\RemoteSensingData\\FY4GEO\\test.txt"); //输出到文件
