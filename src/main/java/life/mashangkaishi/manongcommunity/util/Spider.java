@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -15,13 +16,22 @@ public class Spider {
 
     static {
       System.setProperty("webdriver.chrome.driver", "/downloads/chromedriver");
+
        //System.setProperty("webdriver.chrome.driver", "D:\\IntelliJProject\\SPIDER\\chromedriver_win32-80.0.3987.106\\chromedriver.exe");
     }
 
     public Job getJobs() {
         ArrayList<Job> list=new ArrayList<>();
         try {
-            WebDriver driver = new ChromeDriver();
+
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--headless","--whitelisted-ips","--no-sandbox","--disable-extensions");
+//            options.AddArgument("--headless");
+//            options.AddArgument("--whitelisted-ips");
+//            options.AddArgument("--no-sandbox");
+//            options.AddArgument("--disable-extensions");
+            WebDriver driver = new ChromeDriver(options);
+
             // 进入首页
             driver.get("https://www.lagou.com/zhaopin/Java/?labelWords=label");
             Map<String, Job> jobs = new HashMap();
