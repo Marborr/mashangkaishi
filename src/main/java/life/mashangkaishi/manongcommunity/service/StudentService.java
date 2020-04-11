@@ -10,6 +10,7 @@ import life.mashangkaishi.manongcommunity.model.mailIdentifyExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class StudentService {
     StudentExtMapper studentExtMapper;
     @Autowired
     mailIdentifyMapper mailIdentifyMapper;
-
+    @Transactional
     public Student create(Student student){
         mailIdentifyExample mailexample = new mailIdentifyExample();
         mailexample.createCriteria().andEmailEqualTo(student.getEmail());
@@ -45,7 +46,7 @@ public class StudentService {
             return null;
         }
     }
-
+    @Transactional
     public Student updatepassword(Student student){
         Student student1 = selectStudent(student);
         mailIdentifyExample mailexample = new mailIdentifyExample();

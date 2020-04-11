@@ -6,6 +6,7 @@ import life.mashangkaishi.manongcommunity.mapper.AdministratorMapper;
 import life.mashangkaishi.manongcommunity.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,6 +20,7 @@ public class AdministratorService {
     AdministratorExtMapper administratorExtMapper;
     @Autowired
     life.mashangkaishi.manongcommunity.mapper.mailIdentifyMapper mailIdentifyMapper;
+
 
     public Administrator selectAdministrator(Administrator administrator) {
         AdministratorExample example = new AdministratorExample();
@@ -43,6 +45,7 @@ public class AdministratorService {
         }
     }
 
+    @Transactional
     public Mes create(Administrator administrator) {
         mailIdentifyExample mailexample = new mailIdentifyExample();
         mailexample.createCriteria().andEmailEqualTo(administrator.getEmail());
@@ -70,6 +73,7 @@ public class AdministratorService {
             return mes;
     }
 
+    @Transactional
     public Mes Update(Administrator administrator) {
         Administrator administrator1 = selectAdministratorByTecherId(administrator);
 

@@ -8,6 +8,7 @@ import life.mashangkaishi.manongcommunity.model.systemMessageExample;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.xml.crypto.Data;
 import java.text.SimpleDateFormat;
@@ -18,7 +19,7 @@ import java.util.List;
 public class MassageService {
     @Autowired
     systemMessageMapper systemMessageMapper;
-
+    @Transactional
     public int pushMassage(systemMessage message) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         message.setCreatTime(df.format(new Date()));

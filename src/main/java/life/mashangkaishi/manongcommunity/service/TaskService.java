@@ -10,6 +10,7 @@ import life.mashangkaishi.manongcommunity.model.*;
 import life.mashangkaishi.manongcommunity.util.TimeFlush;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,7 +28,7 @@ public class TaskService {
     ClassMapper classMapper;
     @Autowired
     TimeFlush timeFlush;
-
+    @Transactional
     public String creatOrUpdateTask(Task task) {
         try {
             boolean timeout = timeFlush.timeout(task.getDeadline());
@@ -101,7 +102,6 @@ public class TaskService {
                         t.setState("已过期");
                         tasks.get(i).setState("已过期");
                     }
-                    System.out.println(tasks.get(i));
                     taskMapper.updateByPrimaryKeyWithBLOBs(t);
                 }
             } catch (ParseException e) {
@@ -120,7 +120,7 @@ public class TaskService {
             return pageTask;
         }
     }
-
+    @Transactional
     public Mes studentCreatOrUpdateTask(Task task) {
         TaskExample example = new TaskExample();
         example.createCriteria()
@@ -231,7 +231,7 @@ public class TaskService {
         List<Class> classes = classMapper.selectByExample(example);
         return classes.get(0);
     }
-
+    @Transactional
     public Mes creatTask(Task task) {
         TaskExample example = new TaskExample();
         example.createCriteria()

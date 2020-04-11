@@ -32,7 +32,7 @@ public class StudentController {
     MailService mailService;
 
 
-    @Transactional
+
     @ResponseBody
     @PostMapping("/api/user/register")
     public StudentDTO regist(@RequestBody Student student) {
@@ -63,7 +63,7 @@ public class StudentController {
         }
     }
 
-    @Transactional
+
     @ResponseBody
     @PostMapping("/api/user/login")
     public StudentDTO login(@RequestBody Student student) {
@@ -83,7 +83,7 @@ public class StudentController {
         }
     }
 
-    @Transactional
+
     @ResponseBody
     @PostMapping("/api/user/findpassword")  //(需要传入用户名）
     public StudentDTO findPassword(@RequestBody Student student){
@@ -103,7 +103,7 @@ public class StudentController {
         }
     }
 
-    @Transactional
+
     @ResponseBody
     @PostMapping("/api/user/validationemail")  //(邮箱验证）
     public StudentDTO ValidationEmail(@RequestBody Student student){
@@ -127,7 +127,7 @@ public class StudentController {
     }
 
 
-    @Transactional
+
     @ResponseBody
     @PostMapping("/api/user/studentSelectTask")
     public PageTask studentSelectTask(@RequestBody TaskAndPageDTO task) {
@@ -137,7 +137,7 @@ public class StudentController {
 
 
 
-    @Transactional
+
     @ResponseBody
     @PostMapping("/api/user/AllTaskNameStudentSelectTask")
     public PageTask studentAllSelectTask(@RequestBody TaskAndPageDTO task) {
@@ -146,7 +146,7 @@ public class StudentController {
     }
 
 
-    @Transactional
+
     @ResponseBody
     @PostMapping("/api/user/studentCreatOrUpdateTask")
     public Mes studentCreatOrUpdateTask(@RequestBody Task task) {
@@ -155,7 +155,7 @@ public class StudentController {
     }
 
     //@Async("asyncExecutor")
-    @Transactional
+
     @ResponseBody
     @PostMapping("/api/user/studentMessage")
     public PageTask studentMessage(@RequestBody TaskAndPageDTO student) {
@@ -163,7 +163,7 @@ public class StudentController {
         return pageTask;
     }
 
-    @Transactional
+
     @ResponseBody
     @PostMapping("/api/user/ExecuteJavaCode")
     public CodeCompiler ExecuteJavaCode(@RequestBody Task task) {

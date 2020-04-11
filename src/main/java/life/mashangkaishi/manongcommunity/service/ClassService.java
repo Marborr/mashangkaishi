@@ -9,6 +9,7 @@ import life.mashangkaishi.manongcommunity.model.*;
 import life.mashangkaishi.manongcommunity.model.Class;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,6 +25,7 @@ public class ClassService {
     StudentMapper studentMapper;
     @Autowired
     AdministratorMapper administratorMapper;
+    @Transactional
     public String creatOrUpdateClass(TeacherClassDTO teacherClass) {
         Class classMassege = new Class();
         classMassege.setClassNumber(Integer.parseInt(teacherClass.getClassNumber()));
@@ -61,7 +63,7 @@ public class ClassService {
             return "教师信息有误，请确认后再次创建";
         }
     }
-
+    @Transactional
     public String joinClass(Class classMassege, Student student) {
         ClassExample example = new ClassExample();
         example.createCriteria().andClassNameEqualTo(classMassege.getClassName())

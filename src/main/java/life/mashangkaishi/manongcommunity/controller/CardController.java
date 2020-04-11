@@ -23,7 +23,7 @@ public class CardController {
     @Autowired
     StudentMapper studentMapper;
 
-    @Transactional
+
     @ResponseBody
     @PostMapping("/api/user/cardpage") //排名
     public List<Student> CardPage(@RequestBody Student student){
@@ -35,7 +35,7 @@ public class CardController {
     }
 
 
-    @Transactional
+
     @ResponseBody
     @PostMapping("/api/user/cardclockin") //打卡(传入用户名）
     public StudentDTO Clockin(@RequestBody Student student){

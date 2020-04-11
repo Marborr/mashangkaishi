@@ -31,10 +31,6 @@ public class AdministratorController {
     @Autowired
     ClassMapper classMapper;
 
-
-
-
-    @Transactional
     @ResponseBody
     @PostMapping("/api/user/teacherRegister")
     public AdministratorDTO regist(@RequestBody Administrator administrator) {
@@ -54,7 +50,7 @@ public class AdministratorController {
         }
     }
 
-    @Transactional
+
     @ResponseBody
     @PostMapping("/api/user/teacherFindPassWord")
     public AdministratorDTO Update(@RequestBody Administrator administrator) {
@@ -63,7 +59,7 @@ public class AdministratorController {
         return administratorDTO;
     }
 
-    @Transactional
+
     @ResponseBody
     @PostMapping("/api/user/teacherLogin")
     public AdministratorDTO login(@RequestBody Administrator administrator) {
@@ -86,7 +82,7 @@ public class AdministratorController {
         }
     }
 
-    @Transactional
+
     @ResponseBody
     @PostMapping("/api/user/creatClass")
     public AdministratorDTO creatClass(@RequestBody TeacherClassDTO2 teacherClassDTO2) {
@@ -109,7 +105,7 @@ public class AdministratorController {
         return administratorDTO;
     }
 
-    @Transactional
+
     @ResponseBody
     @PostMapping("/api/user/creatTaskToClass")
     public AdministratorDTO creatTaskToClass(@RequestBody Task task) {
@@ -120,7 +116,7 @@ public class AdministratorController {
         return administratorDTO;
     }
 
-    @Transactional
+
     @ResponseBody
     @PostMapping("/api/user/creatTask")
     public AdministratorDTO creatTask(@RequestBody Task task) {
@@ -132,7 +128,7 @@ public class AdministratorController {
 
 
 
-    @Transactional
+
     @ResponseBody
     @PostMapping("/api/user/selectClassTask")//通过班级查任务
     public List<Task> selectClassTask(@RequestBody Task task) {
@@ -140,7 +136,7 @@ public class AdministratorController {
         return tasks;
     }
 
-    @Transactional
+
     @ResponseBody
     @GetMapping("/api/user/selectTeacherTask")//查任务
     public List<TeacherTask> selectTask() {
@@ -150,7 +146,7 @@ public class AdministratorController {
 
 
     //@Async("asyncExecutor")
-    @Transactional
+
     @ResponseBody
     @PostMapping("/api/user/selectClasses")//查班级
     public List<Class> selectClasses(@RequestBody Administrator administrator) {
@@ -158,7 +154,7 @@ public class AdministratorController {
         return classes;
     }
 
-    @Transactional
+
     @ResponseBody
     @PostMapping("/api/user/selectClassStudentTask")//查学生任务
     public List<StudentTaskStateDTO> selectClassStudentTask(@RequestBody Task task) {
@@ -166,7 +162,7 @@ public class AdministratorController {
         return selectStudentClassTask;
     }
 
-    @Transactional
+
     @ResponseBody
     @PostMapping("/api/user/selectClassStudent")//查学生
     public List<StudentNameDTO> selectClassStudent(@RequestBody Class aclass) {
@@ -184,7 +180,7 @@ public class AdministratorController {
         return studentNameDTOS;
     }
 
-    @Transactional
+
     @ResponseBody
     @PostMapping("/api/user/SelectTeacherTask")
     public PageTask selectTeacherTask(@RequestBody TaskAndPageDTO task) {
