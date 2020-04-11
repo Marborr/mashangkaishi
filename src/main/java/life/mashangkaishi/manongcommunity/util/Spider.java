@@ -14,11 +14,11 @@ import java.util.*;
 public class Spider {
 
     static {
-       System.setProperty("webdriver.chrome.driver", "/downloads/chromedriver");
-     //   System.setProperty("webdriver.chrome.driver", "D:\\IntelliJProject\\SPIDER\\chromedriver_win32 (1)\\chromedriver.exe");
+      System.setProperty("webdriver.chrome.driver", "/downloads/chromedriver");
+       //System.setProperty("webdriver.chrome.driver", "D:\\IntelliJProject\\SPIDER\\chromedriver_win32-80.0.3987.106\\chromedriver.exe");
     }
 
-    public ArrayList<Job> getJobs() {
+    public Job getJobs() {
         ArrayList<Job> list=new ArrayList<>();
         try {
             WebDriver driver = new ChromeDriver();
@@ -35,7 +35,7 @@ public class Spider {
             driver.quit();
         } catch (Exception e) {
         }
-        return list;
+        return list.get(0);
     }
 
     private static void printMoney(Map<String, Job> jobs) {
@@ -84,6 +84,10 @@ public class Spider {
     private static void choseOptions(WebDriver driver) {
         // 选择城市
         String cityName = "北京";
+
+        WebElement geiyebuyao = driver.findElement(By.xpath("//div[@class='body-container showData']//div[@class='body-box']//div[contains(text(),'给也不要')]"));
+        geiyebuyao.click();
+
         WebElement cityAuthorElement = driver.findElement(By.xpath("//div[@class='other-hot-city']//a[contains(text(),'" + cityName + "')]"));
         cityAuthorElement.click();
 

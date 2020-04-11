@@ -1,5 +1,6 @@
 package life.mashangkaishi.manongcommunity.controller;
 
+import life.mashangkaishi.manongcommunity.dto.Job;
 import life.mashangkaishi.manongcommunity.dto.MassageInDTO;
 import life.mashangkaishi.manongcommunity.dto.MassagePageDTO;
 import life.mashangkaishi.manongcommunity.dto.Mes;
@@ -48,8 +49,8 @@ public class MassageController {
 
     @ResponseBody
     @GetMapping("/api/user/GetJobs")
-    public void getJob() {
-        spider.getJobs();
+    public Job getJob() {
+      return  spider.getJobs();
     }
 
 
