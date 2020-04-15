@@ -1,9 +1,6 @@
 package life.mashangkaishi.manongcommunity.controller;
 
-import life.mashangkaishi.manongcommunity.dto.Job;
-import life.mashangkaishi.manongcommunity.dto.MassageInDTO;
-import life.mashangkaishi.manongcommunity.dto.MassagePageDTO;
-import life.mashangkaishi.manongcommunity.dto.Mes;
+import life.mashangkaishi.manongcommunity.dto.*;
 import life.mashangkaishi.manongcommunity.model.Task;
 import life.mashangkaishi.manongcommunity.model.systemMessage;
 import life.mashangkaishi.manongcommunity.service.MassageService;
@@ -16,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -49,8 +47,10 @@ public class MassageController {
 
     @ResponseBody
     @GetMapping("/api/user/GetJobs")
-    public Job getJob() {
-      return  spider.getJobs();
+    public JobDTO getJob() {
+        JobDTO jobDTO = new JobDTO();
+        jobDTO.setList(spider.getJobs());
+        return  jobDTO;
     }
 
 

@@ -15,12 +15,12 @@ import java.util.*;
 public class Spider {
 
     static {
-      System.setProperty("webdriver.chrome.driver", "/downloads/chromedriver");
+     System.setProperty("webdriver.chrome.driver", "/downloads/chromedriver");
 
-       //System.setProperty("webdriver.chrome.driver", "D:\\IntelliJProject\\SPIDER\\chromedriver_win32-80.0.3987.106\\chromedriver.exe");
+//       System.setProperty("webdriver.chrome.driver", "D:\\IntelliJProject\\SPIDER\\chromedriver_win32-80.0.3987.106\\chromedriver.exe");
     }
 
-    public Job getJobs() {
+    public ArrayList<Job> getJobs() {
         ArrayList<Job> list=new ArrayList<>();
         try {
 
@@ -33,89 +33,79 @@ public class Spider {
             WebDriver driver = new ChromeDriver(options);
 
             // 进入首页
-            driver.get("https://www.lagou.com/zhaopin/Java/?labelWords=label");
-            Map<String, Job> jobs = new HashMap();
+            driver.get("https://www.lagou.com/jobs/list_Java?isSchoolJob=1");
+            ArrayList<Job> jobs = new ArrayList<>();
             //设置筛选条件
             choseOptions(driver);
             //开始解析页面，分页获取工资
-            findMoneyByPagination(driver, jobs);
-            list = (ArrayList<Job>) Lists.newArrayList(jobs.values());
-            //打印工资
-            printMoney(jobs);
+            findMoneyByPagination(driver, jobs,1);
+            list = jobs;
+
             driver.quit();
         } catch (Exception e) {
         }
-        return list.get(0);
+        return list;
     }
 
-    private static void printMoney(Map<String, Job> jobs) {
-        ArrayList<Job> list = (ArrayList<Job>) Lists.newArrayList(jobs.values());
-        Collections.sort(list, new Comparator<Job>() {
-            public int compare(Job o1, Job o2) {
-                return o2.getCount() - o1.getCount();
-            }
-        });
-        for (Job job : list) {
-            System.out.println(job);
-        }
-    }
 
-    private static void findMoneyByPagination(WebDriver driver, Map<String, Job> map) {
+
+    private static void findMoneyByPagination(WebDriver driver, ArrayList<Job> jobs,int page) {
+
         List<WebElement> jobElements = driver.findElements(By.className("list_item_top"));
+
         for (WebElement jobElement : jobElements) {
+            Job job = new Job();
             String money = jobElement.findElement(By.className("money")).getText();
+            String time = jobElement.findElement(By.className("format-time")).getText();
             String companyName = jobElement.findElement(By.className("company_name")).getText();
-            if (map.containsKey(money)) {
-                Job job = map.get(money);
-                job.getCompanies().add(companyName);
-                job.setMoney(money);
-                job.setCount(job.getCount() + 1);
-                map.put(money, job);
-            } else {
-                Job job = new Job();
-                job.getCompanies().add(companyName);
-                job.setMoney(money);
-                job.setCount(1);
-                map.put(money, job);
-            }
+            String attribute = jobElement.findElement(By.className("position_link")).getAttribute("href");
+            String industry = jobElement.findElement(By.className("industry")).getText();
+            String jobname = jobElement.findElement(By.className("position_link")).findElement(By.tagName("h3")).getText();
+            job.setCompany(companyName);
+            job.setJobname(jobname);
+            job.setScale(industry);
+            job.setTime(time);
+            job.setMoney(money);
+            job.setUrl(attribute);
+            jobs.add(job);
         }
         WebElement nextPageElement = driver.findElement(By.className("pager_next"));
         boolean canClickNextPageBtn = !nextPageElement.getAttribute("class").contains("pager_next_disabled");
-        if (canClickNextPageBtn) {
+        if (canClickNextPageBtn&&page>0) {
             nextPageElement.click();
             try {
                 Thread.sleep(1000L);
             } catch (InterruptedException e) {
             }
-            findMoneyByPagination(driver, map);
+            findMoneyByPagination(driver, jobs,page-1);
         }
     }
 
     private static void choseOptions(WebDriver driver) {
         // 选择城市
-        String cityName = "北京";
+        String cityName = "重庆";
 
         WebElement geiyebuyao = driver.findElement(By.xpath("//div[@class='body-container showData']//div[@class='body-box']//div[contains(text(),'给也不要')]"));
         geiyebuyao.click();
 
-        WebElement cityAuthorElement = driver.findElement(By.xpath("//div[@class='other-hot-city']//a[contains(text(),'" + cityName + "')]"));
-        cityAuthorElement.click();
+//        WebElement cityAuthorElement = driver.findElement(By.xpath("//div[@class='other-hot-city']//a[contains(text(),'" + cityName + "')]"));
+//        cityAuthorElement.click();
 
         // 选择工作经验
         // 不限 应届毕业生 3年及以下 3-5年 5-10年 10年以上 不要求
-        choseByTitle(driver, "3-5年", "工作经验");
+        choseByTitle(driver, "应届", "工作性质");
 
         // 选择学历要求
         // 不限 大专 本科 硕士 博士 不要求
         choseByTitle(driver, "本科", "学历要求");
 
         // 选择公司规模
-        List<String> companyMembers = new ArrayList<String>();
-        companyMembers.add("50-150人");
-        companyMembers.add("150-500人");
-        for (String companyMember : companyMembers) {
-            choseByTitle(driver, companyMember, "公司规模");
-        }
+//        List<String> companyMembers = new ArrayList<String>();
+//        companyMembers.add("不限");
+//
+//        for (String companyMember : companyMembers) {
+//            choseByTitle(driver, companyMember, "公司规模");
+//        }
         // 选择行业领域
         choseByTitle(driver, "移动互联网", "行业领域");
     }
