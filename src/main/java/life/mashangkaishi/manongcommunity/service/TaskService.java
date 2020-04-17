@@ -46,6 +46,11 @@ public class TaskService {
         return "任务创建成功";
     }
 
+    public List<Task>  selectAllTask(TaskAndPageDTO task, String type) {
+        TaskExample example = new TaskExample();
+        example.createCriteria().andIdIsNotNull();
+        return taskMapper.selectByExampleWithBLOBs(example);
+    }
 
     public PageTask selectTask(TaskAndPageDTO task, String type) {
 
@@ -120,6 +125,7 @@ public class TaskService {
             return pageTask;
         }
     }
+
     @Transactional
     public Mes studentCreatOrUpdateTask(Task task) {
         TaskExample example = new TaskExample();

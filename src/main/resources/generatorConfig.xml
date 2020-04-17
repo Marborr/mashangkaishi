@@ -42,6 +42,7 @@
 <!--        <table tableName="task" domainObjectName="Task" ></table>-->
 <!--        <table tableName="test_table" domainObjectName="testTable" ></table>-->
 <!--        <table tableName="mail_identify" domainObjectName="mailIdentify" ></table>-->
-        <table tableName="system_message" domainObjectName="systemMessage" ></table>
+<!--        <table tableName="system_message" domainObjectName="systemMessage" ></table>-->
+        <table tableName="jobs" domainObjectName="Jobs" ></table>
     </context>
 </generatorConfiguration>

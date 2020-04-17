@@ -8,6 +8,7 @@ import life.mashangkaishi.manongcommunity.service.*;
 import life.mashangkaishi.manongcommunity.util.CustomStringJavaCompiler;
 import life.mashangkaishi.manongcommunity.util.SendMail;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Controller
@@ -30,6 +32,8 @@ public class StudentController {
     TaskService taskService;
     @Autowired
     MailService mailService;
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
 
 
 
@@ -126,6 +130,16 @@ public class StudentController {
         }
     }
 
+//    @PostConstruct
+//    public void init(){
+//        TaskAndPageDTO task = new TaskAndPageDTO();
+//
+//        List<Task> tasks=taskService.selectAllTask(task,"SelectTask");
+//        for (Task t:
+//             tasks) {
+//            stringRedisTemplate.opsForValue().set("task"+t.getId(),t+"");
+//        }
+//    }
 
 
     @ResponseBody

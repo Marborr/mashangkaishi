@@ -1,8 +1,10 @@
 package life.mashangkaishi.manongcommunity.controller;
 
 import life.mashangkaishi.manongcommunity.dto.*;
+import life.mashangkaishi.manongcommunity.model.Jobs;
 import life.mashangkaishi.manongcommunity.model.Task;
 import life.mashangkaishi.manongcommunity.model.systemMessage;
+import life.mashangkaishi.manongcommunity.service.JobService;
 import life.mashangkaishi.manongcommunity.service.MassageService;
 import life.mashangkaishi.manongcommunity.util.Spider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class MassageController {
     MassageService massageService;
     @Autowired
     Spider spider;
+    @Autowired
+    JobService jobService;
 
 
     @ResponseBody
@@ -46,10 +50,11 @@ public class MassageController {
     }
 
     @ResponseBody
-    @GetMapping("/api/user/GetJobs")
-    public JobDTO getJob() {
+    @PostMapping("/api/user/GetJobs")
+    public JobDTO getJob(@RequestBody MassageInDTO message) {
         JobDTO jobDTO = new JobDTO();
-        jobDTO.setList(spider.getJobs());
+        ArrayList<Jobs> jobs = jobService.getJobs(message.getPage(), message.getLimit());
+        jobDTO.setList(jobs);
         return  jobDTO;
     }
 
