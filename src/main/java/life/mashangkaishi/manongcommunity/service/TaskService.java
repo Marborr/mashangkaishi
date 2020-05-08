@@ -53,7 +53,6 @@ public class TaskService {
     }
 
     public PageTask selectTask(TaskAndPageDTO task, String type) {
-
         Integer offset = task.getLimit() * (task.getPage() - 1);//页面偏移量
 
         TaskExample example = new TaskExample();

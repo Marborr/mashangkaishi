@@ -47,11 +47,13 @@ public class AdministratorService {
 
     @Transactional
     public Mes create(Administrator administrator) {
+
         mailIdentifyExample mailexample = new mailIdentifyExample();
         mailexample.createCriteria().andEmailEqualTo(administrator.getEmail());
         List<mailIdentify> mailIdentifies
                 = mailIdentifyMapper.selectByExample(mailexample);
         Mes mes = new Mes();
+
         if (mailIdentifies.size() == 0) {
           mes.setErr(1);
           mes.setMsg("验证码有误");
